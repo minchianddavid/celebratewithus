@@ -346,7 +346,7 @@
                 </section>
 
                 <!-- RSVP Section -->
-                <section class="my-0 pb-5 pt-3 position-relative overflow-hidden" id="rsvp" style="min-height: 100vh;">
+                <section class="rsvp-section my-0 pt-3 position-relative overflow-hidden" id="rsvp" style="min-height: 100vh;">
                     <img src="./assets/images/placeholder.webp" data-src="./assets/images/rsvp-bg.jpeg" alt="bg" class="position-absolute top-0 start-0" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.25; z-index: 0; mask-image: linear-gradient(to bottom, transparent, black 15%, black 60%, transparent 100%);">
                     <div class="container position-relative px-4" style="z-index: 1;">
                         <h2 class="font-esthetic text-center mt-2 mb-1" style="font-size: 2.25rem;">RSVP</h2>
@@ -356,7 +356,6 @@
                         <style>
                             .rsvp-input {
                                 background: rgba(255,255,255,0.3) !important;
-                                backdrop-filter: blur(4px);
                                 border: 1px solid #b8976a !important;
                                 color: inherit !important;
                             }
@@ -365,8 +364,8 @@
                             select.rsvp-input { font-size: 0.85rem !important; }
                             html[data-bs-theme="dark"] .rsvp-input { background: rgba(0,0,0,0.3) !important; }
                             html[data-bs-theme="dark"] .rsvp-input::placeholder { color: rgba(255,255,255,0.4) !important; }
-                            .rsvp-conditional { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.4s ease, opacity 0.3s ease; }
-                            .rsvp-conditional.show { max-height: 1600px; opacity: 1; }
+                            .rsvp-conditional { display: none !important; }
+                            .rsvp-conditional.show { display: block !important; }
                         </style>
 
                         <section class="rsvp-group">
@@ -395,10 +394,8 @@
                                         <span>3+</span>
                                     </label>
                                 </div>
-                                <p class="form-text mt-2 mb-0">Please include yourself in the total.</p>
-                                <p class="rsvp-helper-zh mb-2">請包含您本人在內。</p>
-                                <p class="form-text mb-0">Need more than 3 guests? Let us know below.</p>
-                                <p class="rsvp-helper-zh mb-0">若超過 3 位，請於下方留言告知我們。</p>
+                                <p class="form-text mt-2 mb-0">Include yourself. For 3+, tell us below.</p>
+                                <p class="rsvp-helper-zh mb-0">請包含您本人；若超過 3 位，請於下方留言。</p>
                                 <script>
                                     var guestCountEl = document.getElementById('form-guest-count');
                                     document.querySelectorAll('input[name="party-size-choice"]').forEach(function(option) {
@@ -494,7 +491,7 @@
                                 <label for="form-message" class="form-label my-1"><i class="fa-solid fa-comment me-2"></i>Message (Optional)<span class="zh-form-label">留言（選填）</span></label>
                                 <p class="form-text mb-0">Is there anything you'd like us to know?</p>
                                 <p class="rsvp-helper-zh mb-2">有任何想告訴我們的事嗎？</p>
-                                <textarea dir="auto" class="form-control rounded-4 rsvp-input" id="form-message" rows="5" maxlength="500" placeholder="For example:&#10;• We'd love to attend with our children.&#10;• We have dietary requirements.&#10;• We'll arrive a little later.&#10;&#10;例如：&#10;• 我們一家四口都會出席&#10;• 希望安排素食&#10;• 我們可能會稍晚抵達" autocomplete="off" data-offline-disabled="false"></textarea>
+                                <textarea dir="auto" class="form-control rounded-4 rsvp-input" id="form-message" rows="4" maxlength="500" placeholder="Additional guests, dietary needs, arrival notes, or a message&#10;同行人數、飲食需求、抵達時間或祝福留言" autocomplete="off" data-offline-disabled="false"></textarea>
                             </div>
                         </section>
 
@@ -510,7 +507,7 @@
                         </section>
 
                         <!-- Honeypot field — hidden from real users, bots fill it -->
-                        <div style="position: absolute; left: -9999px;" aria-hidden="true">
+                        <div class="rsvp-honeypot" aria-hidden="true">
                             <label for="form-website">Website</label>
                             <input type="text" id="form-website" name="website" tabindex="-1" autocomplete="off">
                         </div>
