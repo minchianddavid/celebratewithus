@@ -371,16 +371,14 @@
                         <section>
                             <div class="rsvp-field">
                                 <label for="form-name" class="rsvp-field-label">
-                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-person" aria-hidden="true"></i><span>Name</span></span>
-                                    <span class="rsvp-field-subheading">姓名</span>
+                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-person" aria-hidden="true"></i><span>Name</span><span class="rsvp-field-subheading">姓名</span></span>
                                 </label>
                                 <input dir="auto" type="text" class="form-control rounded-4 rsvp-input" id="form-name" minlength="2" maxlength="50" placeholder="Name" autocomplete="name" data-offline-disabled="false">
                             </div>
 
                             <fieldset class="rsvp-field border-0 p-0" id="party-size-field">
                                 <legend class="rsvp-field-label">
-                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-users" aria-hidden="true"></i><span>Party Size</span></span>
-                                    <span class="rsvp-field-subheading">同行人數</span>
+                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-users" aria-hidden="true"></i><span>Party Size</span><span class="rsvp-field-subheading">同行人數</span></span>
                                 </legend>
                                 <input type="hidden" id="form-guest-count" value="1">
                                 <div class="rsvp-party-options">
@@ -397,7 +395,7 @@
                                         <span>3+</span>
                                     </label>
                                 </div>
-                                <p class="form-text mt-2 mb-0">Include yourself. For 3+, leave us a message.<span class="rsvp-helper-zh d-block">請包含您本人；若超過 3 位，請於下方留言。</span></p>
+                                <p class="form-text mt-2 mb-0">Include yourself; for 3+, leave us a message.<span class="rsvp-helper-zh d-block">請包含您本人；超過 3 位請於留言告知。</span></p>
                                 <script>
                                     var guestCountEl = document.getElementById('form-guest-count');
                                     document.querySelectorAll('input[name="party-size-choice"]').forEach(function(option) {
@@ -412,8 +410,7 @@
                         <section>
                             <fieldset class="rsvp-field border-0 p-0" id="attendance-field">
                                 <legend class="rsvp-field-label">
-                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-person-circle-question" aria-hidden="true"></i><span>Attendance</span></span>
-                                    <span class="rsvp-field-subheading">是否出席</span>
+                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-person-circle-question" aria-hidden="true"></i><span>Attendance</span><span class="rsvp-field-subheading">是否出席</span></span>
                                 </legend>
                                 <input type="hidden" id="form-presence" value="0">
 
@@ -459,16 +456,14 @@
                         <section id="attending-fields" class="rsvp-conditional">
                             <div class="rsvp-field">
                                 <label for="form-email" class="rsvp-field-label">
-                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-envelope" aria-hidden="true"></i><span>Email (Optional)</span></span>
-                                    <span class="rsvp-field-subheading">電子郵件（選填）</span>
+                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-envelope" aria-hidden="true"></i><span>Email (Optional)</span><span class="rsvp-field-subheading">電子郵件（選填）</span></span>
                                 </label>
                                 <input type="email" class="form-control rounded-4 rsvp-input" id="form-email" placeholder="Email address" autocomplete="email" data-offline-disabled="false">
                             </div>
 
                             <fieldset class="rsvp-field border-0 p-0">
                                 <legend class="rsvp-field-label">
-                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-envelope-circle-check" aria-hidden="true"></i><span>Paper Invitation (Optional)</span></span>
-                                    <span class="rsvp-field-subheading">紙本喜帖（選填）</span>
+                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-envelope-circle-check" aria-hidden="true"></i><span>Paper Invitation (Optional)</span><span class="rsvp-field-subheading">紙本喜帖（選填）</span></span>
                                 </legend>
                                 <input type="hidden" id="form-invitation-type" value="none">
                                 <label class="rsvp-choice rounded-4 mb-2" for="paper-no">
@@ -495,8 +490,7 @@
                             <div id="invitation-details" class="rsvp-conditional">
                                 <div id="field-address" class="rsvp-field rsvp-conditional">
                                     <label for="form-address" class="rsvp-field-label">
-                                        <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-location-dot" aria-hidden="true"></i><span>Address</span></span>
-                                        <span class="rsvp-field-subheading">收件地址</span>
+                                        <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-location-dot" aria-hidden="true"></i><span>Address</span><span class="rsvp-field-subheading">收件地址</span></span>
                                     </label>
                                     <input type="text" class="form-control rounded-4 rsvp-input" id="form-address" placeholder="Mailing address" autocomplete="street-address" data-offline-disabled="false">
                                     <p class="form-text mb-0">Used only to mail your invitation.</p>
@@ -506,8 +500,7 @@
 
                             <div class="rsvp-field">
                                 <label for="form-message" class="rsvp-field-label">
-                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-comment" aria-hidden="true"></i><span>Message (Optional)</span></span>
-                                    <span class="rsvp-field-subheading">留言（選填）</span>
+                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-comment" aria-hidden="true"></i><span>Message (Optional)</span><span class="rsvp-field-subheading">留言（選填）</span></span>
                                 </label>
                                 <p class="form-text mb-0">Anything you'd like us to know?</p>
                                 <p class="rsvp-helper-zh mb-2">有任何想告訴我們的事嗎？</p>
@@ -518,8 +511,7 @@
                         <section id="not-attending-message" class="rsvp-conditional">
                             <div class="rsvp-field">
                                 <label for="form-message-decline" class="rsvp-field-label">
-                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-comment" aria-hidden="true"></i><span>Message (Optional)</span></span>
-                                    <span class="rsvp-field-subheading">留言（選填）</span>
+                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-comment" aria-hidden="true"></i><span>Message (Optional)</span><span class="rsvp-field-subheading">留言（選填）</span></span>
                                 </label>
                                 <p class="form-text mb-0">Anything you'd like us to know?</p>
                                 <p class="rsvp-helper-zh mb-2">有任何想告訴我們的事嗎？</p>
