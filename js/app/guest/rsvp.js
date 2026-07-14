@@ -66,17 +66,17 @@ export const rsvp = (() => {
         }
 
         if (!name.value || name.value.trim().length === 0) {
-            alertWrapper.innerHTML = alertMarkup('warning', 'Please enter your name.<br><span style="font-size: 0.85rem; letter-spacing: 0.1rem;">請填寫姓名</span>');
+            alertWrapper.innerHTML = alertMarkup('warning', 'Please enter your name.<br><span class="validation-message-zh">請填寫姓名</span>');
             return;
         }
 
         if (!presence || !presence.value) {
-            alertWrapper.innerHTML = alertMarkup('warning', 'Please select your attendance status.<br><span style="font-size: 0.85rem; letter-spacing: 0.1rem;">請選擇是否出席</span>');
+            alertWrapper.innerHTML = alertMarkup('warning', 'Please select your attendance status.<br><span class="validation-message-zh">請選擇是否出席</span>');
             return;
         }
 
         if (isAttending && (!guestCount || !guestCount.value)) {
-            alertWrapper.innerHTML = alertMarkup('warning', 'Please select your party size.<br><span style="font-size: 0.85rem; letter-spacing: 0.1rem;">請選擇同行人數</span>');
+            alertWrapper.innerHTML = alertMarkup('warning', 'Please select your party size.<br><span class="validation-message-zh">請選擇同行人數</span>');
             return;
         }
 
@@ -84,7 +84,7 @@ export const rsvp = (() => {
         if (isAttending && invitationType) {
             const v = invitationType.value;
             if (v === 'yes-paper' && address && !address.value.trim()) {
-                alertWrapper.innerHTML = alertMarkup('warning', 'Please enter your mailing address.<br><span style="font-size: 0.85rem; letter-spacing: 0.1rem;">請填寫收件地址</span>');
+                alertWrapper.innerHTML = alertMarkup('warning', 'Please enter your mailing address.<br><span class="validation-message-zh">請填寫收件地址</span>');
                 return;
             }
         }

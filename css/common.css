@@ -4,7 +4,10 @@ html {
 }
 
 body {
-    font-family: 'Josefin Sans', sans-serif !important;
+    font-family: var(--font-sans) !important;
+    font-size: var(--type-body-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-control);
     padding: 0 !important;
     width: 100% !important;
     overflow-x: hidden !important;

@@ -100,8 +100,8 @@
 
                 <div class="text-center p-4 bg-overlay-auto rounded-5">
                     <!-- TODO: Replace couple names and date -->
-                    <h2 class="font-esthetic mb-4" style="font-size: 2rem;">Minchi &amp; David</h2>
-                    <p class="m-0" style="font-size: 1rem;">November 29, 2026</p>
+                    <h2 class="font-esthetic desktop-couple-title mb-4">Minchi &amp; David</h2>
+                    <p class="desktop-wedding-date m-0">November 29, 2026</p>
                 </div>
             </div>
         </div>
@@ -118,7 +118,7 @@
                     <img src="./assets/images/placeholder.webp" data-src="./assets/images/home-page-bg.jpeg?v=1" alt="bg" class="position-absolute opacity-25 top-50 start-50 translate-middle bg-cover-home" style="mask-image: linear-gradient(to bottom, transparent, black 15%, black 60%, transparent 100%);">
 
                     <div class="position-relative text-center bg-overlay-auto w-100 py-5" style="background-color: unset;">
-                        <h1 class="font-esthetic pt-5 pb-0 mb-0 fw-medium" style="font-size: 2.25rem;">We're getting married</h1>
+                        <h1 class="font-esthetic hero-announcement pt-5 pb-0 mb-0">We're getting married</h1>
                         <p class="home-heading-zh mb-0">我們要結婚了</p>
 
                         <img src="./assets/images/placeholder.webp" data-src="./assets/images/hero-photo.jpeg?v=1" alt="Minchi and David together on a golf course" data-image-modal role="button" tabindex="0" aria-label="Open photo of Minchi and David" class="img-center-crop hero-photo d-block rounded-circle border border-3 border-light shadow mt-4 mb-3 mx-auto cursor-pointer">
@@ -242,9 +242,9 @@
                                             <hr class="position-absolute top-0 start-50 translate-middle-x border border-secondary h-100 z-0 opacity-50 m-0">
                                         </div>
                                         <div class="col mt-1 mb-4 ps-0">
-                                            <p class="fw-bold mb-1">How We Met</p>
+                                            <p class="story-milestone-title mb-1">How We Met</p>
                                             <p class="zh-subline mb-2">我們怎麼認識的</p>
-                                            <p class="small mb-0">我們是在波士頓念碩士時認識的同學。<br>因為幾門人生很難的課，開始互相勉勵、互相鼓勵（非抄作業，恩恩）。<br>後來也常常一起參加喵組團的滑雪行程🏂，在東岸的雪地裡慢慢熟了起來。</p>
+                                            <p class="story-milestone-body mb-0">我們是在波士頓念碩士時認識的同學。<br>因為幾門人生很難的課，開始互相勉勵、互相鼓勵（非抄作業，恩恩）。<br>後來也常常一起參加喵組團的滑雪行程🏂，在東岸的雪地裡慢慢熟了起來。</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -252,9 +252,9 @@
                                             <p class="story-step position-relative d-flex justify-content-center align-items-center rounded-circle m-0 z-1">2</p>
                                         </div>
                                         <div class="col mt-1 mb-3 ps-0">
-                                            <p class="fw-bold mb-1">How We Fell in Love</p>
+                                            <p class="story-milestone-title mb-1">How We Fell in Love</p>
                                             <p class="zh-subline mb-2">漸漸靠近</p>
-                                            <p class="small mb-0">女方美女積極參與男方帥哥規劃的各項美洲公路旅行。<br>男方則靠著 365 顆舒芙蕾🧁連招，以及 Six Flags 蝙蝠俠雲霄飛車等表現穩定加分。<br>於是，故事就這樣一路從美國東岸🇺🇸開到了台灣北部🇹🇼。</p>
+                                            <p class="story-milestone-body mb-0">女方美女積極參與男方帥哥規劃的各項美洲公路旅行。<br>男方則靠著 365 顆舒芙蕾🧁連招，以及 Six Flags 蝙蝠俠雲霄飛車等表現穩定加分。<br>於是，故事就這樣一路從美國東岸🇺🇸開到了台灣北部🇹🇼。</p>
                                         </div>
                                     </div>
                                 </div>
@@ -345,21 +345,17 @@
                             <h2 class="section-header-title">RSVP</h2>
                             <p class="section-header-subtitle">回覆出席</p>
                         </header>
-                        <p class="text-center mb-1" style="font-size: 1rem;">We'd love to celebrate with you.</p>
-                        <p class="text-center mb-4" style="font-size: 0.9rem; font-weight: 500; letter-spacing: 0.1rem;">誠摯邀請您與我們一同見證這美好的時刻。</p>
+                        <p class="rsvp-intro-en text-center mb-1">We'd love to celebrate with you.</p>
+                        <p class="rsvp-intro-zh text-center mb-4">誠摯邀請您與我們一同見證這美好的時刻。</p>
 
                         <style>
                             .rsvp-input {
                                 background: rgba(255,255,255,0.3) !important;
                                 border: 1px solid #b8976a !important;
                                 color: inherit !important;
-                                font-size: 16px !important;
-                                font-weight: 400;
-                                line-height: 1.4;
                             }
-                            .rsvp-input::placeholder { color: rgba(0,0,0,0.4) !important; font-size: 16px !important; font-weight: 400; line-height: 1.4; }
+                            .rsvp-input::placeholder { color: rgba(0,0,0,0.4) !important; }
                             .rsvp-input:focus { box-shadow: 0 0 0 0.2rem rgba(184,151,106,0.3) !important; }
-                            select.rsvp-input { font-size: 0.85rem !important; }
                             html[data-bs-theme="dark"] .rsvp-input { background: rgba(0,0,0,0.3) !important; }
                             html[data-bs-theme="dark"] .rsvp-input::placeholder { color: rgba(255,255,255,0.4) !important; }
                             .rsvp-conditional { max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); transition: max-height 220ms ease, opacity 200ms ease, transform 200ms ease; }
@@ -370,14 +366,14 @@
                         <section>
                             <div class="rsvp-field">
                                 <label for="form-name" class="rsvp-field-label">
-                                    <span class="rsvp-field-heading bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-person" aria-hidden="true"></i><span class="bilingual-field-label-en">Name</span><span class="rsvp-field-subheading bilingual-field-label-zh">姓名</span></span>
+                                    <span class="bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-person" aria-hidden="true"></i><span class="bilingual-field-label-en">Name</span><span class="bilingual-field-label-zh">姓名</span></span>
                                 </label>
                                 <input dir="auto" type="text" class="form-control rounded-4 rsvp-input" id="form-name" minlength="2" maxlength="50" placeholder="Name" autocomplete="name" data-offline-disabled="false">
                             </div>
 
                             <fieldset class="rsvp-field rsvp-conditional border-0 p-0" id="party-size-field">
                                 <legend class="rsvp-field-label">
-                                    <span class="rsvp-field-heading bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-users" aria-hidden="true"></i><span class="bilingual-field-label-en">Party Size</span><span class="rsvp-field-subheading bilingual-field-label-zh">同行人數</span></span>
+                                    <span class="bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-users" aria-hidden="true"></i><span class="bilingual-field-label-en">Party Size</span><span class="bilingual-field-label-zh">同行人數</span></span>
                                 </legend>
                                 <input type="hidden" id="form-guest-count" value="">
                                 <div class="rsvp-party-options">
@@ -409,7 +405,7 @@
                         <section>
                             <fieldset class="rsvp-field border-0 p-0" id="attendance-field">
                                 <legend class="rsvp-field-label">
-                                    <span class="rsvp-field-heading bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-person-circle-question" aria-hidden="true"></i><span class="bilingual-field-label-en">Attendance</span><span class="rsvp-field-subheading bilingual-field-label-zh">是否出席</span></span>
+                                    <span class="bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-person-circle-question" aria-hidden="true"></i><span class="bilingual-field-label-en">Attendance</span><span class="bilingual-field-label-zh">是否出席</span></span>
                                 </legend>
                                 <input type="hidden" id="form-presence" value="">
 
@@ -473,7 +469,7 @@
                         <section id="attending-fields" class="rsvp-conditional">
                             <fieldset class="rsvp-field border-0 p-0">
                                 <legend class="rsvp-field-label">
-                                    <span class="rsvp-field-heading bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-envelope-circle-check" aria-hidden="true"></i><span class="bilingual-field-label-en">Paper Invitation (Optional)</span><span class="rsvp-field-subheading bilingual-field-label-zh">紙本喜帖（選填）</span></span>
+                                    <span class="bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-envelope-circle-check" aria-hidden="true"></i><span class="bilingual-field-label-en">Paper Invitation (Optional)</span><span class="bilingual-field-label-zh">紙本喜帖（選填）</span></span>
                                 </legend>
                                 <input type="hidden" id="form-invitation-type" value="">
                                 <label class="rsvp-choice rounded-4 mb-2" for="paper-no">
@@ -500,7 +496,7 @@
                             <div id="invitation-details" class="rsvp-conditional">
                                 <div id="field-address" class="rsvp-field rsvp-conditional">
                                     <label for="form-address" class="rsvp-field-label">
-                                        <span class="rsvp-field-heading bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-location-dot" aria-hidden="true"></i><span class="bilingual-field-label-en">Address</span><span class="rsvp-field-subheading bilingual-field-label-zh">收件地址</span></span>
+                                        <span class="bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-location-dot" aria-hidden="true"></i><span class="bilingual-field-label-en">Address</span><span class="bilingual-field-label-zh">收件地址</span></span>
                                     </label>
                                     <input type="text" class="form-control rounded-4 rsvp-input" id="form-address" placeholder="Mailing address" autocomplete="street-address" data-offline-disabled="false">
                                     <p class="bilingual-helper-text mb-0"><span class="bilingual-helper-text-en">Used only to mail your invitation.</span><span class="bilingual-helper-text-zh">地址僅用於寄送喜帖。</span></p>
@@ -509,7 +505,7 @@
 
                             <div class="rsvp-field rsvp-email-field">
                                 <label for="form-email" class="rsvp-field-label">
-                                    <span class="rsvp-field-heading bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-envelope" aria-hidden="true"></i><span class="bilingual-field-label-en">Email (Optional)</span><span class="rsvp-field-subheading bilingual-field-label-zh">電子郵件（選填）</span></span>
+                                    <span class="bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-envelope" aria-hidden="true"></i><span class="bilingual-field-label-en">Email (Optional)</span><span class="bilingual-field-label-zh">電子郵件（選填）</span></span>
                                 </label>
                                 <p class="bilingual-helper-text mb-0"><span class="bilingual-helper-text-en">For wedding updates and reminders only.</span><span class="bilingual-helper-text-zh">僅用於寄送婚禮最新消息與行前提醒。</span></p>
                                 <input type="email" class="form-control rounded-4 rsvp-input rsvp-email-input" id="form-email" placeholder="Email address　電子郵件地址" autocomplete="email" data-offline-disabled="false">
@@ -518,7 +514,7 @@
 
                         <div class="rsvp-field rsvp-conditional" id="response-message-field">
                             <label for="form-message" class="rsvp-field-label">
-                                <span class="rsvp-field-heading bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-comment" aria-hidden="true"></i><span class="bilingual-field-label-en">Message (Optional)</span><span class="rsvp-field-subheading bilingual-field-label-zh">留言（選填）</span></span>
+                                <span class="bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-comment" aria-hidden="true"></i><span class="bilingual-field-label-en">Message (Optional)</span><span class="bilingual-field-label-zh">留言（選填）</span></span>
                             </label>
                             <textarea dir="auto" class="form-control rounded-3 rsvp-input rsvp-message-input" id="form-message" rows="4" maxlength="500" placeholder="Leave us a note or well wishes.&#10;想對我們說的話，或任何想讓我們知道的事。" autocomplete="off" data-offline-disabled="false"></textarea>
                         </div>
@@ -543,16 +539,16 @@
                 <!-- Wedding Guide -->
                 <section id="wedding-guide" class="bg-white-black py-5">
                     <div class="container text-center">
-                        <h2 class="mb-1" style="font-size: 1.5rem;">Wedding Guide</h2>
-                        <p class="mb-4" style="font-size: 0.85rem; letter-spacing: 0.1rem;">婚禮指南</p>
-                        <p class="mb-1" style="font-size: 0.95rem;">Semi-formal attire is warmly encouraged.</p>
-                        <p class="mb-0" style="font-size: 0.85rem; letter-spacing: 0.1rem;">歡迎以半正式風格服裝出席，<br>享受這場溫暖而輕鬆的聚會。</p>
+                        <h2 class="wedding-guide-title mb-1">Wedding Guide</h2>
+                        <p class="wedding-guide-subtitle mb-4">婚禮指南</p>
+                        <p class="wedding-guide-copy-en mb-1">Semi-formal attire is warmly encouraged.</p>
+                        <p class="wedding-guide-copy-zh mb-0">歡迎以半正式風格服裝出席，<br>享受這場溫暖而輕鬆的聚會。</p>
 
                         <hr class="mx-auto my-3 opacity-25" style="max-width: 100px;">
 
-                        <p class="mb-1" style="font-size: 0.95rem;">Free parking available (first come, first serve)</p>
-                        <p class="mb-1" style="font-size: 0.85rem; letter-spacing: 0.1rem;">現場提供免費停車 (車位有限，建議提早抵達)</p>
-                        <a href="https://www.taipeimarriott.com.tw/websev?cat=page&id=44" target="_blank" style="font-size: 0.8rem; color: #b8976a; text-decoration: none; opacity: 0.7;">Transportation & Parking <span style="letter-spacing: 0.1rem;">交通與停車</span></a>
+                        <p class="wedding-guide-copy-en mb-1">Free parking available (first come, first serve)</p>
+                        <p class="wedding-guide-copy-zh mb-1">現場提供免費停車 (車位有限，建議提早抵達)</p>
+                        <a href="https://www.taipeimarriott.com.tw/websev?cat=page&id=44" target="_blank" class="wedding-guide-link" style="color: #b8976a; text-decoration: none; opacity: 0.7;">Transportation & Parking <span class="wedding-guide-link-zh">交通與停車</span></a>
 
                         <div class="mt-3">
                             <img src="./assets/images/placeholder.webp" data-src="./assets/images/transport-card.jpeg" alt="Transportation and parking information" data-image-modal role="button" tabindex="0" aria-label="Open transportation and parking information" class="img-fluid cursor-pointer" style="max-width: 420px; width: 100%; border-radius: 0.75rem;">
@@ -565,17 +561,17 @@
                     <img src="./assets/images/placeholder.webp" data-src="./assets/images/footer.jpeg?v=2" alt="Minchi and David" class="position-absolute top-0 start-0" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3; z-index: 0; mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);">
                     <div class="d-flex align-items-center justify-content-center position-relative" style="z-index: 1; min-height: 200px;">
                         <div class="text-center px-3">
-                            <p class="mb-1" style="font-size: 0.95rem;">誠摯期待您的到來，<br>陪伴我們一同見證愛與幸福的美好時刻</p>
-                            <p class="mb-0" style="font-size: 0.95rem;">We sincerely look forward to having you with us as we celebrate this beautiful moment of love and happiness.</p>
+                            <p class="footer-message mb-1">誠摯期待您的到來，<br>陪伴我們一同見證愛與幸福的美好時刻</p>
+                            <p class="footer-message mb-0">We sincerely look forward to having you with us as we celebrate this beautiful moment of love and happiness.</p>
                         </div>
                     </div>
 
                     <div class="text-center position-relative pb-3 pt-4" style="z-index: 1;">
                         <hr class="mx-auto my-3 opacity-15" style="max-width: 80px;">
-                        <p class="mb-1" style="font-size: 0.7rem; opacity: 0.5; text-transform: uppercase; letter-spacing: 0.15rem;">Behind the scenes</p>
-                        <p class="mb-0" style="font-size: 0.65rem; opacity: 0.4;">Minchi Tsai — Designer, Developer &amp; PM</p>
-                        <p class="mb-2" style="font-size: 0.65rem; opacity: 0.4;">David Kuo — Music Curator &amp; Barista</p>
-                        <p class="mb-0" style="font-size: 0.6rem; opacity: 0.35;">Built with <i class="fa-solid fa-heart" style="font-size: 0.5rem;"></i> , <i class="fa-solid fa-mug-hot" style="font-size: 0.5rem;"></i> , &amp; <a href="https://claude.ai/code" target="_blank" style="text-decoration: none; color: inherit;">Claude Code</a></p>
+                        <p class="footer-kicker mb-1" style="opacity: 0.5; text-transform: uppercase;">Behind the scenes</p>
+                        <p class="footer-credit mb-0" style="opacity: 0.4;">Minchi Tsai — Designer, Developer &amp; PM</p>
+                        <p class="footer-credit mb-2" style="opacity: 0.4;">David Kuo — Music Curator &amp; Barista</p>
+                        <p class="footer-build-credit mb-0" style="opacity: 0.35;">Built with <i class="footer-build-icon fa-solid fa-heart"></i> , <i class="footer-build-icon fa-solid fa-mug-hot"></i> , &amp; <a href="https://claude.ai/code" target="_blank" style="text-decoration: none; color: inherit;">Claude Code</a></p>
                     </div>
                 </section>
             </main>
@@ -597,31 +593,31 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#home">
                             <i class="fa-solid fa-house"></i>
-                            <span class="d-block" style="font-size: 0.7rem;">Home</span>
+                            <span class="bottom-nav-label d-block">Home</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#wedding-date">
                             <i class="fa-solid fa-calendar-check"></i>
-                            <span class="d-block" style="font-size: 0.7rem;">Wedding</span>
+                            <span class="bottom-nav-label d-block">Wedding</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#rsvp">
                             <i class="fa-solid fa-envelope-open-text"></i>
-                            <span class="d-block" style="font-size: 0.7rem;">RSVP</span>
+                            <span class="bottom-nav-label d-block">RSVP</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#our-story">
                             <i class="fa-solid fa-heart"></i>
-                            <span class="d-block" style="font-size: 0.7rem;">Story</span>
+                            <span class="bottom-nav-label d-block">Story</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#gallery">
                             <i class="fa-solid fa-images"></i>
-                            <span class="d-block" style="font-size: 0.7rem;">Gallery</span>
+                            <span class="bottom-nav-label d-block">Gallery</span>
                         </a>
                     </li>
                 </ul>
@@ -664,7 +660,7 @@
                 <div class="progress" role="progressbar" style="height: 0.5rem;" aria-label="progress bar">
                     <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
                 </div>
-                <small class="d-none mt-1 text-theme-auto" id="progress-info" style="font-size: 0.8rem;">Loading...</small>
+                <small class="loading-status d-none mt-1 text-theme-auto" id="progress-info">Loading...</small>
                 <noscript>
                     <small class="mt-1 text-danger">Sorry, this invitation requires JavaScript to work.</small>
                 </noscript>
@@ -682,11 +678,11 @@
                     <!-- Attending content -->
                     <div id="modal-attending" class="d-none">
                         <i class="fa-solid fa-circle-check fa-3x text-success mb-3"></i>
-                        <h3 class="font-esthetic mb-2" style="font-size: 2rem;">Thank You!</h3>
+                        <h3 class="font-esthetic rsvp-modal-title mb-2">Thank You!</h3>
                         <p class="mb-3">We can't wait to celebrate with you.</p>
-                        <p class="mb-1" style="font-size: 1rem; font-weight: 500; letter-spacing: 0.1rem;">謝謝您的回覆！</p>
-                        <p style="font-size: 0.9rem; letter-spacing: 0.1rem;">期待與您一同慶祝這個特別的日子。</p>
-                        <h4 class="font-esthetic mt-3 mb-0" style="font-size: 1.5rem;">Minchi &amp; David</h4>
+                        <p class="rsvp-modal-zh-primary mb-1">謝謝您的回覆！</p>
+                        <p class="rsvp-modal-zh-secondary">期待與您一同慶祝這個特別的日子。</p>
+                        <h4 class="font-esthetic rsvp-modal-signature mt-3 mb-0">Minchi &amp; David</h4>
                         <hr>
                         <div id="add-to-cal"></div>
                     </div>
@@ -694,10 +690,10 @@
                     <!-- Not attending content -->
                     <div id="modal-declined" class="d-none">
                         <i class="fa-solid fa-envelope-open fa-3x mb-3" style="color: #b8976a;"></i>
-                        <h3 class="font-esthetic mb-3" style="font-size: 2rem;">Thank You</h3>
-                        <p class="mb-3" style="font-size: 0.95rem;">Thank you for letting us know.<br>We'll miss celebrating with you and hope to see you soon.</p>
-                        <p class="mb-0" style="font-size: 0.9rem; letter-spacing: 0.1rem;">謝謝您的回覆！<br>雖然這次無法相聚，<br>仍希望很快有機會再見。</p>
-                        <h4 class="font-esthetic mt-3 mb-0" style="font-size: 1.5rem;">Minchi &amp; David</h4>
+                        <h3 class="font-esthetic rsvp-modal-title mb-3">Thank You</h3>
+                        <p class="rsvp-modal-body mb-3">Thank you for letting us know.<br>We'll miss celebrating with you and hope to see you soon.</p>
+                        <p class="rsvp-modal-zh-secondary mb-0">謝謝您的回覆！<br>雖然這次無法相聚，<br>仍希望很快有機會再見。</p>
+                        <h4 class="font-esthetic rsvp-modal-signature mt-3 mb-0">Minchi &amp; David</h4>
                     </div>
                 </div>
             </div>

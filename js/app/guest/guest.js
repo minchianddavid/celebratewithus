@@ -72,7 +72,7 @@ export const guest = (() => {
             const div = document.createElement('div');
             div.classList.add('m-2');
 
-            const template = `<small class="mt-0 mb-1 mx-0 p-0">${util.escapeHtml(guestName?.getAttribute('data-message'))}</small><p class="m-0 p-0" style="font-size: 1.25rem">${util.escapeHtml(name)}</p>`;
+            const template = `<small class="mt-0 mb-1 mx-0 p-0">${util.escapeHtml(guestName?.getAttribute('data-message'))}</small><p class="guest-name-display m-0 p-0">${util.escapeHtml(name)}</p>`;
             util.safeInnerHTML(div, template);
 
             guestName?.appendChild(div);
@@ -314,13 +314,13 @@ export const guest = (() => {
             ].join(''));
 
             const calHtml = `
-                <p class="mb-1 mt-3" style="font-size: 0.85rem;"><strong>Add to your calendar:</strong></p>
-                <div class="d-flex justify-content-center gap-3 mb-1" style="font-size: 0.85rem;">
+                <p class="calendar-helper-text mb-1 mt-3"><strong>Add to your calendar:</strong></p>
+                <div class="calendar-provider-links d-flex justify-content-center gap-3 mb-1">
                     <a href="${googleUrl.toString()}" target="_blank" style="color: #b8976a; text-decoration: none;"><i class="fa-brands fa-google me-1"></i>Google</a>
                     <span style="opacity: 0.3;">·</span>
                     <a href="${icsHref}" target="_blank" style="color: #b8976a; text-decoration: none;"><i class="fa-brands fa-apple me-1"></i>Apple</a>
                 </div>
-                <div class="d-flex justify-content-center gap-3" style="font-size: 0.85rem;">
+                <div class="calendar-provider-links d-flex justify-content-center gap-3">
                     <a href="${icsHref}" target="_blank" style="color: #b8976a; text-decoration: none;"><i class="fa-brands fa-microsoft me-1"></i>Outlook</a>
                     <span style="opacity: 0.3;">·</span>
                     <a href="${yahooUrl}" target="_blank" style="color: #b8976a; text-decoration: none;"><i class="fa-brands fa-yahoo me-1"></i>Yahoo</a>

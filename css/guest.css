@@ -2,19 +2,122 @@
 @import url("animation.css");
 
 :root {
+    /* Typography families */
+    --font-script: 'Sacramento', cursive;
+    --font-sans: 'Josefin Sans', sans-serif;
+    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-arabic: 'Noto Naskh Arabic', serif;
+
+    /* Shared weights, line heights, and tracking */
+    --type-weight-regular: 400;
+    --type-weight-medium: 500;
+    --type-weight-semibold: 600;
+    --type-weight-bold: 700;
+    --type-line-solid: 1;
+    --type-line-tight: 1.2;
+    --type-line-compact: 1.25;
+    --type-line-ui: 1.3;
+    --type-line-bilingual: 1.35;
+    --type-line-body: 1.4;
+    --type-line-input: var(--type-line-body);
+    --type-line-control: 1.5;
+    --type-line-relaxed: 1.7;
+    --type-tracking-xs: 0.02rem;
+    --type-tracking-sm: 0.03rem;
+    --type-tracking-md: 0.04rem;
+    --type-tracking-lg: 0.05rem;
+    --type-tracking-xl: 0.06rem;
+    --type-tracking-2xl: 0.08rem;
+    --type-tracking-3xl: 0.1rem;
+    --type-tracking-4xl: 0.15rem;
+    --type-tracking-5xl: 0.16rem;
+
+    /* Shared bilingual section headings */
+    --type-section-title-size: clamp(40px, 10vw, 44px);
+    --type-section-title-weight: var(--type-weight-regular);
+    --type-section-title-line: var(--type-line-solid);
+    --type-section-subtitle-size: 18px;
+    --type-section-subtitle-weight: var(--type-weight-semibold);
+    --type-section-subtitle-line: var(--type-line-ui);
+    --type-section-subtitle-tracking: var(--type-tracking-2xl);
+
+    /* Cover and hero */
+    --type-cover-name-size: 2.1rem;
+    --type-cover-name-zh-size: 1rem;
+    --type-cover-date-size: 1rem;
+    --type-cover-action-size: 0.9rem;
+    --type-desktop-title-size: 2rem;
+    --type-desktop-date-size: 1rem;
+    --type-hero-announcement-size: 2.25rem;
+    --type-hero-heading-zh-size: 1.35rem;
+    --type-hero-name-size: 1.85rem;
+    --type-hero-name-zh-size: 1.15rem;
+    --type-hero-date-size: 1.05rem;
+    --type-hero-venue-size: 0.92rem;
+    --type-hero-venue-zh-size: 0.9rem;
+
+    /* Wedding information */
     --bottom-nav-height: 4.25rem;
-    --wedding-title-size: 46px;
-    --wedding-subtitle-size: 18px;
-    --wedding-date-size: 30px;
-    --wedding-day-size: 17px;
-    --countdown-number-size: 18px;
-    --countdown-label-size: 13px;
-    --schedule-time-size: 25px;
-    --schedule-label-en-size: 16px;
-    --schedule-label-zh-size: 15px;
-    --venue-en-size: 20px;
-    --venue-zh-size: 15px;
-    --action-text-size: 16px;
+    --type-wedding-title-size: clamp(42px, 11vw, 46px);
+    --type-wedding-subtitle-size: 18px;
+    --type-wedding-date-size: 30px;
+    --type-wedding-day-size: 17px;
+    --type-countdown-number-size: 18px;
+    --type-countdown-label-size: 13px;
+    --type-schedule-time-size: 25px;
+    --type-schedule-label-en-size: 16px;
+    --type-schedule-label-zh-size: 15px;
+    --type-venue-en-size: 20px;
+    --type-venue-zh-size: 15px;
+    --type-action-size: 16px;
+
+    /* Story */
+    --type-story-kicker-size: 0.75rem;
+    --type-story-name-size: 1.65rem;
+    --type-story-name-zh-size: 1rem;
+    --type-story-supporting-size: 0.9rem;
+    --type-story-heart-size: 2.25rem;
+    --type-story-body-size: 0.875em;
+    --type-button-small-size: 0.875rem;
+    --type-body-size: 1rem;
+
+    /* RSVP */
+    --type-field-label-en-size: 18px;
+    --type-field-label-zh-size: 15px;
+    --type-option-en-size: 17px;
+    --type-option-zh-size: 15px;
+    --type-helper-size: 13px;
+    --type-input-size: 16px;
+    --type-submit-en-size: 17px;
+    --type-submit-zh-size: 14px;
+
+    /* Guide, footer, navigation, and transient UI */
+    --type-guide-title-size: 1.5rem;
+    --type-guide-body-size: 0.95rem;
+    --type-guide-zh-size: 0.85rem;
+    --type-guide-link-size: 0.8rem;
+    --type-footer-message-size: 0.95rem;
+    --type-modal-title-size: 2rem;
+    --type-modal-signature-size: 1.5rem;
+    --type-modal-body-size: 0.95rem;
+    --type-modal-zh-primary-size: 1rem;
+    --type-modal-zh-secondary-size: 0.9rem;
+    --type-loading-size: 0.8rem;
+    --type-calendar-helper-size: 0.85rem;
+    --type-guest-name-size: 1.25rem;
+    --type-validation-zh-size: 0.85rem;
+    --type-icon-hero-size: 0.72rem;
+    --type-icon-map-size: 13px;
+    --type-icon-field-size: 18px;
+    --type-icon-footer-size: 0.5rem;
+    --type-choice-container-size: 1.1rem;
+
+    /* Supporting interface text */
+    --type-nav-size: 0.7rem;
+    --type-credit-size: 0.65rem;
+    --type-credit-small-size: 0.6rem;
+
+    /* Responsive spacing */
     --space-title-date: clamp(20px, 2.8vh, 28px);
     --space-date-countdown: clamp(16px, 2.2vh, 22px);
     --space-countdown-schedule: clamp(20px, 2.6vh, 28px);
@@ -40,27 +143,18 @@ body {
 }
 
 .font-esthetic {
-    font-family: 'Sacramento', cursive !important;
+    font-family: var(--font-script) !important;
 }
 
 .font-arabic {
-    font-family: 'Noto Naskh Arabic', serif !important;
+    font-family: var(--font-arabic) !important;
 }
 
 .zh-subline {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: normal;
-    letter-spacing: 0.1rem;
-}
-
-.zh-form-label {
-    display: block;
-    margin-top: 0.15rem;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.85rem;
-    font-weight: normal;
-    letter-spacing: 0.1rem;
+    font-family: var(--font-sans);
+    font-size: var(--type-story-supporting-size);
+    font-weight: var(--type-weight-regular);
+    letter-spacing: var(--type-tracking-3xl);
 }
 
 [data-image-modal]:focus-visible {
@@ -71,25 +165,30 @@ body {
 .home-heading-zh {
     padding-bottom: 1.25rem;
     margin-top: 0;
-    font-size: 1.35rem;
-    font-weight: 500;
-    line-height: 1.35;
-    letter-spacing: 0.08rem;
+    font-size: var(--type-hero-heading-zh-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-bilingual);
+    letter-spacing: var(--type-tracking-2xl);
+}
+
+.hero-announcement {
+    font-size: var(--type-hero-announcement-size);
+    font-weight: var(--type-weight-medium);
 }
 
 .home-couple-name {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 1.85rem;
-    font-weight: 400;
-    letter-spacing: 0.04rem;
+    font-family: var(--font-serif);
+    font-size: var(--type-hero-name-size);
+    font-weight: var(--type-weight-regular);
+    letter-spacing: var(--type-tracking-md);
 }
 
 .home-couple-name-zh {
     color: #555;
-    font-size: 1.15rem;
-    font-weight: 500;
-    line-height: 1.25;
-    letter-spacing: 0.05rem;
+    font-size: var(--type-hero-name-zh-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-compact);
+    letter-spacing: var(--type-tracking-lg);
 }
 
 html[data-bs-theme="dark"] .home-couple-name-zh {
@@ -108,22 +207,22 @@ html[data-bs-theme="dark"] .home-couple-name-zh {
 }
 
 .hero-date {
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: 0.02rem;
+    font-size: var(--type-hero-date-size);
+    font-weight: var(--type-weight-semibold);
+    letter-spacing: var(--type-tracking-xs);
 }
 
 .hero-venue {
     color: #555;
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 0.92rem;
-    font-weight: 400;
-    letter-spacing: 0.03rem;
+    font-family: var(--font-serif);
+    font-size: var(--type-hero-venue-size);
+    font-weight: var(--type-weight-regular);
+    letter-spacing: var(--type-tracking-sm);
 }
 
 .hero-location-icon {
     color: #8a704f;
-    font-size: 0.72rem;
+    font-size: var(--type-icon-hero-size);
     opacity: 0.7;
 }
 
@@ -133,10 +232,10 @@ html[data-bs-theme="dark"] .hero-venue {
 
 .hero-info-zh {
     color: #555;
-    font-size: 0.9rem;
-    font-weight: 500;
-    line-height: 1.35;
-    letter-spacing: 0.06rem;
+    font-size: var(--type-hero-venue-zh-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-bilingual);
+    letter-spacing: var(--type-tracking-xl);
 }
 
 html[data-bs-theme="dark"] .hero-info-zh {
@@ -145,39 +244,51 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .section-header-title {
     margin: 0;
-    font-family: 'Sacramento', cursive;
-    font-size: clamp(40px, 10vw, 44px);
-    font-weight: 400;
-    line-height: 1;
+    font-family: var(--font-script);
+    font-size: var(--type-section-title-size);
+    font-weight: var(--type-section-title-weight);
+    line-height: var(--type-section-title-line);
 }
 
 .section-header-subtitle {
     margin: 6px 0 0;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 1.3;
-    letter-spacing: 0.08rem;
+    font-family: var(--font-sans);
+    font-size: var(--type-section-subtitle-size);
+    font-weight: var(--type-section-subtitle-weight);
+    line-height: var(--type-section-subtitle-line);
+    letter-spacing: var(--type-section-subtitle-tracking);
+}
+
+.desktop-couple-title {
+    font-size: var(--type-desktop-title-size);
+}
+
+.desktop-wedding-date {
+    font-size: var(--type-desktop-date-size);
 }
 
 .wedding-day-section {
     min-height: calc(100dvh - var(--bottom-nav-height));
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-top: clamp(56px, 8vh, 84px);
+    padding-bottom: clamp(40px, 5vh, 64px);
+    box-sizing: border-box;
 }
 
 .wedding-day-content {
-    padding-top: clamp(14px, 2vh, 22px);
-    padding-bottom: clamp(14px, 2vh, 22px);
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .wedding-day-title {
-    font-size: clamp(42px, 11vw, var(--wedding-title-size));
+    font-size: var(--type-wedding-title-size);
 }
 
 .wedding-day-subtitle {
-    font-size: var(--wedding-subtitle-size);
+    font-size: var(--type-wedding-subtitle-size);
 }
 
 .wedding-date-group {
@@ -185,19 +296,19 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .wedding-date {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: var(--wedding-date-size);
-    font-weight: 600;
-    line-height: 1.2;
+    font-family: var(--font-sans);
+    font-size: var(--type-wedding-date-size);
+    font-weight: var(--type-weight-semibold);
+    line-height: var(--type-line-tight);
 }
 
 .wedding-day {
     margin-top: 4px;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: var(--wedding-day-size);
-    font-weight: 500;
-    line-height: 1.3;
-    letter-spacing: 0.06rem;
+    font-family: var(--font-sans);
+    font-size: var(--type-wedding-day-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-ui);
+    letter-spacing: var(--type-tracking-xl);
 }
 
 .wedding-countdown {
@@ -217,19 +328,19 @@ html[data-bs-theme="dark"] .hero-info-zh {
     justify-content: center;
     min-width: 0;
     gap: 4px;
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: var(--font-sans);
 }
 
 .wedding-countdown-item > span {
-    font-size: var(--countdown-number-size);
-    font-weight: 600;
-    line-height: 1.25;
+    font-size: var(--type-countdown-number-size);
+    font-weight: var(--type-weight-semibold);
+    line-height: var(--type-line-compact);
 }
 
 .wedding-countdown-item small {
-    font-size: var(--countdown-label-size);
-    font-weight: 400;
-    line-height: 1.3;
+    font-size: var(--type-countdown-label-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-ui);
     opacity: 0.7;
 }
 
@@ -254,48 +365,48 @@ html[data-bs-theme="dark"] .hero-info-zh {
 .wedding-schedule-item {
     min-width: 0;
     padding: 0 0.5rem;
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: var(--font-sans);
 }
 
 .wedding-schedule-time {
-    font-size: var(--schedule-time-size);
-    font-weight: 700;
-    line-height: 1.2;
+    font-size: var(--type-schedule-time-size);
+    font-weight: var(--type-weight-bold);
+    line-height: var(--type-line-tight);
 }
 
 .wedding-schedule-label {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: var(--schedule-label-en-size);
-    font-weight: 500;
-    line-height: 1.3;
+    font-family: var(--font-sans);
+    font-size: var(--type-schedule-label-en-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-ui);
 }
 
 .wedding-schedule-zh {
     color: var(--bs-secondary-color);
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: var(--schedule-label-zh-size);
-    font-weight: 500;
-    line-height: 1.35;
-    letter-spacing: 0.06rem;
+    font-family: var(--font-sans);
+    font-size: var(--type-schedule-label-zh-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-bilingual);
+    letter-spacing: var(--type-tracking-xl);
 }
 
 .wedding-venue-block {
     margin-top: var(--space-schedule-venue);
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: var(--font-sans);
 }
 
 .wedding-venue-en {
-    font-size: var(--venue-en-size);
-    font-weight: 600;
-    line-height: 1.3;
+    font-size: var(--type-venue-en-size);
+    font-weight: var(--type-weight-semibold);
+    line-height: var(--type-line-ui);
 }
 
 .wedding-venue-zh {
     margin-top: 4px;
-    font-size: var(--venue-zh-size);
-    font-weight: 500;
-    line-height: 1.35;
-    letter-spacing: 0.08rem;
+    font-size: var(--type-venue-zh-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-bilingual);
+    letter-spacing: var(--type-tracking-2xl);
 }
 
 .wedding-actions {
@@ -310,22 +421,22 @@ html[data-bs-theme="dark"] .hero-info-zh {
     border: 1px solid #b8976a;
     background-color: #b8976a;
     color: #fff;
-    font-size: var(--action-text-size);
-    font-weight: 500;
+    font-size: var(--type-action-size);
+    font-weight: var(--type-weight-medium);
 }
 
 .wedding-map-link {
     color: #555;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: var(--action-text-size);
-    font-weight: 400;
-    line-height: 1.4;
+    font-family: var(--font-sans);
+    font-size: var(--type-action-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-body);
     text-decoration: none;
 }
 
 .wedding-map-link i {
     color: #b8976a;
-    font-size: 13px;
+    font-size: var(--type-icon-map-size);
 }
 
 .invitation-cover {
@@ -340,17 +451,17 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .cover-couple-name {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 2.1rem;
-    font-weight: 400;
-    letter-spacing: 0.06rem;
+    font-family: var(--font-serif);
+    font-size: var(--type-cover-name-size);
+    font-weight: var(--type-weight-regular);
+    letter-spacing: var(--type-tracking-xl);
 }
 
 .cover-couple-name-zh {
     color: #6e665c;
-    font-size: 1rem;
-    font-weight: 400;
-    letter-spacing: 0.06rem;
+    font-size: var(--type-cover-name-zh-size);
+    font-weight: var(--type-weight-regular);
+    letter-spacing: var(--type-tracking-xl);
 }
 
 .cover-photo {
@@ -365,9 +476,9 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .cover-date {
     color: #514a41;
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 1rem;
-    letter-spacing: 0.08rem;
+    font-family: var(--font-serif);
+    font-size: var(--type-cover-date-size);
+    letter-spacing: var(--type-tracking-2xl);
 }
 
 .cover-open-button {
@@ -376,8 +487,10 @@ html[data-bs-theme="dark"] .hero-info-zh {
     color: #fff;
     background-color: #a98556;
     box-shadow: 0 0.5rem 1.5rem rgb(78 61 40 / 15%);
-    font-size: 0.9rem;
-    letter-spacing: 0.04rem;
+    font-size: var(--type-cover-action-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-control);
+    letter-spacing: var(--type-tracking-md);
 }
 
 .cover-open-button:hover,
@@ -400,9 +513,9 @@ html[data-bs-theme="dark"] .hero-info-zh {
 .story-kicker,
 .story-role {
     color: #9a7a50;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.16rem;
+    font-size: var(--type-story-kicker-size);
+    font-weight: var(--type-weight-semibold);
+    letter-spacing: var(--type-tracking-5xl);
     text-transform: uppercase;
 }
 
@@ -421,37 +534,37 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .story-person-name,
 .story-timeline-title {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 1.65rem;
-    font-weight: 400;
-    letter-spacing: 0.03rem;
+    font-family: var(--font-serif);
+    font-size: var(--type-story-name-size);
+    font-weight: var(--type-weight-regular);
+    letter-spacing: var(--type-tracking-sm);
 }
 
 .story-person-name-zh {
     color: #555;
-    font-size: 1rem;
-    font-weight: 500;
-    letter-spacing: 0.06rem;
+    font-size: var(--type-story-name-zh-size);
+    font-weight: var(--type-weight-medium);
+    letter-spacing: var(--type-tracking-xl);
 }
 
 .story-traits {
     color: #8a704f;
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 0.9rem;
+    font-family: var(--font-serif);
+    font-size: var(--type-story-supporting-size);
 }
 
 .story-intro {
     max-width: 20rem;
     margin-inline: auto;
     color: var(--bs-secondary-color);
-    font-size: 0.9rem;
-    line-height: 1.7;
+    font-size: var(--type-story-supporting-size);
+    line-height: var(--type-line-relaxed);
 }
 
 .story-heart {
     color: #b8976a;
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 2.25rem;
+    font-family: var(--font-serif);
+    font-size: var(--type-story-heart-size);
 }
 
 .story-timeline {
@@ -472,6 +585,17 @@ html[data-bs-theme="dark"] .hero-info-zh {
     border: 1px solid #b8976a;
     color: #fff;
     background-color: #a98556;
+    font-size: var(--type-button-small-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-control);
+}
+
+.story-milestone-title {
+    font-weight: var(--type-weight-bold);
+}
+
+.story-milestone-body {
+    font-size: var(--type-story-body-size);
 }
 
 .story-read-button:hover,
@@ -493,50 +617,58 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     box-sizing: border-box;
 }
 
+.rsvp-intro-en {
+    font-size: var(--type-cover-name-zh-size);
+}
+
+.rsvp-intro-zh {
+    font-size: var(--type-story-supporting-size);
+    font-weight: var(--type-weight-medium);
+    letter-spacing: var(--type-tracking-3xl);
+}
+
 .rsvp-field-label {
     display: block;
     width: 100%;
     margin: 0 0 12px;
     padding: 0;
     color: inherit;
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: var(--font-sans);
 }
 
-.rsvp-field-heading,
 .bilingual-field-label {
     display: flex;
     flex-wrap: nowrap;
     align-items: baseline;
     gap: 8px;
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: var(--font-sans);
 }
 
 .bilingual-field-label-en {
     min-width: 0;
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 1.25;
+    font-size: var(--type-field-label-en-size);
+    font-weight: var(--type-weight-semibold);
+    line-height: var(--type-line-compact);
 }
 
-.rsvp-field-subheading,
 .bilingual-field-label-zh {
     display: inline;
     flex: 0 0 auto;
     margin: 0;
     color: var(--bs-secondary-color);
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 1.25;
-    letter-spacing: 0.05rem;
+    font-family: var(--font-sans);
+    font-size: var(--type-field-label-zh-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-compact);
+    letter-spacing: var(--type-tracking-lg);
 }
 
 .rsvp-field-icon {
-    flex: 0 0 18px;
-    width: 18px !important;
-    height: 18px;
-    font-size: 18px;
-    line-height: 18px;
+    flex: 0 0 var(--type-icon-field-size);
+    width: var(--type-icon-field-size) !important;
+    height: var(--type-icon-field-size);
+    font-size: var(--type-icon-field-size);
+    line-height: var(--type-icon-field-size);
     align-self: center;
     text-align: center;
     opacity: 0.72;
@@ -544,7 +676,7 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 
 .bilingual-option-text {
     min-width: 0;
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: var(--font-sans);
 }
 
 .bilingual-option-text-en,
@@ -553,25 +685,25 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 }
 
 .bilingual-option-text-en {
-    font-size: 17px;
-    font-weight: 500;
-    line-height: 1.3;
+    font-size: var(--type-option-en-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-ui);
 }
 
 .bilingual-option-text-zh {
     margin-top: 4px;
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 1.35;
-    letter-spacing: 0.05rem;
+    font-size: var(--type-option-zh-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-bilingual);
+    letter-spacing: var(--type-tracking-lg);
 }
 
 .bilingual-helper-text {
     color: #625f5a;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.4;
+    font-family: var(--font-sans);
+    font-size: var(--type-helper-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-body);
 }
 
 .bilingual-helper-text-en,
@@ -581,14 +713,22 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 
 .bilingual-helper-text-zh {
     margin-top: 2px;
-    letter-spacing: 0.05rem;
+    letter-spacing: var(--type-tracking-lg);
+}
+
+.rsvp-input,
+.rsvp-input::placeholder {
+    font-family: var(--font-sans);
+    font-size: var(--type-input-size) !important;
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-input);
 }
 
 .rsvp-message-input {
     min-height: 128px;
     padding: 0.85rem 1rem;
     border-width: 1px;
-    line-height: 1.5;
+    line-height: var(--type-line-input);
     resize: vertical;
 }
 
@@ -616,33 +756,21 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 .rsvp-submit-en,
 .rsvp-submit-zh {
     display: block;
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: var(--font-sans);
 }
 
 .rsvp-submit-en {
-    font-size: 17px;
-    font-weight: 600;
-    line-height: 1.3;
+    font-size: var(--type-submit-en-size);
+    font-weight: var(--type-weight-semibold);
+    line-height: var(--type-line-ui);
 }
 
 .rsvp-submit-zh {
     margin-top: 2px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.3;
-    letter-spacing: 0.1rem;
-}
-
-.rsvp-section .form-text {
-    font-size: 0.9rem;
-    line-height: 1.45;
-}
-
-.rsvp-helper-zh {
-    color: var(--bs-secondary-color);
-    font-size: 0.9rem;
-    line-height: 1.45;
-    letter-spacing: 0.08rem;
+    font-size: var(--type-submit-zh-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-ui);
+    letter-spacing: var(--type-tracking-3xl);
 }
 
 .rsvp-party-options {
@@ -662,8 +790,8 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     padding: 0.65rem 0.8rem;
     border: 1px solid #b8976a;
     background-color: rgb(255 255 255 / 30%);
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-size: var(--type-choice-container-size);
+    font-weight: var(--type-weight-medium);
     cursor: pointer;
     transition: background-color 200ms ease, box-shadow 200ms ease;
 }
@@ -690,9 +818,101 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 }
 
 .rsvp-party-size-text {
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 1.25;
+    font-size: var(--type-field-label-en-size);
+    font-weight: var(--type-weight-semibold);
+    line-height: var(--type-line-compact);
+}
+
+.wedding-guide-title {
+    font-size: var(--type-guide-title-size);
+}
+
+.wedding-guide-subtitle,
+.wedding-guide-copy-zh {
+    font-size: var(--type-guide-zh-size);
+    letter-spacing: var(--type-tracking-3xl);
+}
+
+.wedding-guide-copy-en {
+    font-size: var(--type-guide-body-size);
+}
+
+.wedding-guide-link {
+    font-size: var(--type-guide-link-size);
+}
+
+.wedding-guide-link-zh {
+    letter-spacing: var(--type-tracking-3xl);
+}
+
+.footer-message {
+    font-size: var(--type-footer-message-size);
+}
+
+.footer-kicker {
+    font-size: var(--type-nav-size);
+    letter-spacing: var(--type-tracking-4xl);
+}
+
+.footer-credit {
+    font-size: var(--type-credit-size);
+}
+
+.footer-build-credit {
+    font-size: var(--type-credit-small-size);
+}
+
+.footer-build-icon {
+    font-size: var(--type-icon-footer-size);
+}
+
+.bottom-nav-label {
+    font-size: var(--type-nav-size);
+}
+
+.loading-status {
+    font-size: var(--type-loading-size);
+}
+
+.guest-name-display {
+    font-size: var(--type-guest-name-size);
+}
+
+.calendar-helper-text,
+.calendar-provider-links {
+    font-size: var(--type-calendar-helper-size);
+}
+
+.validation-message-zh {
+    font-size: var(--type-validation-zh-size);
+    letter-spacing: var(--type-tracking-3xl);
+}
+
+.offline-status-text {
+    font-size: var(--type-loading-size);
+}
+
+.rsvp-modal-title {
+    font-size: var(--type-modal-title-size);
+}
+
+.rsvp-modal-body {
+    font-size: var(--type-modal-body-size);
+}
+
+.rsvp-modal-zh-primary {
+    font-size: var(--type-modal-zh-primary-size);
+    font-weight: var(--type-weight-medium);
+    letter-spacing: var(--type-tracking-3xl);
+}
+
+.rsvp-modal-zh-secondary {
+    font-size: var(--type-modal-zh-secondary-size);
+    letter-spacing: var(--type-tracking-3xl);
+}
+
+.rsvp-modal-signature {
+    font-size: var(--type-modal-signature-size);
 }
 
 .rsvp-section {
