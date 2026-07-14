@@ -5,6 +5,7 @@
 1. Make code changes step by step so each change can be reviewed independently.
 2. Show the user what changed and wait for explicit confirmation before continuing to the next meaningful change.
 3. Never push commits or changes to a remote repository without the user's explicit confirmation immediately before the push.
+4. Treat the user's standalone command `cp` as explicit confirmation to commit all currently reviewed changes and push the resulting commit to the configured remote branch.
 
 ## Git and PR Rules
 
@@ -20,11 +21,75 @@ The Apps Script (`docs/google-apps-script.js`) must only interact with the RSVP 
 4. Never install automatic triggers.
 5. Make no external HTTP calls except to Google's reCAPTCHA verification endpoint.
 
-## Chinese and English Typography
+## Canonical Typography System
 
-1. Never put Chinese text inside `font-esthetic` elements.
-2. Use regular Josefin Sans for Chinese with `letter-spacing: 0.1rem`.
-3. Put Chinese on a separate line below an English Sacramento heading using `<p>`, not `<span>`.
-4. Use a Chinese font size approximately 60% of the English heading size.
-5. Do not use a slash separator between English and Chinese.
-6. Apply these rules to headings, labels, dropdown options, and placeholders throughout the site.
+Typography is determined by semantic role, never by visual preference. Do not introduce another font role without updating this specification.
+
+### 1. Brand Font — Display Serif
+
+The Brand Font is the Display Serif and represents the couple's identity. Use it for all bride and groom names, including:
+
+- `Minchi & David` in the Hero and invitation cover
+- `Irene Tsai` and `David Chen` on Couple or profile sections
+- An optional couple-name footer signature
+
+Never use the Display Serif for section titles, dates, times, venues, Story body content, RSVP content, buttons, forms, or navigation.
+
+### 2. Section Script — Emotional Headings
+
+Use the decorative Section Script only for these section or profile headings:
+
+- `Wedding Day`
+- `RSVP`
+- `Bride`
+- `Groom`
+- `Our Story`
+- `Gallery`
+
+Do not use the Section Script for Hero announcements, Wedding Guide, names, information blocks, descriptions, buttons, or navigation.
+
+### 3. Sans-serif — Information and UI
+
+Use the primary sans-serif for everything that is not a couple name or one of the approved Section Script headings, including:
+
+- Hero announcements
+- Dates, times, countdowns, schedules, and venues
+- Maps links, buttons, and navigation
+- RSVP fields, options, descriptions, and helper text
+- Story body content
+- Wedding Guide content
+- Footer content
+
+Sans-serif should account for more than 90% of the website typography.
+
+### 4. Chinese Sans-serif
+
+All Chinese text must use the dedicated Chinese sans-serif stack. Never place Chinese inside a Section Script or Brand Font element.
+
+Do not calculate Chinese sizes as arbitrary percentages of English sizes. Text with the same semantic role must consume the same shared Chinese typography token, such as:
+
+- Section subtitle
+- Field label
+- Option text
+- Venue information
+- Body text
+- Helper text
+- Button text
+
+Chinese may share a line with English when the component specification calls for a compact bilingual label. Do not use slash separators between languages.
+
+### Required Hierarchy
+
+- Cover: Display Serif couple name → date in sans-serif → button in sans-serif
+- Hero: Sans-serif announcement → Chinese subtitle → Display Serif couple name → Chinese names → date → venue
+- Wedding Day: Section Script → Chinese subtitle → date → weekday → schedule → venue → actions; only the section title uses script
+- RSVP: Section Script → invitation sentence → form → buttons → helper text; only the section title uses script
+
+### Consistency Rule
+
+Before styling any text, classify it:
+
+- Bride or groom name → Display Serif
+- `Wedding Day`, `RSVP`, `Bride`, `Groom`, `Our Story`, or `Gallery` heading → Section Script
+- Everything else → Sans-serif
+- Chinese → shared Chinese sans-serif semantic token
