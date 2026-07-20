@@ -37,7 +37,9 @@ The Hero announcement and its Chinese line use the shared bilingual section-titl
 
 Display Serif is not currently assigned to visible couple or personal names. Do not use it for `Minchi`, `David`, or `Minchi & David` without first changing this specification.
 
-Do not use the Display Serif for section titles, dates, times, venues, body text, buttons, forms, or navigation.
+Use Cormorant Garamond as the Display Serif only for the expanded `How We Met` and `How We Fell in Love` chapter titles within Our Journey. Their collapsed accordion titles remain Sans-serif.
+
+Do not use the Display Serif for other section titles, dates, times, venues, body text, buttons, forms, or navigation.
 
 ### 2. Section Script — Emotional Statements and Titles
 
@@ -86,10 +88,10 @@ Chinese informational and interface text must use this dedicated Chinese sans-se
 Chinese personal names (`蔡旻淇`, `郭大為`, `旻淇`, and `大為`) and short emotional display lines are the exceptions. Emotional display lines include the Hero Chinese announcement, Chinese section subtitles, Cover invitation copy, and footer closing message. Load `Zen Maru Gothic` explicitly and use this dedicated rounded stack:
 
 ```css
---font-soft-zh: 'Zen Maru Gothic', 'Noto Sans TC', 'PingFang TC', sans-serif;
+--font-soft-zh: 'Zen Maru Gothic Local', 'Zen Maru Gothic', 'Noto Sans TC', 'PingFang TC', sans-serif;
 ```
 
-Load `Noto Sans TC` explicitly. Load the local subset `assets/fonts/ZenMaruGothic-SoftChinese.woff2` as `Zen Maru Gothic` for Chinese names and emotional display glyphs. Use `var(--font-soft-zh)` only for those roles and `var(--font-sans-zh)` for informational Chinese, body copy, forms, FAQ content, dates, times, and venues. Never place Chinese inside a Section Script or Brand Font element.
+Load `Noto Sans TC` explicitly. Load the local subset `assets/fonts/ZenMaruGothic-SoftChinese.woff2` as `Zen Maru Gothic Local`, with the Google-hosted `Zen Maru Gothic` as a fallback for missing emotional display glyphs. Use `var(--font-soft-zh)` only for those roles and `var(--font-sans-zh)` for informational Chinese, body copy, forms, FAQ content, dates, times, and venues. Within Our Journey, the Chinese chapter titles and expanded narrative body both use `var(--font-sans-zh)`; only the expanded English chapter title uses Display Serif. Never place Chinese inside a Section Script or Brand Font element.
 
 Chinese is the primary language in bilingual informational and UI pairs. Place or style Chinese as the dominant line; English is secondary, smaller, lighter, and must not compete. Approved English Section Script titles and visible personal names remain romantic display exceptions rather than informational hierarchy.
 

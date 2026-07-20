@@ -2,7 +2,7 @@
 @import url("animation.css");
 
 @font-face {
-    font-family: 'Zen Maru Gothic';
+    font-family: 'Zen Maru Gothic Local';
     src: url('../assets/fonts/ZenMaruGothic-SoftChinese.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
@@ -13,9 +13,9 @@
     /* Typography families */
     --font-script: 'Sacramento', cursive;
     --font-sans-zh: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Heiti TC', sans-serif;
-    --font-soft-zh: 'Zen Maru Gothic', 'Noto Sans TC', 'PingFang TC', sans-serif;
+    --font-soft-zh: 'Zen Maru Gothic Local', 'Zen Maru Gothic', 'Noto Sans TC', 'PingFang TC', sans-serif;
     --font-sans: 'Josefin Sans', var(--font-sans-zh);
-    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
     --font-arabic: 'Noto Naskh Arabic', serif;
 
     /* Shared weights, line heights, and tracking */
@@ -766,14 +766,39 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .story-timeline {
+    position: relative;
+    isolation: isolate;
     width: 100%;
+    height: min(650px, calc(100dvh - var(--bottom-nav-height)));
+    padding: 2.75rem 1.5rem 3rem;
+    margin-inline: -0.75rem;
+    box-sizing: border-box;
+}
+
+.journey-background {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 60% center;
+    opacity: 0.065;
+    filter: grayscale(1) contrast(0.86);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%);
+    mix-blend-mode: multiply;
+    pointer-events: none;
 }
 
 .journey-header {
+    position: relative;
+    z-index: 1;
     margin-bottom: 1.5rem;
 }
 
 .journey-stories {
+    position: relative;
+    z-index: 1;
     width: 100%;
     max-width: 34rem;
     margin-inline: auto;
@@ -783,12 +808,12 @@ html[data-bs-theme="dark"] .hero-info-zh {
     border-bottom: 1px solid rgb(184 151 106 / 24%);
 }
 
-.journey-card:first-child {
-    border-top: 1px solid rgb(184 151 106 / 24%);
-}
-
 .journey-card + .journey-card {
     margin-top: 1rem;
+}
+
+.journey-card:first-child {
+    border-top: 1px solid rgb(184 151 106 / 24%);
 }
 
 .journey-card-heading {
@@ -838,14 +863,15 @@ html[data-bs-theme="dark"] .hero-info-zh {
     font-size: 14px;
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-ui);
+    transition: color 180ms ease, font-family 180ms ease, font-size 180ms ease;
 }
 
 .journey-title-zh {
     margin-top: 2px;
     color: var(--bs-body-color);
     font-family: var(--font-sans-zh);
-    font-size: 14px;
-    font-weight: var(--type-weight-medium);
+    font-size: 15px;
+    font-weight: var(--type-weight-regular);
     line-height: var(--type-line-bilingual);
     letter-spacing: var(--type-tracking-lg);
 }
@@ -873,14 +899,30 @@ html[data-bs-theme="dark"] .hero-info-zh {
     transform: rotate(90deg);
 }
 
+.journey-toggle[aria-expanded="true"] .journey-title-en {
+    color: #514a41;
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-tight);
+}
+
 .journey-story-body {
     padding: 0 1.5rem 1.5rem 3rem;
-    color: var(--bs-body-color);
+    color: #514a41;
     font-family: var(--font-sans-zh);
     font-size: 14px;
     font-weight: var(--type-weight-regular);
-    line-height: 1.85;
+    line-height: 1.9;
     letter-spacing: var(--type-tracking-xs);
+}
+
+.journey-story-body::before {
+    display: block;
+    width: 2.5rem;
+    margin: 0 0 1.1rem;
+    border-top: 1px solid rgb(184 151 106 / 32%);
+    content: "";
 }
 
 .journey-story-body p {
@@ -893,6 +935,16 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .journey-card .collapsing {
     transition: height 280ms ease;
+}
+
+html[data-bs-theme="dark"] .journey-background {
+    opacity: 0.05;
+    filter: grayscale(1) contrast(0.8) invert(1);
+    mix-blend-mode: screen;
+}
+
+html[data-bs-theme="dark"] .journey-story-body {
+    color: #d8d2c9;
 }
 
 html[data-bs-theme="dark"] .story-person-name-zh {
@@ -1433,6 +1485,19 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 
 .wedding-guide-answer {
     padding: 0 2.5rem 1.75rem 0;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.wedding-guide-item .collapse.show .wedding-guide-answer,
+.wedding-guide-item .collapsing .wedding-guide-answer {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.wedding-guide-item .collapsing {
+    transition: height 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .wedding-guide-answer-en {
@@ -1503,7 +1568,7 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
     margin-top: 0.25rem;
     color: var(--bs-secondary-color);
     letter-spacing: var(--type-tracking-xs);
-    opacity: 0.58;
+    opacity: 0.55;
 }
 
 .footer-message-heart {
@@ -1514,16 +1579,16 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 }
 
 .footer-credits {
-    padding: 3rem 1.5rem 1rem;
+    padding: 2rem 1.5rem 1rem;
 }
 
 .footer-kicker {
     margin: 0;
     font-family: var(--font-script);
-    font-size: 1.75rem;
+    font-size: 1.875rem;
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-solid);
-    opacity: 0.65;
+    opacity: 0.75;
 }
 
 .footer-credit-list {
@@ -1839,7 +1904,21 @@ html[data-bs-theme="dark"] .bg-white-black {
 
     .wedding-guide-section {
         padding-top: 3.5rem !important;
-        padding-bottom: 3rem !important;
+        padding-bottom: 2rem !important;
+        box-sizing: border-box;
+    }
+
+    .wedding-guide-section > .container {
+        width: 100%;
+    }
+
+    .guide-closing {
+        padding-top: 0;
+        margin-top: 4rem;
+    }
+
+    .wedding-guide-background {
+        height: calc(100dvh - var(--bottom-nav-height));
     }
 
     .wedding-guide-header {
