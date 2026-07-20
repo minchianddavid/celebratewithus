@@ -52,6 +52,7 @@ Use the Section Script for:
 - `Wedding Day`
 - `RSVP`
 - `Our Story`
+- `Our Journey`
 - `Meet the Couple`
 - `Good to Know`
 - `Behind the Scenes`

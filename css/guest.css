@@ -78,7 +78,6 @@
     --type-schedule-label-zh-size: 15px;
     --type-venue-en-size: 20px;
     --type-venue-zh-size: 15px;
-    --type-action-size: 16px;
 
     /* Story */
     --type-story-kicker-size: 2rem;
@@ -105,8 +104,8 @@
     --type-guide-question-size: 1.05rem;
     --type-guide-answer-size: 0.95rem;
     --type-guide-answer-zh-size: 0.9rem;
-    --type-footer-message-size: 0.82rem;
-    --type-footer-message-zh-size: 0.94rem;
+    --type-footer-message-size: 0.75rem;
+    --type-footer-message-zh-size: 1rem;
     --type-footer-name-size: 1.5rem;
     --type-footer-quote-size: 0.86rem;
     --type-footer-credit-size: 0.72rem;
@@ -134,7 +133,6 @@
     --space-date-countdown: clamp(16px, 2.2vh, 22px);
     --space-countdown-schedule: clamp(20px, 2.6vh, 28px);
     --space-schedule-venue: clamp(20px, 2.6vh, 28px);
-    --space-venue-action: 32px;
 }
 
 html {
@@ -146,11 +144,6 @@ html,
 body {
     max-width: 100%;
     overflow-x: hidden;
-}
-
-.with-scrollbar {
-    scrollbar-width: auto !important;
-    -ms-overflow-style: auto !important;
 }
 
 .font-esthetic {
@@ -165,7 +158,7 @@ body {
 .wedding-schedule-zh,
 .wedding-venue-zh,
 .zh-subline,
-.story-milestone-body,
+.journey-story-body,
 .rsvp-intro-zh,
 .bilingual-field-label-zh,
 .bilingual-option-text-zh,
@@ -306,6 +299,10 @@ html[data-bs-theme="dark"] .home-couple-name-zh {
     text-decoration-color: rgb(159 123 77 / 70%);
 }
 
+.map-link-accent {
+    color: #b8976a;
+}
+
 html[data-bs-theme="dark"] .hero-venue {
     color: #aaa;
 }
@@ -375,6 +372,17 @@ html[data-bs-theme="dark"] .hero-info-zh {
     box-sizing: border-box;
 }
 
+.wedding-day-section::after {
+    position: absolute;
+    z-index: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 8rem;
+    pointer-events: none;
+    content: "";
+}
+
 .wedding-day-content {
     padding-top: 0;
     padding-bottom: 0;
@@ -400,6 +408,26 @@ html[data-bs-theme="dark"] .hero-info-zh {
     font-size: var(--type-wedding-date-size);
     font-weight: var(--type-weight-medium);
     line-height: var(--type-line-tight);
+}
+
+.wedding-date-link {
+    padding: 0 0 2px;
+    border: 0;
+    border-bottom: 1px solid rgb(184 151 106 / 35%);
+    border-radius: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.wedding-date-link:hover,
+.wedding-date-link:focus-visible {
+    border-bottom-color: rgb(184 151 106 / 75%);
+    color: #8f6d42;
+}
+
+.wedding-date-link:focus-visible {
+    outline: 2px solid rgb(184 151 106 / 35%);
+    outline-offset: 4px;
 }
 
 .wedding-day {
@@ -516,36 +544,6 @@ html[data-bs-theme="dark"] .hero-info-zh {
     letter-spacing: var(--type-tracking-2xl);
 }
 
-.wedding-actions {
-    gap: 0;
-    margin-top: var(--space-venue-action);
-}
-
-.add-calendar-button {
-    width: min(220px, 72vw);
-    min-height: 42px;
-    margin-top: 0;
-    border: 1px solid rgb(184 151 106 / 65%);
-    background-color: rgb(184 151 106 / 7%);
-    color: #9f7b4d;
-    font-size: var(--type-action-size);
-    font-weight: var(--type-weight-regular);
-    box-shadow: none;
-}
-
-.add-calendar-button:hover,
-.add-calendar-button:focus-visible {
-    border-color: rgb(184 151 106 / 85%);
-    background-color: rgb(184 151 106 / 13%);
-    color: #8f6d42;
-}
-
-html[data-bs-theme="dark"] .add-calendar-button {
-    border-color: rgb(216 189 147 / 55%);
-    background-color: rgb(216 189 147 / 8%);
-    color: #d8bd93;
-}
-
 .invitation-cover {
     isolation: isolate;
     color: #292621;
@@ -560,11 +558,11 @@ html[data-bs-theme="dark"] .add-calendar-button {
     z-index: 0;
     inset: 0;
     pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='390' height='844' viewBox='0 0 390 844' preserveAspectRatio='none'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.035 .38' numOctaves='2' seed='12'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='.58'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='390' height='844' viewBox='0 0 390 844' preserveAspectRatio='none'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .18' numOctaves='3' seed='17' result='fibers'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.46 .62' numOctaves='2' seed='29' result='tooth'/%3E%3CfeBlend in='fibers' in2='tooth' mode='soft-light'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='.68'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     mix-blend-mode: multiply;
-    opacity: 0.035;
+    opacity: 0.055;
 }
 
 .invitation-cover > div {
@@ -724,8 +722,7 @@ html[data-bs-theme="dark"] .add-calendar-button {
     object-fit: cover;
 }
 
-.story-person-name,
-.story-timeline-title {
+.story-person-name {
     font-size: var(--type-story-name-size);
     font-weight: var(--type-weight-regular);
     letter-spacing: var(--type-tracking-sm);
@@ -733,10 +730,6 @@ html[data-bs-theme="dark"] .add-calendar-button {
 
 .story-person-name {
     font-family: var(--font-script);
-}
-
-.story-timeline-title {
-    font-family: var(--font-sans);
 }
 
 .story-person-name-zh {
@@ -773,41 +766,133 @@ html[data-bs-theme="dark"] .add-calendar-button {
 }
 
 .story-timeline {
-    border: 1px solid rgb(184 151 106 / 25%);
-    border-radius: 1.5rem;
-    box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 7%);
+    width: 100%;
 }
 
-.story-step {
-    width: 2rem;
-    height: 2rem;
-    border: 1px solid #b8976a;
-    color: #8a704f;
-    background-color: var(--bs-body-bg);
+.journey-header {
+    margin-bottom: 1.5rem;
 }
 
-.story-read-button {
-    border: 1px solid #b8976a;
-    color: #fff;
-    background-color: #a98556;
-    font-size: var(--type-button-small-size);
+.journey-stories {
+    width: 100%;
+    max-width: 34rem;
+    margin-inline: auto;
+}
+
+.journey-card {
+    border-bottom: 1px solid rgb(184 151 106 / 24%);
+}
+
+.journey-card:first-child {
+    border-top: 1px solid rgb(184 151 106 / 24%);
+}
+
+.journey-card + .journey-card {
+    margin-top: 1rem;
+}
+
+.journey-card-heading {
+    margin: 0;
+}
+
+.journey-toggle {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr) 1.25rem;
+    align-items: start;
+    width: 100%;
+    gap: 0.75rem;
+    padding: 1.25rem 0.25rem 1.15rem;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 160ms ease;
+}
+
+.journey-toggle:hover,
+.journey-toggle:focus-visible {
+    background-color: rgb(184 151 106 / 5%);
+    outline: none;
+}
+
+.journey-step {
+    padding-top: 2px;
+    color: #9a7a50;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-compact);
+    letter-spacing: var(--type-tracking-lg);
+}
+
+.journey-card-copy {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.journey-title-en {
+    color: var(--bs-secondary-color);
+    font-family: var(--font-sans);
+    font-size: 14px;
     font-weight: var(--type-weight-regular);
-    line-height: var(--type-line-control);
+    line-height: var(--type-line-ui);
 }
 
-.story-milestone-title {
-    font-weight: var(--type-weight-bold);
+.journey-title-zh {
+    margin-top: 2px;
+    color: var(--bs-body-color);
+    font-family: var(--font-sans-zh);
+    font-size: 14px;
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-bilingual);
+    letter-spacing: var(--type-tracking-lg);
 }
 
-.story-milestone-body {
-    font-size: var(--type-story-body-size);
+.journey-preview {
+    margin-top: 0.65rem;
+    color: var(--bs-secondary-color);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-body);
+    opacity: 0.72;
 }
 
-.story-read-button:hover,
-.story-read-button:focus-visible {
-    border-color: #8d6d45;
-    color: #fff;
-    background-color: #8d6d45;
+.journey-indicator {
+    align-self: center;
+    color: rgb(154 122 80 / 72%);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.3rem;
+    line-height: var(--type-line-solid);
+    transition: transform 220ms ease;
+}
+
+.journey-toggle[aria-expanded="true"] .journey-indicator {
+    transform: rotate(90deg);
+}
+
+.journey-story-body {
+    padding: 0 1.5rem 1.5rem 3rem;
+    color: var(--bs-body-color);
+    font-family: var(--font-sans-zh);
+    font-size: 14px;
+    font-weight: var(--type-weight-regular);
+    line-height: 1.85;
+    letter-spacing: var(--type-tracking-xs);
+}
+
+.journey-story-body p {
+    margin: 0;
+}
+
+.journey-story-body p + p {
+    margin-top: 0.75rem;
+}
+
+.journey-card .collapsing {
+    transition: height 280ms ease;
 }
 
 html[data-bs-theme="dark"] .story-person-name-zh {
@@ -835,6 +920,21 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     font-weight: var(--type-weight-regular);
     letter-spacing: var(--type-tracking-lg);
     opacity: 0.88;
+}
+
+.rsvp-transition {
+    max-width: 22rem;
+    margin: 0 auto;
+    padding-top: 2.5rem;
+}
+
+.rsvp-transition-divider {
+    display: block;
+    width: 2.5rem;
+    height: 0;
+    margin: 0 auto 16px;
+    border-top: 1px solid rgb(184 151 106 / 48%);
+    transform: scaleY(0.5);
 }
 
 .rsvp-field-label {
@@ -1113,11 +1213,22 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-self: center;
+    width: min(220px, 68vw);
     min-height: 48px;
-    padding: 6px 30px;
-    border: 0;
-    background-color: #b8976a;
-    color: #fff;
+    padding: 6px 24px;
+    border: 1px solid rgb(184 151 106 / 58%);
+    background-color: rgb(255 255 255 / 24%);
+    color: var(--bs-body-color);
+    box-shadow: none;
+    transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+.rsvp-submit-button:hover,
+.rsvp-submit-button:focus-visible {
+    border-color: rgb(184 151 106 / 82%);
+    background-color: rgb(184 151 106 / 10%);
+    color: #8f6d42;
 }
 
 .rsvp-submit-en,
@@ -1127,10 +1238,11 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 }
 
 .rsvp-submit-en {
-    color: rgb(255 255 255 / 78%);
-    font-size: var(--type-submit-en-size);
+    color: var(--bs-secondary-color);
+    font-size: 12px;
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-ui);
+    opacity: 0.68;
 }
 
 .rsvp-submit-zh {
@@ -1140,6 +1252,11 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
     font-weight: var(--type-weight-medium);
     line-height: var(--type-line-ui);
     letter-spacing: var(--type-tracking-lg);
+}
+
+html[data-bs-theme="dark"] .rsvp-submit-button {
+    border-color: rgb(216 189 147 / 48%);
+    background-color: rgb(255 255 255 / 4%);
 }
 
 .rsvp-party-options {
@@ -1206,6 +1323,15 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 
 .wedding-guide-section {
     padding-bottom: 4.5rem !important;
+    background-image: linear-gradient(to bottom, #faf7f1 0%, rgb(255 255 255 / 0%) 8rem);
+}
+
+.journey-guide-divider {
+    width: 3rem;
+    height: 0;
+    margin: 0 auto 1.25rem;
+    border-top: 1px solid rgb(184 151 106 / 42%);
+    transform: scaleY(0.5);
 }
 
 .wedding-guide-background {
@@ -1338,15 +1464,23 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 }
 
 .footer-section {
-    padding: 0 1.5rem 2.75rem;
+    padding: 0 0 2.75rem;
 }
 
-.footer-closing {
-    padding: 4.5rem 0 4rem;
+.guide-closing {
+    margin-top: 4.5rem;
 }
 
-.footer-closing-copy {
-    max-width: 19rem;
+.guide-closing-divider {
+    width: 4rem;
+    height: 0;
+    margin: 0 auto 2rem;
+    border-top: 1px solid rgb(184 151 106 / 42%);
+    transform: scaleY(0.5);
+}
+
+.guide-closing-copy {
+    max-width: 17.5rem;
 }
 
 .footer-message {
@@ -1361,29 +1495,26 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
     color: inherit;
     font-family: var(--font-soft-zh);
     font-size: var(--type-footer-message-zh-size);
-    font-weight: var(--type-weight-medium);
+    font-weight: var(--type-weight-regular);
     letter-spacing: var(--type-tracking-sm);
 }
 
-.footer-message-zh strong {
-    font-weight: var(--type-weight-medium);
+.footer-message-en {
+    margin-top: 0.25rem;
+    color: var(--bs-secondary-color);
+    letter-spacing: var(--type-tracking-xs);
+    opacity: 0.58;
 }
 
-.footer-message-en {
-    margin-top: 0.3rem;
-    color: var(--bs-secondary-color);
-    opacity: 0.72;
+.footer-message-heart {
+    margin-left: 0.1rem;
+    color: rgb(184 151 106 / 78%);
+    font-family: var(--font-sans);
+    font-size: 0.75em;
 }
 
 .footer-credits {
-    padding: 0 0 1rem;
-}
-
-.footer-divider {
-    width: 4rem;
-    margin: 0 auto 1.5rem;
-    border-color: currentColor;
-    opacity: 0.15;
+    padding: 3rem 1.5rem 1rem;
 }
 
 .footer-kicker {
@@ -1506,7 +1637,9 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 .rsvp-section {
     --bottom-nav-height: 4.25rem;
 
+    min-height: calc(100dvh - var(--bottom-nav-height));
     padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom) + 0.75rem) !important;
+    box-sizing: border-box;
 }
 
 .rsvp-honeypot {
@@ -1589,9 +1722,21 @@ html[data-bs-theme="light"] .story-section {
     background-color: #faf7f1;
 }
 
+html[data-bs-theme="light"] .wedding-day-section::after {
+    background: linear-gradient(to bottom, rgb(250 247 241 / 0%), #faf7f1);
+}
+
 html[data-bs-theme="dark"] .rsvp-section,
 html[data-bs-theme="dark"] .story-section {
     background-color: #171512;
+}
+
+html[data-bs-theme="dark"] .wedding-day-section::after {
+    background: linear-gradient(to bottom, rgb(23 21 18 / 0%), #171512);
+}
+
+html[data-bs-theme="dark"] .wedding-guide-section {
+    background-image: linear-gradient(to bottom, #171512 0%, rgb(0 0 0 / 0%) 8rem);
 }
 
 html[data-bs-theme="light"] .bg-white-black {
@@ -1643,14 +1788,12 @@ html[data-bs-theme="dark"] .bg-white-black {
         --type-schedule-label-zh-size: 14px;
         --type-venue-en-size: 15px;
         --type-venue-zh-size: 14px;
-        --type-action-size: 13px;
         --space-title-date: 30px;
         --space-date-countdown: 26px;
         --space-countdown-schedule: 34px;
-        --space-schedule-venue: 36px;
-        --space-venue-action: 40px;
+        --space-schedule-venue: 52px;
 
-        min-height: auto;
+        min-height: calc(100dvh - var(--bottom-nav-height));
         padding-top: 4.5rem;
         padding-bottom: 6.5rem;
     }
@@ -1662,6 +1805,7 @@ html[data-bs-theme="dark"] .bg-white-black {
 
     .story-section {
         padding-top: 3.5rem;
+        padding-bottom: 2.25rem;
     }
 
     .story-hero {
@@ -1694,8 +1838,8 @@ html[data-bs-theme="dark"] .bg-white-black {
     }
 
     .wedding-guide-section {
-        padding-top: 4.5rem !important;
-        padding-bottom: 5rem !important;
+        padding-top: 3.5rem !important;
+        padding-bottom: 3rem !important;
     }
 
     .wedding-guide-header {
