@@ -4,7 +4,8 @@
 :root {
     /* Typography families */
     --font-script: 'Sacramento', cursive;
-    --font-sans: 'Josefin Sans', sans-serif;
+    --font-sans-zh: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Heiti TC', sans-serif;
+    --font-sans: 'Josefin Sans', var(--font-sans-zh);
     --font-serif: Georgia, 'Times New Roman', serif;
     --font-arabic: 'Noto Naskh Arabic', serif;
 
@@ -150,6 +151,30 @@ body {
     font-family: var(--font-arabic) !important;
 }
 
+.home-heading-zh,
+.home-couple-name-zh,
+.hero-info-zh,
+.section-header-subtitle,
+.wedding-schedule-zh,
+.wedding-venue-zh,
+.story-person-name-zh,
+.zh-subline,
+.story-milestone-body,
+.rsvp-intro-zh,
+.bilingual-field-label-zh,
+.bilingual-option-text-zh,
+.bilingual-helper-text-zh,
+.rsvp-submit-zh,
+.wedding-guide-question-zh,
+.wedding-guide-answer-zh,
+.footer-message-zh,
+.cover-couple-name-zh,
+.rsvp-modal-zh-primary,
+.rsvp-modal-zh-secondary,
+.validation-message-zh {
+    font-family: var(--font-sans-zh);
+}
+
 .zh-subline {
     font-family: var(--font-sans);
     font-size: var(--type-story-supporting-size);
@@ -173,6 +198,7 @@ body {
 }
 
 .hero-announcement {
+    font-family: var(--font-sans);
     font-size: var(--type-hero-announcement-size);
     font-weight: var(--type-weight-medium);
     transform: translateX(-6px);
@@ -216,7 +242,7 @@ html[data-bs-theme="dark"] .home-couple-name-zh {
 
 .hero-venue {
     color: #555;
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-size: var(--type-hero-venue-size);
     font-weight: var(--type-weight-regular);
     letter-spacing: var(--type-tracking-sm);
@@ -262,7 +288,10 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .desktop-couple-title {
+    font-family: var(--font-serif);
     font-size: var(--type-desktop-title-size);
+    font-weight: var(--type-weight-regular);
+    letter-spacing: var(--type-tracking-md);
 }
 
 .desktop-wedding-date {
@@ -487,7 +516,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .cover-date {
     color: #514a41;
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-size: var(--type-cover-date-size);
     letter-spacing: var(--type-tracking-2xl);
 }
@@ -545,10 +574,17 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .story-person-name,
 .story-timeline-title {
-    font-family: var(--font-serif);
     font-size: var(--type-story-name-size);
     font-weight: var(--type-weight-regular);
     letter-spacing: var(--type-tracking-sm);
+}
+
+.story-person-name {
+    font-family: var(--font-serif);
+}
+
+.story-timeline-title {
+    font-family: var(--font-sans);
 }
 
 .story-person-name-zh {
@@ -562,7 +598,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
     max-width: 22rem;
     margin-inline: auto;
     color: #8a704f;
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-size: var(--type-story-supporting-size);
     line-height: var(--type-line-body);
     text-wrap: balance;
@@ -853,7 +889,7 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 }
 
 .wedding-guide-item {
-    padding: 1.75rem 0;
+    padding: 0;
 }
 
 .wedding-guide-item + .wedding-guide-item {
@@ -867,23 +903,77 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     font-family: var(--font-sans);
 }
 
+.wedding-guide-question-heading {
+    margin: 0;
+}
+
+.wedding-guide-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 44px;
+    padding: 1.75rem 0;
+    border: 0;
+    color: inherit;
+    background: transparent;
+    text-align: left;
+}
+
+.wedding-guide-toggle:focus-visible {
+    outline: 2px solid rgb(184 151 106 / 65%);
+    outline-offset: 4px;
+}
+
+.wedding-guide-question-copy {
+    min-width: 0;
+    padding-right: 1rem;
+}
+
 .wedding-guide-question-en {
+    display: block;
     margin: 0;
     font-size: var(--type-guide-question-size);
-    font-weight: var(--type-weight-medium);
+    font-weight: var(--type-weight-semibold);
     line-height: var(--type-line-ui);
 }
 
 .wedding-guide-question-zh {
+    display: block;
     margin: 0.25rem 0 0;
     font-size: var(--type-guide-answer-zh-size);
-    font-weight: var(--type-weight-medium);
+    font-weight: var(--type-weight-regular);
     line-height: var(--type-line-bilingual);
     letter-spacing: var(--type-tracking-xl);
+    opacity: 0.78;
+}
+
+.wedding-guide-toggle-icon {
+    display: inline-flex;
+    flex: 0 0 1.5rem;
+    align-items: center;
+    justify-content: center;
+    color: #b8976a;
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    font-weight: var(--type-weight-regular);
+    line-height: 1;
+}
+
+.wedding-guide-toggle-icon::before {
+    content: "+";
+}
+
+.wedding-guide-toggle[aria-expanded="true"] .wedding-guide-toggle-icon::before {
+    content: "−";
+}
+
+.wedding-guide-answer {
+    padding: 0 2.5rem 1.75rem 0;
 }
 
 .wedding-guide-answer-en {
-    margin: 0.9rem 0 0;
+    margin: 0;
     font-size: var(--type-guide-answer-size);
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-relaxed);
@@ -981,7 +1071,9 @@ html[data-bs-theme="dark"] .wedding-guide-map-link {
 }
 
 .rsvp-modal-title {
+    font-family: var(--font-sans);
     font-size: var(--type-modal-title-size);
+    font-weight: var(--type-weight-medium);
 }
 
 .rsvp-modal-body {
@@ -1000,7 +1092,9 @@ html[data-bs-theme="dark"] .wedding-guide-map-link {
 }
 
 .rsvp-modal-signature {
+    font-family: var(--font-serif);
     font-size: var(--type-modal-signature-size);
+    font-weight: var(--type-weight-regular);
 }
 
 .rsvp-section {
@@ -1103,6 +1197,92 @@ html[data-bs-theme="dark"] .bg-white-black {
 @media screen and (max-width: 576px) {
     .width-loading {
         width: 75%;
+    }
+
+    .wedding-day-section {
+        --space-title-date: 30px;
+        --space-date-countdown: 26px;
+        --space-countdown-schedule: 34px;
+        --space-schedule-venue: 36px;
+        --space-venue-map: 12px;
+        --space-map-calendar: 20px;
+
+        min-height: auto;
+        padding-top: 4.5rem;
+        padding-bottom: 6.5rem;
+    }
+
+    .wedding-day-content {
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+    }
+
+    .wedding-countdown {
+        min-height: 74px;
+        padding: 12px 10px;
+    }
+
+    .wedding-countdown-item {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .wedding-schedule {
+        gap: 1rem;
+    }
+
+    .wedding-schedule-item {
+        padding: 0 0.25rem;
+    }
+
+    .wedding-venue-zh {
+        margin-top: 6px;
+        line-height: var(--type-line-relaxed);
+    }
+
+    .wedding-guide-section {
+        padding-top: 4.5rem !important;
+        padding-bottom: 5rem !important;
+    }
+
+    .wedding-guide-header {
+        margin-bottom: 2rem;
+    }
+
+    .wedding-guide-header .section-header-title {
+        max-width: 19rem;
+        margin-inline: auto;
+        font-size: clamp(2.25rem, 11vw, 2.625rem);
+        line-height: 1.08;
+        text-wrap: balance;
+    }
+
+    .wedding-guide-toggle {
+        padding: 1.65rem 0;
+    }
+
+    .wedding-guide-question-en {
+        line-height: var(--type-line-body);
+    }
+
+    .wedding-guide-question-zh {
+        margin-top: 0.4rem;
+    }
+
+    .wedding-guide-answer {
+        padding: 0 2.25rem 1.85rem 0;
+    }
+
+    .wedding-guide-answer-zh {
+        margin-top: 0.35rem;
+    }
+
+    .wedding-guide-map-link {
+        margin-top: 1rem;
+    }
+
+    .wedding-guide-map {
+        margin-top: 1.25rem;
     }
 }
 

@@ -44,9 +44,11 @@ Use the decorative Section Script only for these section or profile headings:
 - `Bride`
 - `Groom`
 - `Our Story`
-- `Gallery`
+- `A Few Things to Know`
 
-Do not use the Section Script for Hero announcements, Wedding Guide, names, information blocks, descriptions, buttons, or navigation.
+Within `A Few Things to Know`, only the English section title uses the Section Script. FAQ questions, answers, links, and map text remain Sans-serif.
+
+Do not use the Section Script for Hero announcements, names, information blocks, descriptions, modal copy, buttons, or navigation.
 
 ### 3. Sans-serif — Information and UI
 
@@ -57,16 +59,22 @@ Use the primary sans-serif for everything that is not a couple name or one of th
 - Maps links, buttons, and navigation
 - RSVP fields, options, descriptions, and helper text
 - Story body content
-- Wedding Guide content
+- Wedding Guide content, except the `A Few Things to Know` English section title
 - Footer content
 
 Sans-serif should account for more than 90% of the website typography.
 
 ### 4. Chinese Sans-serif
 
-All Chinese text must use the dedicated Chinese sans-serif stack. Never place Chinese inside a Section Script or Brand Font element.
+All Chinese text must use this dedicated Chinese sans-serif stack:
 
-Do not calculate Chinese sizes as arbitrary percentages of English sizes. Text with the same semantic role must consume the same shared Chinese typography token, such as:
+```css
+--font-sans-zh: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Heiti TC', sans-serif;
+```
+
+Load `Noto Sans TC` explicitly and use `var(--font-sans-zh)` for Chinese text. Never place Chinese inside a Section Script or Brand Font element.
+
+Do not apply a global `60%` size ratio or universal `0.1rem` letter-spacing to Chinese. Text with the same semantic role must consume the same shared Chinese typography token, such as:
 
 - Section subtitle
 - Field label
@@ -76,7 +84,7 @@ Do not calculate Chinese sizes as arbitrary percentages of English sizes. Text w
 - Helper text
 - Button text
 
-Chinese may share a line with English when the component specification calls for a compact bilingual label. Do not use slash separators between languages.
+Section-heading Chinese must remain on its own line below the English heading. Compact UI components are the exception: field labels, options, helper text, and placeholders may keep English and Chinese together when the component specification calls for a compact bilingual label. Do not use slash separators between languages.
 
 ### Required Hierarchy
 
@@ -84,12 +92,13 @@ Chinese may share a line with English when the component specification calls for
 - Hero: Sans-serif announcement → Chinese subtitle → Display Serif couple name → Chinese names → date → venue
 - Wedding Day: Section Script → Chinese subtitle → date → weekday → schedule → venue → actions; only the section title uses script
 - RSVP: Section Script → invitation sentence → form → buttons → helper text; only the section title uses script
+- A Few Things to Know: Section Script → Chinese subtitle → compact FAQ questions and answers; only the section title uses script
 
 ### Consistency Rule
 
 Before styling any text, classify it:
 
 - Bride or groom name → Display Serif
-- `Wedding Day`, `RSVP`, `Bride`, `Groom`, `Our Story`, or `Gallery` heading → Section Script
+- `Wedding Day`, `RSVP`, `Bride`, `Groom`, `Our Story`, or `A Few Things to Know` heading → Section Script
 - Everything else → Sans-serif
-- Chinese → shared Chinese sans-serif semantic token
+- Chinese → `var(--font-sans-zh)` plus the shared Chinese semantic token for its role
