@@ -92,21 +92,21 @@
     --type-body-size: 1rem;
 
     /* RSVP */
-    --type-field-label-en-size: 14px;
-    --type-field-label-zh-size: 16px;
-    --type-option-en-size: 14px;
-    --type-option-zh-size: 16px;
+    --type-field-label-en-size: 13px;
+    --type-field-label-zh-size: 14px;
+    --type-option-en-size: 13px;
+    --type-option-zh-size: 14px;
     --type-helper-size: 13px;
     --type-input-size: 16px;
-    --type-submit-en-size: 17px;
+    --type-submit-en-size: 13px;
     --type-submit-zh-size: 14px;
 
     /* Guide, footer, navigation, and transient UI */
     --type-guide-question-size: 1.05rem;
     --type-guide-answer-size: 0.95rem;
     --type-guide-answer-zh-size: 0.9rem;
-    --type-footer-message-size: 0.9rem;
-    --type-footer-message-zh-size: 0.82rem;
+    --type-footer-message-size: 0.82rem;
+    --type-footer-message-zh-size: 0.94rem;
     --type-footer-name-size: 1.5rem;
     --type-footer-quote-size: 0.86rem;
     --type-footer-credit-size: 0.72rem;
@@ -134,8 +134,7 @@
     --space-date-countdown: clamp(16px, 2.2vh, 22px);
     --space-countdown-schedule: clamp(20px, 2.6vh, 28px);
     --space-schedule-venue: clamp(20px, 2.6vh, 28px);
-    --space-venue-map: 8px;
-    --space-map-calendar: 24px;
+    --space-venue-action: 32px;
 }
 
 html {
@@ -292,6 +291,21 @@ html[data-bs-theme="dark"] .home-couple-name-zh {
     opacity: 0.7;
 }
 
+.venue-inline-link {
+    color: inherit;
+    font: inherit;
+    text-decoration: none;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+}
+
+.venue-inline-link:hover,
+.venue-inline-link:focus-visible {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: rgb(159 123 77 / 70%);
+}
+
 html[data-bs-theme="dark"] .hero-venue {
     color: #aaa;
 }
@@ -384,7 +398,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
     color: var(--bs-body-color);
     font-family: var(--font-sans);
     font-size: var(--type-wedding-date-size);
-    font-weight: var(--type-weight-semibold);
+    font-weight: var(--type-weight-medium);
     line-height: var(--type-line-tight);
 }
 
@@ -393,7 +407,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
     color: var(--bs-secondary-color);
     font-family: var(--font-sans);
     font-size: var(--type-wedding-day-size);
-    font-weight: var(--type-weight-medium);
+    font-weight: var(--type-weight-regular);
     line-height: var(--type-line-ui);
     letter-spacing: var(--type-tracking-xl);
 }
@@ -421,7 +435,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
 .wedding-countdown-item > span {
     color: var(--bs-body-color);
     font-size: var(--type-countdown-number-size);
-    font-weight: var(--type-weight-semibold);
+    font-weight: var(--type-weight-medium);
     line-height: var(--type-line-compact);
 }
 
@@ -460,7 +474,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
 .wedding-schedule-time {
     color: var(--bs-body-color);
     font-size: var(--type-schedule-time-size);
-    font-weight: var(--type-weight-bold);
+    font-weight: var(--type-weight-medium);
     line-height: var(--type-line-tight);
 }
 
@@ -468,7 +482,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
     color: var(--bs-secondary-color);
     font-family: var(--font-sans);
     font-size: var(--type-schedule-label-en-size);
-    font-weight: var(--type-weight-medium);
+    font-weight: var(--type-weight-regular);
     line-height: var(--type-line-ui);
 }
 
@@ -489,7 +503,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
 .wedding-venue-en {
     color: var(--bs-body-color);
     font-size: var(--type-venue-en-size);
-    font-weight: var(--type-weight-semibold);
+    font-weight: var(--type-weight-regular);
     line-height: var(--type-line-ui);
 }
 
@@ -504,39 +518,58 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .wedding-actions {
     gap: 0;
-    margin-top: var(--space-venue-map);
+    margin-top: var(--space-venue-action);
 }
 
 .add-calendar-button {
-    width: min(260px, 78vw);
-    min-height: 48px;
-    margin-top: var(--space-map-calendar);
-    border: 1px solid #b8976a;
-    background-color: #b8976a;
-    color: #fff;
-    font-size: var(--type-action-size);
-    font-weight: var(--type-weight-medium);
-}
-
-.wedding-map-link {
-    color: #b8976a;
-    font-family: var(--font-sans);
+    width: min(220px, 72vw);
+    min-height: 42px;
+    margin-top: 0;
+    border: 1px solid rgb(184 151 106 / 65%);
+    background-color: rgb(184 151 106 / 7%);
+    color: #9f7b4d;
     font-size: var(--type-action-size);
     font-weight: var(--type-weight-regular);
-    line-height: var(--type-line-body);
-    text-decoration: none;
+    box-shadow: none;
 }
 
-.wedding-map-link i {
-    color: #b8976a;
-    font-size: var(--type-icon-map-size);
+.add-calendar-button:hover,
+.add-calendar-button:focus-visible {
+    border-color: rgb(184 151 106 / 85%);
+    background-color: rgb(184 151 106 / 13%);
+    color: #8f6d42;
+}
+
+html[data-bs-theme="dark"] .add-calendar-button {
+    border-color: rgb(216 189 147 / 55%);
+    background-color: rgb(216 189 147 / 8%);
+    color: #d8bd93;
 }
 
 .invitation-cover {
+    isolation: isolate;
     color: #292621;
     background:
         radial-gradient(circle at 50% 42%, rgb(255 255 255 / 70%), transparent 48%),
         #f7f1e6;
+}
+
+.invitation-cover::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='390' height='844' viewBox='0 0 390 844' preserveAspectRatio='none'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.035 .38' numOctaves='2' seed='12'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='.58'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    mix-blend-mode: multiply;
+    opacity: 0.035;
+}
+
+.invitation-cover > div {
+    position: relative;
+    z-index: 1;
 }
 
 .cover-content {
@@ -613,10 +646,50 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .story-section {
     overflow: hidden;
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+}
+
+.story-transition {
+    max-width: 22rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.story-transition-zh {
+    margin: 0;
+    font-family: var(--font-sans-zh);
+    font-size: 14px;
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-relaxed);
+    letter-spacing: var(--type-tracking-lg);
+}
+
+.story-transition-en {
+    margin: 3px 0 0;
+    color: var(--bs-secondary-color);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-body);
+    opacity: 0.62;
+}
+
+.story-transition-divider {
+    display: block;
+    width: 2rem;
+    height: 0;
+    margin: 14px auto 10px;
+    border-top: 1px solid rgb(184 151 106 / 45%);
 }
 
 .story-hero {
+    display: block;
+    width: 100%;
     height: 21rem;
+    margin-right: auto;
+    margin-bottom: 3rem;
+    margin-left: auto;
     border-radius: 1.5rem;
     object-fit: cover;
 }
@@ -751,16 +824,17 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 
 .rsvp-intro-en {
     color: var(--bs-secondary-color);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: var(--type-weight-regular);
-    opacity: 0.72;
+    opacity: 0.62;
 }
 
 .rsvp-intro-zh {
-    color: inherit;
-    font-size: 16px;
-    font-weight: var(--type-weight-medium);
+    color: var(--bs-secondary-color);
+    font-size: 14px;
+    font-weight: var(--type-weight-regular);
     letter-spacing: var(--type-tracking-lg);
+    opacity: 0.88;
 }
 
 .rsvp-field-label {
@@ -827,7 +901,7 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     color: inherit;
     font-family: var(--font-sans-zh);
     font-size: var(--type-option-zh-size);
-    font-weight: var(--type-weight-medium);
+    font-weight: var(--type-weight-regular);
     line-height: var(--type-line-bilingual);
     letter-spacing: var(--type-tracking-lg);
 }
@@ -870,6 +944,30 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     min-height: 40px;
     padding: 0.5rem 0.85rem;
     line-height: var(--type-line-ui);
+}
+
+.rsvp-input:not(.rsvp-message-input) {
+    padding-right: 0;
+    padding-left: 0;
+    border: 0 !important;
+    border-bottom: 1px solid rgb(184 151 106 / 55%) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.rsvp-input:not(.rsvp-message-input):focus {
+    border-bottom-color: #9f7b4d !important;
+    box-shadow: none !important;
+}
+
+.rsvp-input::placeholder {
+    color: rgb(33 37 41 / 32%);
+    font-size: 13px !important;
+}
+
+html[data-bs-theme="dark"] .rsvp-input::placeholder {
+    color: rgb(255 255 255 / 38%);
 }
 
 .rsvp-name-field {
@@ -928,16 +1026,79 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 }
 
 .rsvp-message-input {
-    min-height: 128px;
-    padding: 0.85rem 1rem;
-    border-width: 1px;
+    height: 72px;
+    min-height: 72px;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid rgb(184 151 106 / 35%);
+    background-color: rgb(255 255 255 / 18%);
     line-height: var(--type-line-input);
     resize: vertical;
+    transition: min-height 180ms ease, height 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+.rsvp-message-input:focus {
+    height: 128px;
+    min-height: 128px;
+    border-color: rgb(184 151 106 / 65%);
+    background-color: rgb(255 255 255 / 32%);
+    box-shadow: none;
 }
 
 .rsvp-message-input::placeholder {
     color: var(--bs-secondary-color);
-    opacity: 0.65;
+    opacity: 0.42;
+}
+
+.rsvp-optional-note {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 1.75rem;
+    color: var(--bs-secondary-color);
+    line-height: var(--type-line-ui);
+}
+
+.rsvp-optional-note-zh {
+    font-family: var(--font-sans-zh);
+    font-size: 12px;
+    font-weight: var(--type-weight-regular);
+    opacity: 0.72;
+}
+
+.rsvp-optional-note-en {
+    margin-top: 1px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: var(--type-weight-regular);
+    opacity: 0.52;
+}
+
+#party-size-field.show,
+#attending-fields.show,
+#response-message-field.show {
+    padding-top: 2rem !important;
+    border-top: 1px solid rgb(184 151 106 / 22%);
+}
+
+#attendance-field {
+    margin-bottom: 16px;
+}
+
+#party-size-field.show {
+    padding-top: 16px !important;
+    border-top: 0;
+}
+
+#attending-fields.show {
+    padding-top: 0 !important;
+}
+
+.rsvp-paper-field {
+    margin-bottom: 18px;
+}
+
+#response-message-field.show {
+    padding-top: 0 !important;
+    border-top: 0;
 }
 
 .rsvp-email-field .rsvp-field-label {
@@ -949,6 +1110,9 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 }
 
 .rsvp-submit-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     min-height: 48px;
     padding: 6px 30px;
     border: 0;
@@ -963,17 +1127,19 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 }
 
 .rsvp-submit-en {
+    color: rgb(255 255 255 / 78%);
     font-size: var(--type-submit-en-size);
-    font-weight: var(--type-weight-semibold);
+    font-weight: var(--type-weight-regular);
     line-height: var(--type-line-ui);
 }
 
 .rsvp-submit-zh {
-    margin-top: 2px;
+    order: -1;
+    margin-bottom: 2px;
     font-size: var(--type-submit-zh-size);
     font-weight: var(--type-weight-medium);
     line-height: var(--type-line-ui);
-    letter-spacing: var(--type-tracking-3xl);
+    letter-spacing: var(--type-tracking-lg);
 }
 
 .rsvp-party-options {
@@ -990,13 +1156,14 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     display: flex;
     align-items: center;
     min-height: 3.4rem;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid #b8976a;
-    background-color: rgb(255 255 255 / 30%);
+    padding: 0.65rem 0.15rem;
+    border: 0;
+    border-bottom: 1px solid rgb(184 151 106 / 35%);
+    background-color: transparent;
     font-size: var(--type-choice-container-size);
     font-weight: var(--type-weight-medium);
     cursor: pointer;
-    transition: background-color 200ms ease, box-shadow 200ms ease;
+    transition: background-color 200ms ease;
 }
 
 .rsvp-choice .form-check-input {
@@ -1016,13 +1183,23 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     justify-content: center;
     width: 100%;
     min-width: 0;
-    min-height: 44px;
-    padding: 0.65rem;
+    min-height: 38px;
+    padding: 0.4rem 0.2rem;
+    border: 0;
+    border-bottom: 1px solid rgb(184 151 106 / 35%);
+    border-radius: 0;
+    background-color: transparent;
     box-sizing: border-box;
 }
 
+.rsvp-party-choice .form-check-input {
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-right: 0.35rem !important;
+}
+
 .rsvp-party-size-text {
-    font-size: var(--type-field-label-en-size);
+    font-size: 16px;
     font-weight: var(--type-weight-semibold);
     line-height: var(--type-line-compact);
 }
@@ -1160,33 +1337,6 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     border-radius: 0.75rem;
 }
 
-.wedding-guide-map-link {
-    display: inline-block;
-    margin-top: 0.75rem;
-    color: #8f7049;
-    font-family: var(--font-sans);
-    font-size: var(--type-guide-answer-size);
-    font-weight: var(--type-weight-medium);
-    line-height: var(--type-line-body);
-    text-decoration: none;
-}
-
-.wedding-guide-map-link span {
-    margin-left: 0.15rem;
-    font-size: 0.9em;
-}
-
-.wedding-guide-map-link:hover,
-.wedding-guide-map-link:focus-visible {
-    color: #b8976a;
-    text-decoration: underline;
-    text-underline-offset: 0.2rem;
-}
-
-html[data-bs-theme="dark"] .wedding-guide-map-link {
-    color: #d7b98f;
-}
-
 .footer-section {
     padding: 0 1.5rem 2.75rem;
 }
@@ -1203,17 +1353,26 @@ html[data-bs-theme="dark"] .wedding-guide-map-link {
     margin: 0;
     font-family: var(--font-sans);
     font-size: var(--type-footer-message-size);
-    font-weight: var(--type-weight-medium);
+    font-weight: var(--type-weight-regular);
     line-height: var(--type-line-relaxed);
 }
 
 .footer-message-zh {
-    margin-top: 0.2rem;
-    color: var(--bs-secondary-color);
+    color: inherit;
     font-family: var(--font-soft-zh);
     font-size: var(--type-footer-message-zh-size);
-    font-weight: var(--type-weight-regular);
+    font-weight: var(--type-weight-medium);
     letter-spacing: var(--type-tracking-sm);
+}
+
+.footer-message-zh strong {
+    font-weight: var(--type-weight-medium);
+}
+
+.footer-message-en {
+    margin-top: 0.3rem;
+    color: var(--bs-secondary-color);
+    opacity: 0.72;
 }
 
 .footer-credits {
@@ -1248,9 +1407,20 @@ html[data-bs-theme="dark"] .wedding-guide-map-link {
     line-height: var(--type-line-solid);
 }
 
+.footer-role {
+    margin: 0.25rem 0 0;
+    color: var(--bs-secondary-color);
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-ui);
+    letter-spacing: var(--type-tracking-sm);
+    opacity: 0.8;
+}
+
 .footer-quote {
     max-width: 15rem;
-    margin: 0.25rem 0 0;
+    margin: 0.55rem 0 0;
     margin-right: auto;
     margin-left: auto;
     font-family: var(--font-sans);
@@ -1336,7 +1506,7 @@ html[data-bs-theme="dark"] .wedding-guide-map-link {
 .rsvp-section {
     --bottom-nav-height: 4.25rem;
 
-    padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom) + 2rem) !important;
+    padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom) + 0.75rem) !important;
 }
 
 .rsvp-honeypot {
@@ -1349,12 +1519,25 @@ html[data-bs-theme="dark"] .wedding-guide-map-link {
 }
 
 html[data-bs-theme="dark"] .rsvp-choice {
-    background-color: rgb(0 0 0 / 30%);
+    background-color: transparent;
 }
 
 .rsvp-choice:has(.form-check-input:checked) {
-    background-color: rgb(184 151 106 / 15%);
-    box-shadow: 0 0 0 0.15rem rgb(184 151 106 / 25%);
+    background-color: rgb(184 151 106 / 7%);
+}
+
+.rsvp-choice:has(.form-check-input:focus-visible) {
+    background-color: rgb(184 151 106 / 7%);
+}
+
+html[data-bs-theme="dark"] .rsvp-party-choice {
+    background-color: transparent;
+}
+
+.rsvp-party-choice:has(.form-check-input:checked) {
+    border-bottom-color: #b8976a;
+    background-color: transparent;
+    box-shadow: none;
 }
 
 .img-center-crop {
@@ -1401,6 +1584,16 @@ html[data-bs-theme="dark"] .bg-light-dark {
     background-color: rgb(var(--bs-dark-rgb));
 }
 
+html[data-bs-theme="light"] .rsvp-section,
+html[data-bs-theme="light"] .story-section {
+    background-color: #faf7f1;
+}
+
+html[data-bs-theme="dark"] .rsvp-section,
+html[data-bs-theme="dark"] .story-section {
+    background-color: #171512;
+}
+
 html[data-bs-theme="light"] .bg-white-black {
     background-color: rgb(var(--bs-white-rgb));
 }
@@ -1445,18 +1638,17 @@ html[data-bs-theme="dark"] .bg-white-black {
         --type-wedding-day-size: 14px;
         --type-countdown-number-size: 15px;
         --type-countdown-label-size: 11px;
-        --type-schedule-time-size: 19px;
-        --type-schedule-label-en-size: 14px;
-        --type-schedule-label-zh-size: 13px;
-        --type-venue-en-size: 16px;
-        --type-venue-zh-size: 13px;
-        --type-action-size: 14px;
+        --type-schedule-time-size: 18px;
+        --type-schedule-label-en-size: 13px;
+        --type-schedule-label-zh-size: 14px;
+        --type-venue-en-size: 15px;
+        --type-venue-zh-size: 14px;
+        --type-action-size: 13px;
         --space-title-date: 30px;
         --space-date-countdown: 26px;
         --space-countdown-schedule: 34px;
         --space-schedule-venue: 36px;
-        --space-venue-map: 12px;
-        --space-map-calendar: 20px;
+        --space-venue-action: 40px;
 
         min-height: auto;
         padding-top: 4.5rem;
@@ -1466,6 +1658,16 @@ html[data-bs-theme="dark"] .bg-white-black {
     .wedding-day-content {
         padding-right: 1.5rem;
         padding-left: 1.5rem;
+    }
+
+    .story-section {
+        padding-top: 3.5rem;
+    }
+
+    .story-hero {
+        width: min(84vw, 328px);
+        height: 306px;
+        margin-bottom: 36px;
     }
 
     .wedding-countdown {
@@ -1525,10 +1727,6 @@ html[data-bs-theme="dark"] .bg-white-black {
 
     .wedding-guide-answer-zh {
         margin-top: 0.35rem;
-    }
-
-    .wedding-guide-map-link {
-        margin-top: 1rem;
     }
 
     .wedding-guide-map {

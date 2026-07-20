@@ -47,7 +47,7 @@
     <!-- Dependencies CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha256-2FMn2Zx6PuH5tdBQDRNwrOo60ts5wWPC9R8jK67b3t4=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css" integrity="sha256-4rTIfo5GQTi/7UJqoyUJQKzxW8VN/YBH31+Cy+vTZj4=" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/guest.css">
+    <link rel="stylesheet" href="./css/guest.css?v=11">
 
     <!-- Dependencies JS -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha256-5P1JGBOIxI7FBAvT/mb1fCnI5n/NhQKzNUuW7Hq0fMc=" crossorigin="anonymous"></script>
@@ -129,8 +129,8 @@
                         <div class="hero-event-info">
                             <p class="hero-date">November 29, 2026</p>
                             <p class="hero-weekday">Sunday</p>
-                            <p class="hero-venue"><i class="hero-location-icon fa-solid fa-location-dot me-1" aria-hidden="true"></i>Taipei Marriott Hotel</p>
-                            <p class="hero-info-zh">台北萬豪酒店</p>
+                            <p class="hero-venue"><a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" rel="noopener noreferrer" class="venue-inline-link"><i class="hero-location-icon fa-solid fa-location-dot me-1" aria-hidden="true"></i>Taipei Marriott Hotel</a></p>
+                            <p class="hero-info-zh"><a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" rel="noopener noreferrer" class="venue-inline-link">台北萬豪酒店</a></p>
                         </div>
 
                         <a href="#wedding-date" class="hero-scroll-indicator d-inline-flex text-secondary text-decoration-none opacity-50" aria-label="Scroll to Wedding Day">
@@ -174,12 +174,11 @@
                         </div>
 
                         <div class="wedding-venue-block" data-aos="fade-down" data-aos-duration="1500">
-                            <p class="wedding-venue-en mb-0">Taipei Marriott Hotel</p>
-                            <p class="wedding-venue-zh mb-0">台北萬豪酒店 · 36F 寰宇廳</p>
+                            <p class="wedding-venue-en mb-0"><a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" rel="noopener noreferrer" class="venue-inline-link">Taipei Marriott Hotel</a></p>
+                            <p class="wedding-venue-zh mb-0"><a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" rel="noopener noreferrer" class="venue-inline-link">台北萬豪酒店 · 36F 寰宇廳</a></p>
                             <div class="wedding-actions d-flex flex-column align-items-center">
-                                <a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" class="wedding-map-link"><i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i>View on Google Maps</a>
                                 <button class="add-calendar-button btn btn-sm rounded-pill px-4" data-calendar="true"
-                                    data-cal-title="Wedding of Minchi & David"
+                                    data-cal-title="Minchi &amp; David's Wedding Day"
                                     data-cal-start="2026-11-29 11:30"
                                     data-cal-end="2026-11-29 15:00"
                                     data-cal-location="Taipei Marriott Hotel 36F 寰宇廳, No.199 Lequn 2nd Road, ZhongShan District, Taipei, Taiwan"
@@ -192,14 +191,19 @@
                 </section>
 
                 <!-- Our Story -->
-                <section class="story-section bg-light-dark position-relative py-5" id="our-story">
+                <section class="story-section bg-light-dark position-relative" id="our-story">
                     <div class="container px-3">
+                        <div class="story-transition text-center">
+                            <p class="story-transition-zh">在婚禮之前，先認識一下我們</p>
+                            <p class="story-transition-en"><em>Before the big day, here’s a little about us.</em></p>
+                            <span class="story-transition-divider" aria-hidden="true"></span>
+                        </div>
                         <header class="section-header text-center mb-4">
                             <h2 class="section-header-title">Our Story</h2>
                             <p class="section-header-subtitle">我們的故事</p>
                         </header>
 
-                        <img src="./assets/images/placeholder.webp" data-src="./assets/images/our-story.jpeg" alt="Minchi and David sharing a moment" data-image-modal role="button" tabindex="0" aria-label="Open Our Story photo" class="story-hero w-100 shadow-sm cursor-pointer mb-5">
+                        <img src="./assets/images/placeholder.webp" data-src="./assets/images/our-story.jpeg" alt="Minchi and David sharing a moment" data-image-modal role="button" tabindex="0" aria-label="Open Our Story photo" class="story-hero shadow-sm cursor-pointer">
 
                         <div class="text-center mb-5">
                             <p class="story-kicker mb-4">Meet the Couple</p>
@@ -210,7 +214,7 @@
                                 <h3 class="story-person-name mb-0">Minchi Tsai</h3>
                                 <p class="story-person-name-zh mb-3">蔡旻淇</p>
                                 <p class="story-traits mb-2">Snowboard Instructor • Outdoor Addict • Free Spirit</p>
-                                <p class="story-punchline mb-0">Never enough ski trips.</p>
+                                <p class="story-punchline mb-0">There’s no such thing as too many ski trips.</p>
                             </article>
 
                             <div class="story-heart my-4" aria-hidden="true">♡</div>
@@ -265,25 +269,16 @@
                 </section>
 
                 <!-- RSVP Section -->
-                <section class="rsvp-section my-0 pt-3 position-relative overflow-hidden" id="rsvp" style="min-height: 100vh;">
+                <section class="rsvp-section my-0 pt-3 position-relative overflow-hidden" id="rsvp">
                     <img src="./assets/images/placeholder.webp" data-src="./assets/images/rsvp-bg.jpeg" alt="bg" class="position-absolute top-0 start-0" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.25; z-index: 0; mask-image: linear-gradient(to bottom, transparent, black 15%, black 60%, transparent 100%);">
                     <div class="container position-relative px-4" style="z-index: 1;">
                         <header class="section-header text-center mt-2 mb-1">
                             <h2 class="section-header-title">RSVP</h2>
                         </header>
-                        <p class="rsvp-intro-zh text-center mb-1">誠摯邀請您與我們一同見證這美好的時刻。</p>
-                        <p class="rsvp-intro-en text-center mb-4">We'd love to celebrate with you.</p>
+                        <p class="rsvp-intro-zh text-center mb-1">期待與您一起慶祝這特別的日子</p>
+                        <p class="rsvp-intro-en text-center mb-4"><em>We'd love to celebrate with you.</em></p>
 
                         <style>
-                            .rsvp-input {
-                                background: rgba(255,255,255,0.42) !important;
-                                border: 1px solid rgba(184,151,106,0.7) !important;
-                                color: inherit !important;
-                            }
-                            .rsvp-input::placeholder { color: rgba(0,0,0,0.4) !important; }
-                            .rsvp-input:focus { box-shadow: 0 0 0 0.2rem rgba(184,151,106,0.3) !important; }
-                            html[data-bs-theme="dark"] .rsvp-input { background: rgba(0,0,0,0.3) !important; }
-                            html[data-bs-theme="dark"] .rsvp-input::placeholder { color: rgba(255,255,255,0.4) !important; }
                             .rsvp-conditional { max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); transition: max-height 220ms ease, opacity 200ms ease, transform 200ms ease; }
                             .rsvp-conditional:not(.show) { margin-top: 0 !important; margin-bottom: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; border-width: 0 !important; }
                             .rsvp-conditional.show { max-height: 1200px; opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
@@ -303,15 +298,15 @@
                                 </legend>
                                 <input type="hidden" id="form-guest-count" value="">
                                 <div class="rsvp-party-options">
-                                    <label class="rsvp-choice rsvp-party-choice rounded-4" for="party-size-1">
+                                    <label class="rsvp-choice rsvp-party-choice" for="party-size-1">
                                         <input class="form-check-input me-2" type="radio" name="party-size-choice" id="party-size-1" value="1">
                                         <span class="rsvp-party-size-text">1</span>
                                     </label>
-                                    <label class="rsvp-choice rsvp-party-choice rounded-4" for="party-size-2">
+                                    <label class="rsvp-choice rsvp-party-choice" for="party-size-2">
                                         <input class="form-check-input me-2" type="radio" name="party-size-choice" id="party-size-2" value="2">
                                         <span class="rsvp-party-size-text">2</span>
                                     </label>
-                                    <label class="rsvp-choice rsvp-party-choice rounded-4" for="party-size-3">
+                                    <label class="rsvp-choice rsvp-party-choice" for="party-size-3">
                                         <input class="form-check-input me-2" type="radio" name="party-size-choice" id="party-size-3" value="3">
                                         <span class="rsvp-party-size-text">3+</span>
                                     </label>
@@ -335,12 +330,12 @@
                                 </legend>
                                 <input type="hidden" id="form-presence" value="">
 
-                                <label class="rsvp-choice rounded-4 mb-2" for="attendance-yes">
+                                <label class="rsvp-choice" for="attendance-yes">
                                     <input class="form-check-input me-3" type="radio" name="attendance-choice" id="attendance-yes" value="attending">
                                     <span class="bilingual-option-text"><span class="bilingual-option-text-en">Yes, I'd love to attend</span><span class="bilingual-option-text-zh">我很期待參加</span></span>
                                 </label>
 
-                                <label class="rsvp-choice rounded-4" for="attendance-no">
+                                <label class="rsvp-choice" for="attendance-no">
                                     <input class="form-check-input me-3" type="radio" name="attendance-choice" id="attendance-no" value="declined">
                                     <span class="bilingual-option-text"><span class="bilingual-option-text-en">Sorry, I can't make it</span><span class="bilingual-option-text-zh">很遺憾無法出席</span></span>
                                 </label>
@@ -393,18 +388,18 @@
                         </section>
 
                         <section id="attending-fields" class="rsvp-conditional">
-                            <fieldset class="rsvp-field border-0 p-0">
+                            <fieldset class="rsvp-field rsvp-paper-field border-0 p-0">
                                 <legend class="rsvp-field-label">
-                                    <span class="bilingual-field-label"><span class="bilingual-field-label-en">Paper Invitation (Optional)</span><span class="bilingual-field-label-zh">紙本喜帖（選填）</span></span>
+                                    <span class="bilingual-field-label"><span class="bilingual-field-label-en">Paper Invitation</span><span class="bilingual-field-label-zh">紙本喜帖</span></span>
                                 </legend>
                                 <input type="hidden" id="form-invitation-type" value="">
-                                <label class="rsvp-choice rounded-4 mb-2" for="paper-no">
+                                <label class="rsvp-choice" for="paper-no">
                                     <input class="form-check-input me-3" type="radio" name="paper-choice" id="paper-no" value="none">
-                                    <span class="bilingual-option-text"><span class="bilingual-option-text-en">No, thank you</span><span class="bilingual-option-text-zh">不需要紙本喜帖</span></span>
+                                    <span class="bilingual-option-text"><span class="bilingual-option-text-en">No, thank you</span><span class="bilingual-option-text-zh">不需要，謝謝</span></span>
                                 </label>
-                                <label class="rsvp-choice rounded-4" for="paper-yes">
+                                <label class="rsvp-choice" for="paper-yes">
                                     <input class="form-check-input me-3" type="radio" name="paper-choice" id="paper-yes" value="yes-paper">
-                                    <span class="bilingual-option-text"><span class="bilingual-option-text-en">Yes, please mail one</span><span class="bilingual-option-text-zh">麻煩寄送紙本喜帖</span></span>
+                                    <span class="bilingual-option-text"><span class="bilingual-option-text-en">Yes, please mail one</span><span class="bilingual-option-text-zh">麻煩寄一份</span></span>
                                 </label>
                                 <script>
                                     var invitationTypeEl = document.getElementById('form-invitation-type');
@@ -419,30 +414,32 @@
                                 </script>
                             </fieldset>
 
+                            <p class="rsvp-optional-note"><span class="rsvp-optional-note-zh">以下皆為選填</span><span class="rsvp-optional-note-en">Everything below is optional</span></p>
+
                             <div id="invitation-details" class="rsvp-conditional">
                                 <div id="field-address" class="rsvp-field rsvp-conditional">
                                     <label for="form-address" class="rsvp-field-label">
-                                        <span class="bilingual-field-label"><span class="bilingual-field-label-en">Address</span><span class="bilingual-field-label-zh">收件地址</span></span>
+                                        <span class="bilingual-field-label"><span class="bilingual-field-label-en">Mailing Address</span><span class="bilingual-field-label-zh">收件地址</span></span>
                                     </label>
-                                    <input type="text" class="form-control rounded-4 rsvp-input" id="form-address" placeholder="Mailing address" autocomplete="street-address" data-offline-disabled="false">
+                                    <input type="text" class="form-control rsvp-input" id="form-address" placeholder="例：台北市中山區民生東路 123 號 5 樓" autocomplete="street-address" data-offline-disabled="false">
                                     <p class="bilingual-helper-text mb-0"><span class="bilingual-helper-text-en">Used only to mail your invitation.</span><span class="bilingual-helper-text-zh">地址僅用於寄送喜帖。</span></p>
                                 </div>
                             </div>
 
                             <div class="rsvp-field rsvp-email-field">
                                 <label for="form-email" class="rsvp-field-label">
-                                    <span class="bilingual-field-label"><span class="bilingual-field-label-en">Email (Optional)</span><span class="bilingual-field-label-zh">電子郵件（選填）</span></span>
+                                    <span class="bilingual-field-label"><span class="bilingual-field-label-en">Email</span><span class="bilingual-field-label-zh">電子郵件</span></span>
                                 </label>
+                                <input type="email" class="form-control rsvp-input rsvp-email-input" id="form-email" placeholder="name@example.com" autocomplete="email" data-offline-disabled="false">
                                 <p class="bilingual-helper-text mb-0"><span class="bilingual-helper-text-en">For wedding updates and reminders only.</span><span class="bilingual-helper-text-zh">僅用於寄送婚禮最新消息與行前提醒。</span></p>
-                                <input type="email" class="form-control rounded-4 rsvp-input rsvp-email-input" id="form-email" placeholder="Email address　電子郵件地址" autocomplete="email" data-offline-disabled="false">
                             </div>
                         </section>
 
                         <div class="rsvp-field rsvp-conditional" id="response-message-field">
                             <label for="form-message" class="rsvp-field-label">
-                                <span class="bilingual-field-label"><span class="bilingual-field-label-en">Message (Optional)</span><span class="bilingual-field-label-zh">留言（選填）</span></span>
+                                <span class="bilingual-field-label"><span class="bilingual-field-label-en">Message</span><span class="bilingual-field-label-zh">留言</span></span>
                             </label>
-                            <textarea dir="auto" class="form-control rounded-3 rsvp-input rsvp-message-input" id="form-message" rows="4" maxlength="500" placeholder="Leave us a note or well wishes.&#10;想對我們說的話，或任何想讓我們知道的事。" autocomplete="off" data-offline-disabled="false"></textarea>
+                            <textarea dir="auto" class="form-control rounded-3 rsvp-input rsvp-message-input" id="form-message" rows="2" maxlength="500" placeholder="Leave us a note or well wishes.&#10;想對我們說的話，或任何想讓我們知道的事。" autocomplete="off" data-offline-disabled="false"></textarea>
                         </div>
 
                         <!-- Honeypot field — hidden from real users, bots fill it -->
@@ -502,7 +499,7 @@
                                 </h3>
                                 <div class="collapse" id="wedding-guide-parking" data-bs-parent="#wedding-guide-accordion">
                                     <div class="wedding-guide-answer">
-                                        <p class="wedding-guide-answer-en">Complimentary parking is available.</p>
+                                        <p class="wedding-guide-answer-en">First come, first serve.</p>
                                         <p class="wedding-guide-answer-zh">現場提供免費停車，車位有限，建議提早抵達。</p>
                                     </div>
                                 </div>
@@ -520,9 +517,8 @@
                                 </h3>
                                 <div class="collapse" id="wedding-guide-directions" data-bs-parent="#wedding-guide-accordion">
                                     <div class="wedding-guide-answer">
-                                        <p class="wedding-guide-answer-en">View directions on Google Maps.</p>
-                                        <p class="wedding-guide-answer-zh">可透過 Google Maps 查看路線與交通資訊。</p>
-                                        <a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" rel="noopener noreferrer" class="wedding-guide-map-link">View on Google Maps <span aria-hidden="true">↗</span></a>
+                                        <p class="wedding-guide-answer-en"><a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" rel="noopener noreferrer" class="venue-inline-link">View on Google Maps</a></p>
+                                        <p class="wedding-guide-answer-zh">可透過 <a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" rel="noopener noreferrer" class="venue-inline-link">Google Maps</a> 查看路線與交通資訊。</p>
 
                                         <div class="wedding-guide-map">
                                             <img src="./assets/images/placeholder.webp" data-src="./assets/images/transport-card.jpeg" alt="Directions to Taipei Marriott Hotel" data-image-modal role="button" tabindex="0" aria-label="Open venue directions" class="wedding-guide-map-image img-fluid cursor-pointer">
@@ -540,8 +536,8 @@
                     <img src="./assets/images/placeholder.webp" data-src="./assets/images/footer.jpeg?v=2" alt="Minchi and David" class="position-absolute top-0 start-0" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3; z-index: 0; mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);">
                     <div class="footer-closing position-relative text-center" style="z-index: 1;">
                         <div class="footer-closing-copy mx-auto">
-                            <p class="footer-message footer-message-en">We can’t wait to share this special day with you.</p>
-                            <p class="footer-message footer-message-zh">很期待和你們一起度過這個特別的日子。</p>
+                            <p class="footer-message footer-message-zh"><strong>謝謝你成為我們故事的一部分。</strong></p>
+                            <p class="footer-message footer-message-en"><em>Thank you for being part of our story.</em></p>
                         </div>
                     </div>
 
@@ -552,12 +548,14 @@
                         <div class="footer-credit-list">
                             <div class="footer-credit-block">
                                 <p class="footer-person-name">Minchi</p>
+                                <p class="footer-role">PM &amp; AI Spell Caster</p>
                                 <p class="footer-quote">“I’ll just change one more thing…”</p>
                             </div>
                             <div class="footer-credit-separator" aria-hidden="true">•</div>
                             <div class="footer-credit-block">
                                 <p class="footer-person-name">David</p>
-                                <p class="footer-quote">“It looked fine 3 hours ago.”</p>
+                                <p class="footer-role">Chief Opinion Officer</p>
+                                <p class="footer-quote">“Have you considered...?”</p>
                             </div>
                         </div>
 
