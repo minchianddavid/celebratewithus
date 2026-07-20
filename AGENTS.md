@@ -30,7 +30,7 @@ Typography is determined by semantic role, never by visual preference. Do not in
 The Brand Font is the Display Serif and represents the couple's identity. Use it for all bride and groom names, including:
 
 - `Minchi & David` in the Hero and invitation cover
-- `Irene Tsai` and `David Chen` on Couple or profile sections
+- `Minchi Tsai` and `David Kuo` on Couple or profile sections
 - An optional couple-name footer signature
 
 Never use the Display Serif for section titles, dates, times, venues, Story body content, RSVP content, buttons, forms, or navigation.

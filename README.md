@@ -8,7 +8,6 @@ A modern, mobile-first wedding invitation website with RSVP via Google Sheets.
 - RSVP form → Google Sheets (serverless, free)
 - Anti-spam: honeypot field + optional reCAPTCHA v3
 - Guest personalization via URL (`?to=GuestName`)
-- Photo gallery with lazy loading and lightbox
 - Background music with play/pause
 - Countdown timer
 - Add to Calendar (Google, Apple, Outlook, Yahoo)

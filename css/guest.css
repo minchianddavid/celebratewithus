@@ -94,10 +94,9 @@
     --type-submit-zh-size: 14px;
 
     /* Guide, footer, navigation, and transient UI */
-    --type-guide-title-size: 1.5rem;
-    --type-guide-body-size: 0.95rem;
-    --type-guide-zh-size: 0.85rem;
-    --type-guide-link-size: 0.8rem;
+    --type-guide-question-size: 1.05rem;
+    --type-guide-answer-size: 0.95rem;
+    --type-guide-answer-zh-size: 0.9rem;
     --type-footer-message-size: 0.95rem;
     --type-modal-title-size: 2rem;
     --type-modal-signature-size: 1.5rem;
@@ -111,7 +110,6 @@
     --type-icon-hero-size: 0.72rem;
     --type-icon-map-size: 13px;
     --type-icon-field-size: 18px;
-    --type-icon-footer-size: 0.5rem;
     --type-choice-container-size: 1.1rem;
 
     /* Supporting interface text */
@@ -561,16 +559,22 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .story-traits {
+    max-width: 22rem;
+    margin-inline: auto;
     color: #8a704f;
     font-family: var(--font-serif);
     font-size: var(--type-story-supporting-size);
+    line-height: var(--type-line-body);
+    text-wrap: balance;
 }
 
-.story-intro {
+.story-punchline {
     max-width: 20rem;
     margin-inline: auto;
     color: var(--bs-secondary-color);
     font-size: var(--type-story-supporting-size);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
     line-height: var(--type-line-relaxed);
 }
 
@@ -836,26 +840,101 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     line-height: var(--type-line-compact);
 }
 
-.wedding-guide-title {
-    font-size: var(--type-guide-title-size);
+.wedding-guide-section {
+    padding-bottom: 4.5rem !important;
 }
 
-.wedding-guide-subtitle,
-.wedding-guide-copy-zh {
-    font-size: var(--type-guide-zh-size);
-    letter-spacing: var(--type-tracking-3xl);
+.wedding-guide-header {
+    margin-bottom: 1.5rem;
 }
 
-.wedding-guide-copy-en {
-    font-size: var(--type-guide-body-size);
+.wedding-guide-faq {
+    max-width: 36rem;
 }
 
-.wedding-guide-link {
-    font-size: var(--type-guide-link-size);
+.wedding-guide-item {
+    padding: 1.75rem 0;
 }
 
-.wedding-guide-link-zh {
-    letter-spacing: var(--type-tracking-3xl);
+.wedding-guide-item + .wedding-guide-item {
+    border-top: 1px solid rgb(184 151 106 / 28%);
+}
+
+.wedding-guide-question-en,
+.wedding-guide-question-zh,
+.wedding-guide-answer-en,
+.wedding-guide-answer-zh {
+    font-family: var(--font-sans);
+}
+
+.wedding-guide-question-en {
+    margin: 0;
+    font-size: var(--type-guide-question-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-ui);
+}
+
+.wedding-guide-question-zh {
+    margin: 0.25rem 0 0;
+    font-size: var(--type-guide-answer-zh-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-bilingual);
+    letter-spacing: var(--type-tracking-xl);
+}
+
+.wedding-guide-answer-en {
+    margin: 0.9rem 0 0;
+    font-size: var(--type-guide-answer-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-relaxed);
+}
+
+.wedding-guide-answer-zh {
+    margin: 0.2rem 0 0;
+    font-size: var(--type-guide-answer-zh-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-relaxed);
+    letter-spacing: var(--type-tracking-md);
+}
+
+.wedding-guide-map {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.wedding-guide-map-image {
+    display: block;
+    width: 100%;
+    max-width: 36rem;
+    margin: 0 auto;
+    border-radius: 0.75rem;
+}
+
+.wedding-guide-map-link {
+    display: inline-block;
+    margin-top: 0.75rem;
+    color: #8f7049;
+    font-family: var(--font-sans);
+    font-size: var(--type-guide-answer-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-body);
+    text-decoration: none;
+}
+
+.wedding-guide-map-link span {
+    margin-left: 0.15rem;
+    font-size: 0.9em;
+}
+
+.wedding-guide-map-link:hover,
+.wedding-guide-map-link:focus-visible {
+    color: #b8976a;
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
+}
+
+html[data-bs-theme="dark"] .wedding-guide-map-link {
+    color: #d7b98f;
 }
 
 .footer-message {
@@ -873,10 +952,6 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 
 .footer-build-credit {
     font-size: var(--type-credit-small-size);
-}
-
-.footer-build-icon {
-    font-size: var(--type-icon-footer-size);
 }
 
 .bottom-nav-label {
