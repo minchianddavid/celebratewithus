@@ -156,10 +156,16 @@ export const guest = (() => {
      * @param {HTMLButtonElement} button
      * @returns {void}
      */
-    const open = (button) => {
+    const open = async (button) => {
         button.disabled = true;
         document.body.scrollIntoView({ behavior: 'instant' });
-        document.getElementById('root').classList.remove('opacity-0');
+
+        const welcome = document.getElementById('welcome');
+        const root = document.getElementById('root');
+
+        await util.changeOpacity(welcome, false);
+        welcome.remove();
+        root.classList.remove('opacity-0');
 
         if (theme.isAutoMode()) {
             document.getElementById('button-theme').classList.remove('d-none');
@@ -172,7 +178,6 @@ export const guest = (() => {
         util.timeOut(confetti.openAnimation, 1500);
 
         document.dispatchEvent(new Event('undangan.open'));
-        util.changeOpacity(document.getElementById('welcome'), false).then((el) => el.remove());
     };
 
     /**

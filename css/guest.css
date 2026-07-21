@@ -146,6 +146,10 @@ body {
     overflow-x: hidden;
 }
 
+#root {
+    transition: opacity 220ms ease;
+}
+
 .font-esthetic {
     font-family: var(--font-script) !important;
 }
@@ -244,8 +248,6 @@ html[data-bs-theme="dark"] .home-couple-name-zh {
 }
 
 .hero-photo {
-    position: relative;
-    left: 0.4rem;
     width: 13.65rem;
     height: 13.65rem;
     margin-top: 2.5rem;
