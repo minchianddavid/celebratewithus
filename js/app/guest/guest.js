@@ -163,6 +163,7 @@ export const guest = (() => {
         const welcome = document.getElementById('welcome');
         const root = document.getElementById('root');
 
+        await confetti.basicAnimation();
         await util.changeOpacity(welcome, false);
         welcome.remove();
         root.classList.remove('opacity-0');
@@ -174,8 +175,6 @@ export const guest = (() => {
 
         slide();
         theme.spyTop();
-
-        confetti.basicAnimation();
 
         document.dispatchEvent(new Event('undangan.open'));
     };
@@ -534,6 +533,23 @@ export const guest = (() => {
         });
     };
 
+    /** @returns {void} */
+    const heroScrollIndicator = () => {
+        const indicator = document.querySelector('.hero-scroll-indicator');
+        const target = document.getElementById('wedding-date');
+        if (!indicator || !target) {
+            return;
+        }
+
+        indicator.addEventListener('click', (event) => {
+            event.preventDefault();
+            target.scrollIntoView({
+                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+                block: 'start',
+            });
+        });
+    };
+
     /**
      * @returns {object}
      */
@@ -570,6 +586,7 @@ export const guest = (() => {
         footerEasterEgg();
         guideClosingHeartEasterEgg();
         weddingDayShortcut();
+        heroScrollIndicator();
         confetti.prepareBasicAnimation();
 
         // Don't restore previous attendance — always start fresh at "Select"
@@ -602,7 +619,9 @@ export const guest = (() => {
         const aud = audio.init();
         const lib = loaderLibs();
 
-        window.addEventListener('resize', util.debounce(slide));
+        if (window.matchMedia('(min-width: 576px)').matches) {
+            window.addEventListener('resize', util.debounce(slide));
+        }
         document.addEventListener('undangan.progress.done', () => booting());
         document.addEventListener('hide.bs.modal', () => document.activeElement?.blur());
         document.getElementById('button-modal-download').addEventListener('click', (e) => {
@@ -613,7 +632,10 @@ export const guest = (() => {
         vid.load();
         img.load();
         aud.load();
-        lib.load({ confetti: document.body.getAttribute('data-confetti') === 'true' });
+        lib.load({
+            aos: !window.matchMedia('(max-width: 767px)').matches,
+            confetti: document.body.getAttribute('data-confetti') === 'true',
+        });
     };
 
     /**

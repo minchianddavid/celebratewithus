@@ -25,11 +25,41 @@ export const audio = (() => {
         let audioEl = null;
 
         try {
-            audioEl = new Audio(await cache('audio').withForceCache().get(url, progress.getAbort()));
+            const audioUrl = await cache('audio').withForceCache().get(url, progress.getAbort());
+            audioEl = new Audio();
             audioEl.loop = true;
             audioEl.muted = false;
             audioEl.autoplay = false;
             audioEl.controls = false;
+            audioEl.preload = 'auto';
+
+            await new Promise((resolve, reject) => {
+                let readyTimer = null;
+                let cleanup = () => {};
+                const ready = () => {
+                    cleanup();
+                    resolve();
+                };
+                const fail = () => {
+                    cleanup();
+                    reject(new Error('Audio preload failed'));
+                };
+                cleanup = () => {
+                    window.clearTimeout(readyTimer);
+                    audioEl.removeEventListener('canplaythrough', ready);
+                    audioEl.removeEventListener('error', fail);
+                };
+
+                audioEl.addEventListener('canplaythrough', ready, { once: true });
+                audioEl.addEventListener('error', fail, { once: true });
+                readyTimer = window.setTimeout(ready, 5000);
+                audioEl.src = audioUrl;
+                audioEl.load();
+
+                if (audioEl.readyState >= 4) {
+                    ready();
+                }
+            });
 
             progress.complete('audio');
         } catch {

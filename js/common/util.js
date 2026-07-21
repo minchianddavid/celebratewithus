@@ -89,15 +89,20 @@ export const util = (() => {
      * @returns {Promise<HTMLElement>}
      */
     const changeOpacity = (el, isUp, step = 0.05) => new Promise((res) => {
-        let op = parseFloat(el.style.opacity);
+        const initialOpacity = parseFloat(el.style.opacity);
+        const from = Number.isNaN(initialOpacity) ? parseFloat(window.getComputedStyle(el).opacity) : initialOpacity;
         const target = isUp ? 1 : 0;
+        const distance = target - from;
+        const duration = Math.max(1, (Math.abs(distance) / step) * (1000 / 60));
+        let startedAt = null;
 
-        const animate = () => {
-            op += isUp ? step : -step;
-            op = Math.max(0, Math.min(1, op));
-            el.style.opacity = op.toFixed(2);
+        const animate = (now) => {
+            startedAt ??= now;
+            const opacityProgress = Math.min(1, (now - startedAt) / duration);
+            const opacity = from + (distance * opacityProgress);
+            el.style.opacity = opacity.toFixed(2);
 
-            if ((isUp && op >= target) || (!isUp && op <= target)) {
+            if (opacityProgress >= 1) {
                 el.style.opacity = target.toString();
                 res(el);
             } else {

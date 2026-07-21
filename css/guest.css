@@ -1,4 +1,4 @@
-@import url("common.css?v=2");
+@import url("common.css?v=3");
 @import url("animation.css?v=2");
 
 @font-face {
@@ -395,7 +395,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .wedding-day-section {
-    min-height: calc(100dvh - var(--bottom-nav-height));
+    min-height: calc(100svh - var(--bottom-nav-height));
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -880,7 +880,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
     position: relative;
     isolation: isolate;
     width: 100%;
-    height: min(650px, calc(100dvh - var(--bottom-nav-height)));
+    height: min(650px, calc(100svh - var(--bottom-nav-height)));
     overflow: hidden;
     padding: 2.75rem 1.5rem 3rem;
     margin-inline: -0.75rem;
@@ -903,7 +903,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
     z-index: 0;
     inset: 0;
     width: 100%;
-    height: min(650px, calc(100dvh - var(--bottom-nav-height)));
+    height: min(650px, calc(100svh - var(--bottom-nav-height)));
     object-fit: cover;
     object-position: 60% center;
     opacity: 0.065;
@@ -1092,6 +1092,10 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .journey-story-body p + p {
     margin-top: 0.75rem;
+}
+
+.journey-no-break {
+    white-space: nowrap;
 }
 
 .journey-photo-card {
@@ -2404,7 +2408,7 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 .rsvp-section {
     --bottom-nav-height: 0px;
 
-    min-height: calc(100dvh - var(--bottom-nav-height));
+    min-height: calc(100svh - var(--bottom-nav-height));
     padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom) + 0.75rem) !important;
     box-sizing: border-box;
 }
@@ -2579,6 +2583,30 @@ html[data-bs-theme="dark"] .bg-white-black {
         width: 75%;
     }
 
+    .wedding-hero > .bg-cover-home,
+    .wedding-day-section > img,
+    .rsvp-section > img,
+    .journey-background,
+    .wedding-guide-background,
+    .footer-credit-image {
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
+    }
+
+    .journey-background {
+        opacity: 0.045;
+        filter: none;
+        mix-blend-mode: normal;
+    }
+
+    .rsvp-section > img {
+        opacity: 0.12 !important;
+    }
+
+    .footer-credit-image {
+        opacity: 0.16;
+    }
+
     .wedding-day-section {
         --type-wedding-date-size: 22px;
         --type-wedding-day-size: 14px;
@@ -2594,7 +2622,7 @@ html[data-bs-theme="dark"] .bg-white-black {
         --space-countdown-schedule: 34px;
         --space-schedule-venue: 52px;
 
-        min-height: calc(100dvh - var(--bottom-nav-height));
+        min-height: calc(100svh - var(--bottom-nav-height));
         padding-top: 4.5rem;
         padding-bottom: 6.5rem;
     }

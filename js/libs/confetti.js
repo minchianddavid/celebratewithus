@@ -23,10 +23,12 @@ export const prepareBasicAnimation = () => {
     openingCanvas = document.createElement('canvas');
     openingCanvas.className = 'opening-confetti-canvas';
     openingCanvas.setAttribute('aria-hidden', 'true');
+    openingCanvas.width = window.innerWidth;
+    openingCanvas.height = window.innerHeight;
     document.body.appendChild(openingCanvas);
 
     openingFire = window.confetti.create(openingCanvas, {
-        resize: true,
+        resize: false,
         useWorker: true,
     });
 
@@ -43,12 +45,12 @@ export const prepareBasicAnimation = () => {
 };
 
 /**
- * @returns {void}
+ * @returns {Promise<void>}
  */
 export const basicAnimation = () => {
     prepareBasicAnimation();
     if (!openingFire || !openingCanvas) {
-        return;
+        return Promise.resolve();
     }
 
     const fire = openingFire;
@@ -56,11 +58,11 @@ export const basicAnimation = () => {
     openingFire = null;
     openingCanvas = null;
 
-    fire({
-        particleCount: 36,
-        startVelocity: 30,
-        spread: 58,
-        ticks: 80,
+    return fire({
+        particleCount: 24,
+        startVelocity: 27,
+        spread: 56,
+        ticks: 30,
         gravity: 1.05,
         scalar: 0.82,
         origin: { y: 1 },
