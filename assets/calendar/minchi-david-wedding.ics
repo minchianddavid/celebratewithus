@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Minchi and David//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20261129T113000-minchi-david-wedding@minchianddavid.github.io
+DTSTAMP:20260721T120000Z
+DTSTART;TZID=Asia/Taipei:20261129T113000
+DTEND;TZID=Asia/Taipei:20261129T150000
+SUMMARY:Minchi & David's Wedding Day
+DESCRIPTION:We look forward to celebrating with you!
+LOCATION:Taipei Marriott Hotel 36F 寰宇廳\, No. 199 Lequn 2nd Road\, Zhongshan District\, Taipei
+URL:https://minchianddavid.github.io/celebratewithus/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

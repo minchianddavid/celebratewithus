@@ -267,6 +267,7 @@ export const guest = (() => {
         const location = calBtn.getAttribute('data-cal-location') || '';
         const details = calBtn.getAttribute('data-cal-details') || '';
         const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const icsHref = './assets/calendar/minchi-david-wedding.ics';
 
         // Google Calendar link
         const formatDate = (d) => (new Date(d.replace(' ', 'T') + ':00Z')).toISOString().replace(/[-:]/g, '').split('.').shift();
@@ -280,29 +281,37 @@ export const guest = (() => {
             ctz: tz,
         }).toString();
 
-        calBtn.addEventListener('click', () => window.open(googleUrl, '_blank'));
+        const userAgent = navigator.userAgent || '';
+        const isIOS = /iPad|iPhone|iPod/.test(userAgent)
+            || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        const isAndroid = /Android/.test(userAgent);
+        const platformCta = document.getElementById('calendar-platform-cta');
+        let platformLabel = 'Add to Calendar';
+        if (isIOS) {
+            platformLabel = 'Add to Apple Calendar';
+        } else if (isAndroid) {
+            platformLabel = 'Add to Google Calendar';
+        }
+
+        if (platformCta) {
+            platformCta.textContent = platformLabel;
+        }
+        calBtn.setAttribute('aria-label', `${platformLabel}: November 29, 2026`);
+
+        calBtn.addEventListener('click', () => {
+            if (isAndroid) {
+                window.open(googleUrl, '_blank', 'noopener');
+                return;
+            }
+
+            window.location.assign(icsHref);
+        });
 
         // Build calendar links for the RSVP success modal
         const calContainer = document.getElementById('add-to-cal');
         if (calContainer) {
             const startDate = new Date(start.replace(' ', 'T'));
             const endDate = end ? new Date(end.replace(' ', 'T')) : new Date(startDate.getTime() + 2 * 60 * 60 * 1000);
-
-            const icsContent = [
-                'BEGIN:VCALENDAR',
-                'VERSION:2.0',
-                'BEGIN:VEVENT',
-                'URL:' + document.URL,
-                'DTSTART:' + formatDate(start),
-                'DTEND:' + (end ? formatDate(end) : formatDate(start)),
-                'SUMMARY:' + title,
-                'DESCRIPTION:' + details,
-                'LOCATION:' + location,
-                'END:VEVENT',
-                'END:VCALENDAR'
-            ].join('\n');
-
-            const icsHref = encodeURI('data:text/calendar;charset=utf8,' + icsContent);
 
             // Yahoo Calendar
             const duration = Math.round((endDate - startDate) / 60000);
@@ -446,9 +455,16 @@ export const guest = (() => {
     const weddingDayShortcut = () => {
         const button = document.getElementById('button-wedding-day');
         const target = document.getElementById('wedding-date');
-        if (!button || !target) {
+        const guide = document.getElementById('wedding-guide');
+        if (!button || !target || !guide) {
             return;
         }
+
+        const guideObserver = new IntersectionObserver(([entry]) => {
+            const hasReachedGuide = entry.isIntersecting || entry.boundingClientRect.top < 0;
+            button.classList.toggle('is-guide-active', hasReachedGuide);
+        });
+        guideObserver.observe(guide);
 
         let scrollFrame = null;
         let arrivalTimer = null;

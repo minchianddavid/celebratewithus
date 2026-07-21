@@ -157,6 +157,7 @@ html,
 body {
     max-width: 100%;
     overflow-x: hidden;
+    overflow-x: clip;
 }
 
 #root {
@@ -470,12 +471,29 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .wedding-date-link {
-    padding: 0 0 2px;
+    min-width: 10.5rem;
+    padding: 0.15rem 0.65rem 0.35rem;
     border: 0;
     border-bottom: 1px solid rgb(184 151 106 / 35%);
     border-radius: 0;
     background: transparent;
     cursor: pointer;
+}
+
+.wedding-date-value {
+    display: block;
+    padding-left: 0.12em;
+    letter-spacing: 0.12em;
+}
+
+.calendar-platform-cta {
+    display: block;
+    margin-top: 0.4rem;
+    color: var(--color-info-muted);
+    font-size: 10px;
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-ui);
+    letter-spacing: var(--type-tracking-md);
 }
 
 .wedding-date-link:hover,
@@ -1842,7 +1860,13 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 .calendar-shortcut {
     color: var(--bs-body-color);
     opacity: 0.45;
-    transition: none;
+    transition: color 180ms ease, border-color 180ms ease, opacity 180ms ease;
+}
+
+.calendar-shortcut.is-guide-active {
+    color: #a68150;
+    border-color: rgb(166 129 80 / 55%) !important;
+    opacity: 1;
 }
 
 .calendar-shortcut:focus-visible {
@@ -2013,6 +2037,12 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 
 .footer-credits {
     padding: 2rem 1.5rem 1rem;
+}
+
+.footer-credit-stage {
+    overflow: hidden;
+    overflow: clip;
+    touch-action: pan-y;
 }
 
 .footer-kicker {
@@ -2605,6 +2635,69 @@ html[data-bs-theme="dark"] .bg-white-black {
 
     .footer-credit-image {
         opacity: 0.16;
+    }
+
+    .wedding-day-section::after,
+    .rsvp-section::after,
+    .story-timeline::after,
+    .wedding-guide-section::after,
+    .footer-credit-stage::after {
+        position: absolute;
+        z-index: 0;
+        inset: 0;
+        height: auto;
+        pointer-events: none;
+        content: "";
+    }
+
+    html[data-bs-theme="light"] .wedding-day-section::after {
+        background:
+            linear-gradient(to bottom, #fff 0%, rgb(255 255 255 / 0%) 15%),
+            linear-gradient(to top, #faf7f1 0%, rgb(250 247 241 / 0%) 20%);
+    }
+
+    html[data-bs-theme="light"] .rsvp-section::after,
+    html[data-bs-theme="light"] .story-timeline::after {
+        background:
+            linear-gradient(to bottom, #faf7f1 0%, rgb(250 247 241 / 0%) 16%),
+            linear-gradient(to top, #faf7f1 0%, rgb(250 247 241 / 0%) 16%);
+    }
+
+    html[data-bs-theme="light"] .wedding-guide-section::after {
+        background:
+            linear-gradient(to bottom, #faf7f1 0%, rgb(250 247 241 / 0%) 16%),
+            linear-gradient(to top, #fff 0%, rgb(255 255 255 / 0%) 18%);
+    }
+
+    html[data-bs-theme="light"] .footer-credit-stage::after {
+        background:
+            linear-gradient(to bottom, #fff 0%, rgb(255 255 255 / 0%) 19%),
+            linear-gradient(to top, #fff 0%, rgb(255 255 255 / 0%) 16%);
+    }
+
+    html[data-bs-theme="dark"] .wedding-day-section::after {
+        background:
+            linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 0%) 15%),
+            linear-gradient(to top, #171512 0%, rgb(23 21 18 / 0%) 20%);
+    }
+
+    html[data-bs-theme="dark"] .rsvp-section::after,
+    html[data-bs-theme="dark"] .story-timeline::after {
+        background:
+            linear-gradient(to bottom, #171512 0%, rgb(23 21 18 / 0%) 16%),
+            linear-gradient(to top, #171512 0%, rgb(23 21 18 / 0%) 16%);
+    }
+
+    html[data-bs-theme="dark"] .wedding-guide-section::after {
+        background:
+            linear-gradient(to bottom, #171512 0%, rgb(23 21 18 / 0%) 16%),
+            linear-gradient(to top, #000 0%, rgb(0 0 0 / 0%) 18%);
+    }
+
+    html[data-bs-theme="dark"] .footer-credit-stage::after {
+        background:
+            linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 0%) 19%),
+            linear-gradient(to top, #000 0%, rgb(0 0 0 / 0%) 16%);
     }
 
     .wedding-day-section {
