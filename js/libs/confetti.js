@@ -59,10 +59,10 @@ export const basicAnimation = () => {
     openingCanvas = null;
 
     return fire({
-        particleCount: 24,
-        startVelocity: 27,
-        spread: 56,
-        ticks: 30,
+        particleCount: 36,
+        startVelocity: 30,
+        spread: 58,
+        ticks: 80,
         gravity: 1.05,
         scalar: 0.82,
         origin: { y: 1 },
