@@ -570,6 +570,7 @@ export const guest = (() => {
         footerEasterEgg();
         guideClosingHeartEasterEgg();
         weddingDayShortcut();
+        confetti.prepareBasicAnimation();
 
         // Don't restore previous attendance — always start fresh at "Select"
 

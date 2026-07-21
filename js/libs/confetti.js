@@ -1,4 +1,6 @@
 const zIndex = 1057;
+let openingCanvas = null;
+let openingFire = null;
 
 /**
  * @returns {any}
@@ -13,20 +15,46 @@ const heartShape = () => {
 /**
  * @returns {void}
  */
-export const basicAnimation = () => {
-    if (!window.confetti) {
+export const prepareBasicAnimation = () => {
+    if (!window.confetti || openingFire) {
         return;
     }
 
-    const canvas = document.createElement('canvas');
-    canvas.className = 'opening-confetti-canvas';
-    canvas.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(canvas);
+    openingCanvas = document.createElement('canvas');
+    openingCanvas.className = 'opening-confetti-canvas';
+    openingCanvas.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(openingCanvas);
 
-    const fire = window.confetti.create(canvas, {
+    openingFire = window.confetti.create(openingCanvas, {
         resize: true,
         useWorker: true,
     });
+
+    // Warm the worker and canvas while the loading page is still visible.
+    openingFire({
+        particleCount: 1,
+        startVelocity: 0,
+        ticks: 1,
+        gravity: 0,
+        scalar: 0,
+        origin: { y: 1 },
+        disableForReducedMotion: true,
+    }).catch(() => {});
+};
+
+/**
+ * @returns {void}
+ */
+export const basicAnimation = () => {
+    prepareBasicAnimation();
+    if (!openingFire || !openingCanvas) {
+        return;
+    }
+
+    const fire = openingFire;
+    const canvas = openingCanvas;
+    openingFire = null;
+    openingCanvas = null;
 
     fire({
         particleCount: 36,
