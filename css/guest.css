@@ -2275,13 +2275,17 @@ html[data-bs-theme="dark"] .rsvp-party-choice {
 }
 
 html[data-bs-theme="dark"] .btn-transparent {
-    background-color: rgba(var(--bs-dark-rgb), 0.5) !important;
-    backdrop-filter: blur(0.5rem);
+    background-color: rgba(var(--bs-dark-rgb), 0.72) !important;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none !important;
 }
 
 html[data-bs-theme="light"] .btn-transparent {
-    background-color: rgba(var(--bs-light-rgb), 0.5) !important;
-    backdrop-filter: blur(0.5rem);
+    background-color: rgba(var(--bs-light-rgb), 0.72) !important;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none !important;
 }
 
 .loading-page {
