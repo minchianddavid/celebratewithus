@@ -454,6 +454,30 @@ export const guest = (() => {
         let scrollFrame = null;
         let arrivalTimer = null;
         let restoreScrollBehavior = null;
+        let isScrollingToWeddingDay = false;
+
+        const stopShortcutScroll = () => {
+            if (scrollFrame !== null) {
+                window.cancelAnimationFrame(scrollFrame);
+                scrollFrame = null;
+            }
+            isScrollingToWeddingDay = false;
+            restoreScrollBehavior?.();
+        };
+
+        const interruptShortcutScroll = () => {
+            if (isScrollingToWeddingDay) {
+                stopShortcutScroll();
+            }
+        };
+
+        window.addEventListener('touchstart', interruptShortcutScroll, { passive: true });
+        window.addEventListener('wheel', interruptShortcutScroll, { passive: true });
+        window.addEventListener('keydown', (event) => {
+            if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) {
+                interruptShortcutScroll();
+            }
+        });
 
         const showArrival = () => {
             target.classList.remove('is-shortcut-arrival');
@@ -465,8 +489,7 @@ export const guest = (() => {
 
         button.addEventListener('click', (event) => {
             event.preventDefault();
-            window.cancelAnimationFrame(scrollFrame);
-            restoreScrollBehavior?.();
+            stopShortcutScroll();
 
             const rootStyle = document.documentElement.style;
             const previousScrollBehavior = rootStyle.getPropertyValue('scroll-behavior');
@@ -486,19 +509,22 @@ export const guest = (() => {
             const distance = targetY - startY;
             const duration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1050;
             const startedAt = performance.now();
+            isScrollingToWeddingDay = true;
 
             const step = (now) => {
-                const progress = duration === 0 ? 1 : Math.min(1, (now - startedAt) / duration);
-                const eased = progress < 0.5
-                    ? 4 * progress * progress * progress
-                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                const scrollProgress = duration === 0 ? 1 : Math.min(1, (now - startedAt) / duration);
+                const eased = scrollProgress < 0.5
+                    ? 4 * scrollProgress * scrollProgress * scrollProgress
+                    : 1 - Math.pow(-2 * scrollProgress + 2, 3) / 2;
                 window.scrollTo(0, startY + (distance * eased));
 
-                if (progress < 1) {
+                if (scrollProgress < 1) {
                     scrollFrame = window.requestAnimationFrame(step);
                     return;
                 }
 
+                scrollFrame = null;
+                isScrollingToWeddingDay = false;
                 restoreScrollBehavior?.();
                 window.history.replaceState(null, '', '#wedding-date');
                 showArrival();
