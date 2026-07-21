@@ -14,12 +14,30 @@ const heartShape = () => {
  * @returns {void}
  */
 export const basicAnimation = () => {
-    if (window.confetti) {
-        window.confetti({
-            origin: { y: 1 },
-            zIndex: zIndex
-        });
+    if (!window.confetti) {
+        return;
     }
+
+    const canvas = document.createElement('canvas');
+    canvas.className = 'opening-confetti-canvas';
+    canvas.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(canvas);
+
+    const fire = window.confetti.create(canvas, {
+        resize: true,
+        useWorker: true,
+    });
+
+    fire({
+        particleCount: 36,
+        startVelocity: 30,
+        spread: 58,
+        ticks: 80,
+        gravity: 1.05,
+        scalar: 0.82,
+        origin: { y: 1 },
+        disableForReducedMotion: true,
+    }).finally(() => canvas.remove());
 };
 
 /**
