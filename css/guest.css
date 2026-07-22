@@ -733,11 +733,11 @@ html[data-bs-theme="dark"] .hero-info-zh {
     padding: 0.95rem 0.25rem;
     border: 0;
     border-radius: 0;
-    color: #514b45;
+    color: #3f3a34;
     background: transparent;
     box-shadow: none;
     font-size: var(--type-cover-action-size);
-    font-weight: var(--type-weight-regular);
+    font-weight: var(--type-weight-semibold);
     line-height: var(--type-line-control);
     letter-spacing: var(--type-tracking-md);
 }
@@ -872,7 +872,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
 .cover-open-label {
     position: relative;
     z-index: 1;
-    animation: cover-cta-shimmer 2s ease-in-out infinite;
+    animation: cover-cta-shimmer 1s ease-in-out infinite;
 }
 
 .cover-open-sparkles {
@@ -884,48 +884,63 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .cover-open-sparkles > span {
     position: absolute;
+    bottom: 3px;
     width: 3px;
     height: 3px;
     border-radius: 50%;
     background: #c5a46f;
     box-shadow: 0 0 4px rgb(197 164 111 / 38%);
     opacity: 0;
-    animation: cover-cta-gold-dust 2s ease-out infinite;
+    animation: cover-cta-gold-dust 1s ease-out infinite;
 }
 
 .cover-open-sparkles > span:nth-child(1) {
-    top: 29%;
     left: 25%;
+    --sparkle-rise: -42px;
 }
 
 .cover-open-sparkles > span:nth-child(2) {
-    top: 23%;
     right: 28%;
     width: 2px;
     height: 2px;
-    animation-delay: 90ms;
+    --sparkle-rise: -44px;
+    animation-delay: 80ms;
 }
 
 .cover-open-sparkles > span:nth-child(3) {
     right: 20%;
-    bottom: 25%;
     width: 2px;
     height: 2px;
-    animation-delay: 170ms;
+    --sparkle-rise: -39px;
+    animation-delay: 150ms;
 }
 
 .cover-open-sparkles > span:nth-child(4) {
-    bottom: 27%;
     left: 18%;
     width: 2px;
     height: 2px;
-    animation-delay: 240ms;
+    --sparkle-rise: -45px;
+    animation-delay: 220ms;
 }
 
 .cover-open-sparkles > span:nth-child(5) {
-    top: 18%;
     right: 18%;
-    animation-delay: 310ms;
+    --sparkle-rise: -41px;
+    animation-delay: 290ms;
+}
+
+.cover-open-sparkles > span:nth-child(6) {
+    left: 36%;
+    width: 2px;
+    height: 2px;
+    --sparkle-rise: -40px;
+    animation-delay: 360ms;
+}
+
+.cover-open-sparkles > span:nth-child(7) {
+    right: 38%;
+    --sparkle-rise: -43px;
+    animation-delay: 430ms;
 }
 
 .cover-open-button.is-opening .cover-open-label,
@@ -935,13 +950,13 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 @keyframes cover-cta-shimmer {
     0%,
-    70%,
+    46%,
     100% {
         filter: brightness(1);
         transform: translateY(0);
     }
 
-    82% {
+    70% {
         filter: brightness(1.05);
         transform: translateY(-3px);
     }
@@ -953,21 +968,19 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 @keyframes cover-cta-gold-dust {
-    0%,
-    42%,
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0) scale(0.65);
+    }
+
+    18% {
+        opacity: 0.78;
+        transform: translate3d(0, -7px, 0) scale(1);
+    }
+
     100% {
         opacity: 0;
-        transform: translate3d(0, 2px, 0) scale(0.65);
-    }
-
-    55% {
-        opacity: 0.78;
-        transform: translate3d(0, 0, 0) scale(1);
-    }
-
-    92% {
-        opacity: 0;
-        transform: translate3d(0, -5px, 0) scale(0.8);
+        transform: translate3d(0, var(--sparkle-rise), 0) scale(0.72);
     }
 }
 
