@@ -211,11 +211,6 @@ body {
     letter-spacing: var(--type-tracking-3xl);
 }
 
-[data-image-modal]:focus-visible {
-    outline: 0.2rem solid #b8976a;
-    outline-offset: 0.2rem;
-}
-
 .home-heading-zh {
     padding: 0;
     margin: 0.7rem 0 0;
@@ -3753,10 +3748,6 @@ html[data-bs-theme="dark"] .bg-white-black {
     width: 25%;
 }
 
-.cursor-pointer {
-    cursor: pointer;
-}
-
 @media screen and (max-width: 992px) {
     .width-loading {
         width: 50%;
@@ -3773,9 +3764,13 @@ html[data-bs-theme="dark"] .bg-white-black {
         width: 75%;
     }
 
+    .wedding-hero {
+        min-height: var(--stable-hero-height, 100svh);
+    }
+
     .hero-content {
-        padding: 2.75rem 0 3rem;
-        padding-top: clamp(2rem, 4dvh, 2.75rem);
+        padding: 3rem 0 3rem;
+        padding-top: clamp(2.5rem, 5dvh, 3rem);
     }
 
     .hero-scroll-indicator {

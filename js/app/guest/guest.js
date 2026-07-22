@@ -26,6 +26,27 @@ export const guest = (() => {
      */
     let config = null;
 
+    /** @returns {void} */
+    const lockMobileHeroViewport = () => {
+        let orientationTimer = null;
+
+        const update = () => {
+            if (!window.matchMedia('(max-width: 768px)').matches) {
+                document.documentElement.style.removeProperty('--stable-hero-height');
+                return;
+            }
+
+            const viewportHeight = Math.round(window.visualViewport?.height || window.innerHeight);
+            document.documentElement.style.setProperty('--stable-hero-height', `${viewportHeight}px`);
+        };
+
+        update();
+        window.addEventListener('orientationchange', () => {
+            window.clearTimeout(orientationTimer);
+            orientationTimer = window.setTimeout(update, 350);
+        }, { passive: true });
+    };
+
     /**
      * @returns {void}
      */
@@ -187,50 +208,6 @@ export const guest = (() => {
         document.dispatchEvent(new Event('undangan.open'));
         window.requestAnimationFrame(() => {
             window.requestAnimationFrame(() => confetti.basicAnimation());
-        });
-    };
-
-    /**
-     * @param {HTMLImageElement} img
-     * @returns {void}
-     */
-    const modal = (img) => {
-        document.getElementById('button-modal-click').setAttribute('href', img.src);
-        document.getElementById('button-modal-download').setAttribute('data-src', img.src);
-
-        const i = document.getElementById('show-modal-image');
-        i.src = img.src;
-        i.width = img.width;
-        i.height = img.height;
-        bs.modal('modal-image').show();
-    };
-
-    /**
-     * Make modal images available to mouse and keyboard users.
-     * @returns {void}
-     */
-    const modalImageTriggers = () => {
-        document.querySelectorAll('[data-image-modal]').forEach((img) => {
-            img.addEventListener('click', () => modal(img));
-            img.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    modal(img);
-                }
-            });
-        });
-    };
-
-    /**
-     * @returns {void}
-     */
-    const modalImageClick = () => {
-        document.getElementById('show-modal-image').addEventListener('click', (e) => {
-            const abs = e.currentTarget.parentNode.querySelector('.position-absolute');
-
-            abs.classList.contains('d-none')
-                ? abs.classList.replace('d-none', 'd-flex')
-                : abs.classList.replace('d-flex', 'd-none');
         });
     };
 
@@ -406,7 +383,7 @@ export const guest = (() => {
                         if (spin.classList.contains('is-animating')) {
                             confetti.heroSpinSparkleAnimation(spin);
                         }
-                    }, Math.round(animationDuration * 0.3));
+                    }, Math.round(animationDuration * 0.393));
                 }
 
                 const unlock = () => {
@@ -680,8 +657,6 @@ export const guest = (() => {
         animateSvg();
         countDownDate();
         showGuestName();
-        modalImageClick();
-        modalImageTriggers();
         buildCalendarLinks();
         journeyConfetti();
         coupleHeartInteraction();
@@ -711,6 +686,7 @@ export const guest = (() => {
      * @returns {void}
      */
     const pageLoaded = () => {
+        lockMobileHeroViewport();
         lang.init();
         offline.init();
         rsvp.init();
@@ -729,10 +705,6 @@ export const guest = (() => {
         }
         document.addEventListener('undangan.progress.done', () => booting());
         document.addEventListener('hide.bs.modal', () => document.activeElement?.blur());
-        document.getElementById('button-modal-download').addEventListener('click', (e) => {
-            img.download(e.currentTarget.getAttribute('data-src'));
-        });
-
         // No backend token needed — load everything directly
         vid.load();
         img.load();
@@ -764,7 +736,6 @@ export const guest = (() => {
             rsvp,
             guest: {
                 open,
-                modal,
                 showStory,
                 closeInformation,
             },

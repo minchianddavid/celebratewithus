@@ -268,8 +268,8 @@ export const heroSpinSparkleAnimation = (element) => {
         particleCount: 28,
         spread: 100,
         startVelocity: 22,
-        ticks: 58,
-        gravity: 0.62,
+        ticks: 82,
+        gravity: 0.52,
         scalar: 0.62,
         shapes: ['star'],
         origin: {
@@ -277,6 +277,6 @@ export const heroSpinSparkleAnimation = (element) => {
             y: (rect.top + (rect.height / 2)) / window.innerHeight,
         },
         zIndex: zIndex,
-        colors: ['#b8976a', '#d6bd91', '#f1e8d5', '#9f7b4d'],
+        colors: ['#d7ad62', '#f0d38f', '#fff8df', '#f8edd0'],
     });
 };
