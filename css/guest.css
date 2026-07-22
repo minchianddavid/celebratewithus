@@ -276,10 +276,28 @@ html[data-bs-theme="dark"] .home-couple-name-zh {
     padding: 5.5rem 0 4.5rem;
 }
 
+.wedding-hero > .bg-cover-home {
+    object-position: 47% center;
+}
+
 .hero-photo {
     width: 13.65rem;
     height: 13.65rem;
     margin-top: 2.5rem;
+}
+
+.hero-hidden-side-spin {
+    box-shadow: 0 0.5rem 1rem rgb(78 61 40 / 18%);
+    perspective: 520px;
+}
+
+.hero-hidden-side-spin .hidden-side-spin-face {
+    border: 3px solid rgb(248 246 242 / 88%);
+}
+
+.hero-hidden-side-image {
+    object-position: center 58%;
+    transform: translateX(6%) scale(1.12);
 }
 
 .hero-date {
@@ -780,7 +798,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
     opacity: 1;
     animation:
         cover-button-exit 720ms cubic-bezier(0.22, 1, 0.36, 1) both,
-        cover-button-gold-wash 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        cover-button-gold-wash 840ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .cover-open-button.is-opening::before,
@@ -1149,6 +1167,15 @@ html[data-bs-theme="dark"] .hero-info-zh {
     animation: hidden-side-landing-burst 940ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+.hero-hidden-side-spin.is-animating .hidden-side-spin-inner {
+    animation: hero-hidden-side-multi-turn 2920ms both;
+}
+
+.hero-hidden-side-spin.is-animating::before,
+.hero-hidden-side-spin.is-animating::after {
+    animation: none;
+}
+
 .hidden-side-spin-inner::before,
 .hidden-side-spin-inner::after,
 .hidden-side-spin-edge {
@@ -1230,6 +1257,37 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
     75% {
         transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) + 7deg));
+        animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    100% {
+        transform: rotateY(var(--hidden-side-spin-rotation, 0deg));
+    }
+}
+
+@keyframes hero-hidden-side-multi-turn {
+    0% {
+        transform: rotateY(var(--hidden-side-spin-start, 0deg));
+        animation-timing-function: cubic-bezier(0.55, 0, 0.8, 0.3);
+    }
+
+    30% {
+        transform: rotateY(calc(var(--hidden-side-spin-start, 0deg) + 1080deg));
+        animation-timing-function: cubic-bezier(0.18, 0.55, 0.32, 1);
+    }
+
+    67% {
+        transform: rotateY(calc(var(--hidden-side-spin-start, 0deg) + 2160deg));
+        animation-timing-function: cubic-bezier(0.22, 0.7, 0.3, 1);
+    }
+
+    81% {
+        transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) + 45deg));
+        animation-timing-function: cubic-bezier(0.25, 0.8, 0.35, 1);
+    }
+
+    94% {
+        transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) - 8deg));
         animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -1661,10 +1719,12 @@ html[data-bs-theme="dark"] .story-punchline-zh {
 
 .rsvp-intro-zh {
     color: var(--color-section-title-zh);
+    font-family: var(--font-soft-zh);
     font-size: var(--type-section-subtitle-size);
     font-weight: var(--type-section-subtitle-weight);
+    line-height: var(--type-section-subtitle-line);
     letter-spacing: var(--type-tracking-lg);
-    opacity: 0.94;
+    opacity: 1;
 }
 
 .rsvp-transition {
@@ -1806,6 +1866,26 @@ html[data-bs-theme="dark"] .story-punchline-zh {
 .rsvp-input:not(.rsvp-message-input):focus {
     border-bottom-color: #9f7b4d !important;
     box-shadow: none !important;
+}
+
+.rsvp-input:-webkit-autofill,
+.rsvp-input:-webkit-autofill:hover,
+.rsvp-input:-webkit-autofill:focus,
+.rsvp-input:-webkit-autofill:active {
+    color: var(--bs-body-color) !important;
+    background-color: transparent !important;
+    background-clip: text !important;
+    caret-color: var(--bs-body-color);
+    -webkit-text-fill-color: var(--bs-body-color) !important;
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    box-shadow: 0 0 0 1000px transparent inset !important;
+    transition: background-color 9999s ease-out 0s;
+}
+
+.rsvp-input:autofill {
+    color: var(--bs-body-color) !important;
+    background: transparent !important;
+    box-shadow: 0 0 0 1000px transparent inset !important;
 }
 
 .rsvp-input::placeholder {
@@ -2090,8 +2170,8 @@ html[data-bs-theme="dark"] .rsvp-submit-en {
     bottom: 0;
 }
 
-.rsvp-submit-button:not(.is-opening):hover,
-.rsvp-submit-button:not(.is-opening):focus-visible {
+.rsvp-submit-button:not(.is-opening):not(.is-sending):hover,
+.rsvp-submit-button:not(.is-opening):not(.is-sending):focus-visible {
     border: 0;
     color: #8f6d42;
     background: transparent;
@@ -2123,6 +2203,31 @@ html[data-bs-theme="dark"] .rsvp-submit-en {
     animation: cover-button-line-expand 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.rsvp-submit-button.is-sending,
+.rsvp-submit-button.is-sending:disabled {
+    border: 0;
+    color: #3f3a34;
+    background:
+        linear-gradient(
+            90deg,
+            rgb(184 151 106 / 7%) 0%,
+            rgb(184 151 106 / 8%) 66%,
+            rgb(184 151 106 / 18%) 82%,
+            rgb(159 124 77 / 36%) 96%,
+            rgb(159 124 77 / 38%) 100%
+        ) left center / 0% 100% no-repeat;
+    box-shadow: none;
+    opacity: 1;
+    animation:
+        cover-button-exit 720ms cubic-bezier(0.22, 1, 0.36, 1) both,
+        cover-button-gold-wash 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rsvp-submit-button.is-sending::before,
+.rsvp-submit-button.is-sending::after {
+    animation: cover-button-line-expand 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 .rsvp-submit-en,
 .rsvp-submit-zh {
     display: block;
@@ -2150,6 +2255,19 @@ html[data-bs-theme="dark"] .rsvp-submit-en {
 html[data-bs-theme="dark"] .rsvp-submit-button {
     border: 0;
     background: transparent;
+}
+
+html[data-bs-theme="dark"] .rsvp-submit-button.is-sending,
+html[data-bs-theme="dark"] .rsvp-submit-button.is-sending:disabled {
+    background:
+        linear-gradient(
+            90deg,
+            rgb(216 189 147 / 7%) 0%,
+            rgb(216 189 147 / 9%) 66%,
+            rgb(216 189 147 / 17%) 82%,
+            rgb(216 189 147 / 26%) 96%,
+            rgb(216 189 147 / 28%) 100%
+        ) left center / 0% 100% no-repeat;
 }
 
 .rsvp-party-options {
@@ -2890,15 +3008,31 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
     .rsvp-submit-button.is-opening,
     .rsvp-submit-button.is-opening:disabled,
     .rsvp-submit-button.is-opening::before,
-    .rsvp-submit-button.is-opening::after {
+    .rsvp-submit-button.is-opening::after,
+    .rsvp-submit-button.is-sending,
+    .rsvp-submit-button.is-sending:disabled,
+    .rsvp-submit-button.is-sending::before,
+    .rsvp-submit-button.is-sending::after {
         animation: none;
         opacity: 0.62;
         transform: scaleX(1);
+        background-size: 100% 100%, 100% 100%;
     }
 
     .cover-open-label,
     .cover-open-sparkles > span {
         animation: none;
+    }
+
+    .rsvp-submit-button.is-sending,
+    .rsvp-submit-button.is-sending:disabled {
+        opacity: 1;
+        background-size: 100% 100%;
+    }
+
+    .rsvp-submit-button.is-sending::before,
+    .rsvp-submit-button.is-sending::after {
+        background-size: 100% 100%, 100% 100%;
     }
 
     .calendar-shortcut.is-guide-active::before,

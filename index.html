@@ -56,7 +56,7 @@
     <!-- Dependencies CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha256-2FMn2Zx6PuH5tdBQDRNwrOo60ts5wWPC9R8jK67b3t4=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css" integrity="sha256-4rTIfo5GQTi/7UJqoyUJQKzxW8VN/YBH31+Cy+vTZj4=" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/guest.css?v=175">
+    <link rel="stylesheet" href="./css/guest.css?v=193">
 
     <!-- Dependencies JS -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha256-5P1JGBOIxI7FBAvT/mb1fCnI5n/NhQKzNUuW7Hq0fMc=" crossorigin="anonymous"></script>
@@ -68,7 +68,7 @@
             if (window.caches) { caches.keys().then(function(n) { n.forEach(function(k) { caches.delete(k); }); }); }
         }
     </script>
-    <script src="./dist/guest.js?v=81"></script>
+    <script src="./dist/guest.js?v=91"></script>
 
     <!-- reCAPTCHA v3 — replace YOUR_SITE_KEY with your actual key -->
     <!-- <script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script> -->
@@ -130,7 +130,17 @@
                         <h1 class="hero-announcement">We're getting married</h1>
                         <p class="home-heading-zh">我們要結婚了</p>
 
-                        <img src="./assets/images/placeholder.webp" data-src="./assets/images/hero-photo.jpeg?v=1" alt="Minchi and David together on a golf course" data-image-modal role="button" tabindex="0" aria-label="Open photo of Minchi and David" class="img-center-crop hero-photo d-block rounded-circle border border-3 border-light shadow mx-auto cursor-pointer">
+                        <button type="button" class="hidden-side-spin hero-hidden-side-spin hero-photo d-block rounded-circle mx-auto" id="hero-hidden-side-spin" aria-label="Spin the Hero photo to reveal its hidden side" aria-pressed="false">
+                            <span class="hidden-side-spin-inner">
+                                <span class="hidden-side-spin-face hidden-side-spin-front">
+                                    <img src="./assets/images/placeholder.webp" data-src="./assets/images/hero-photo.jpeg?v=1" alt="Minchi and David together on a golf course" class="hidden-side-spin-image">
+                                </span>
+                                <span class="hidden-side-spin-edge" aria-hidden="true"></span>
+                                <span class="hidden-side-spin-face hidden-side-spin-back">
+                                    <img src="./assets/images/placeholder.webp" data-src="./assets/images/hero-hidden-side.jpeg?v=1" alt="Minchi and David celebrating in Florence" class="hidden-side-spin-image hero-hidden-side-image">
+                                </span>
+                            </span>
+                        </button>
 
                         <h2 class="home-couple-name">Minchi &amp; David</h2>
                         <p class="home-couple-name-zh">旻淇 · 大為</p>

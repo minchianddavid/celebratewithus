@@ -150,19 +150,17 @@ export const rsvp = (() => {
             }
         }
 
-        // Match the Cover action: gold wash first, then transition into the sending state.
+        // Enter the sending state immediately, then play the same gold-wash sequence as the Cover action.
         const formControls = [name, presence, ...attendanceOptions, guestCount, ...partyOptions, invitationType, ...invitationOptions, email, address, message];
-        button.classList.add('is-opening');
-        button.disabled = true;
+        const btn = util.disableButton(button, 'Sending... 送出中...', true);
+        button.classList.add('is-sending');
         formControls.forEach((el) => {
             if (el) {
                 el.disabled = true;
             }
         });
-        const actionDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 650;
-        await new Promise((resolve) => window.setTimeout(resolve, actionDuration));
-        button.classList.remove('is-opening');
-        const btn = util.disableButton(button, 'Sending... 送出中...', true);
+        const actionDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 720;
+        const washCompletion = new Promise((resolve) => window.setTimeout(resolve, actionDuration));
 
         try {
             // Get reCAPTCHA token if available
@@ -188,7 +186,7 @@ export const rsvp = (() => {
                 body: body.toString(),
             });
 
-            const result = await response.json();
+            const [result] = await Promise.all([response.json(), washCompletion]);
 
             if (result.result === 'error') {
                 alertWrapper.innerHTML = alertMarkup('danger', `<strong>${lang.on('zh-tw', '抱歉！').on('en', 'Sorry!').get()}</strong> ${util.escapeHtml(result.message)}`);
@@ -217,6 +215,7 @@ export const rsvp = (() => {
                 }
             }
         } catch {
+            await washCompletion;
             alertWrapper.innerHTML = alertMarkup('danger', lang
                 .on('zh-tw', '<strong>抱歉！</strong> 提交時發生錯誤，請稍後再試。')
                 .on('en', '<strong>Sorry!</strong> Something went wrong. Please try again later.')
@@ -224,6 +223,7 @@ export const rsvp = (() => {
         }
 
         // Re-enable form
+        button.classList.remove('is-sending');
         btn.restore();
         formControls.forEach((el) => {
             if (el) {

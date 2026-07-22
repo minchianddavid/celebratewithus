@@ -373,37 +373,37 @@ export const guest = (() => {
 
     /** @returns {void} */
     const hiddenSideSpinInteraction = () => {
-        const spin = document.getElementById('david-hidden-side-spin');
-        if (!spin) {
-            return;
-        }
-
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        let locked = false;
-        let halfTurns = 0;
+        document.querySelectorAll('.hidden-side-spin').forEach((spin) => {
+            let locked = false;
+            let halfTurns = 0;
+            const isHeroSpin = spin.classList.contains('hero-hidden-side-spin');
+            const halfTurnsPerClick = isHeroSpin ? 13 : 1;
+            const animationDuration = isHeroSpin ? 2920 : 960;
 
-        spin.addEventListener('click', () => {
-            if (locked) {
-                return;
-            }
+            spin.addEventListener('click', () => {
+                if (locked) {
+                    return;
+                }
 
-            locked = true;
-            const startAngle = halfTurns * 180;
-            halfTurns += 1;
-            const isFlipped = halfTurns % 2 === 1;
-            spin.style.setProperty('--hidden-side-spin-start', `${startAngle}deg`);
-            spin.style.setProperty('--hidden-side-spin-rotation', `${halfTurns * 180}deg`);
-            spin.classList.add('is-animating');
-            spin.setAttribute('aria-pressed', String(isFlipped));
-            spin.setAttribute('aria-busy', 'true');
+                locked = true;
+                const startAngle = halfTurns * 180;
+                halfTurns += halfTurnsPerClick;
+                const isFlipped = halfTurns % 2 === 1;
+                spin.style.setProperty('--hidden-side-spin-start', `${startAngle}deg`);
+                spin.style.setProperty('--hidden-side-spin-rotation', `${halfTurns * 180}deg`);
+                spin.classList.add('is-animating');
+                spin.setAttribute('aria-pressed', String(isFlipped));
+                spin.setAttribute('aria-busy', 'true');
 
-            const unlock = () => {
-                locked = false;
-                spin.classList.remove('is-animating');
-                spin.removeAttribute('aria-busy');
-            };
+                const unlock = () => {
+                    locked = false;
+                    spin.classList.remove('is-animating');
+                    spin.removeAttribute('aria-busy');
+                };
 
-            window.setTimeout(unlock, reducedMotion ? 0 : 960);
+                window.setTimeout(unlock, reducedMotion ? 0 : animationDuration);
+            });
         });
     };
 
