@@ -161,7 +161,7 @@ export const guest = (() => {
         button.classList.add('is-opening');
         button.disabled = true;
         const chime = openingChime.play();
-        await new Promise((resolve) => util.timeOut(resolve, 380));
+        await new Promise((resolve) => util.timeOut(resolve, 420));
         document.body.scrollIntoView({ behavior: 'instant' });
 
         const welcome = document.getElementById('welcome');
