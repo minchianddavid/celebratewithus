@@ -523,7 +523,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
     color: #4a453f;
     font-family: var(--font-sans-zh);
     font-size: 14px;
-    font-weight: var(--type-weight-medium);
+    font-weight: var(--type-weight-regular);
     line-height: var(--type-line-relaxed);
     letter-spacing: var(--type-tracking-sm);
 }
@@ -1246,6 +1246,29 @@ html[data-bs-theme="dark"] .hero-info-zh {
     will-change: transform;
 }
 
+.hidden-side-spin.is-hinting .hidden-side-spin-inner {
+    animation: hidden-side-affordance 1200ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    will-change: transform;
+}
+
+.hidden-side-spin.is-hinting::after {
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    width: 3px;
+    height: 3px;
+    inset: 50% auto auto 50%;
+    background: #e4c98f;
+    box-shadow:
+        -5.2rem -1.8rem 0 #d5ad63,
+        -3.8rem 3.9rem 0 #f2dfb5,
+        -0.8rem -5.5rem 0 #e8ca88,
+        2.9rem -4.6rem 0 #f6e8c8,
+        4.9rem 2.6rem 0 #cfa45c,
+        1.7rem 5.1rem 0 #ecd49e;
+    animation: hidden-side-hint-gold-dust 1200ms ease-out both;
+}
+
 .hidden-side-spin.is-animating::before {
     animation: hidden-side-gold-orbit 1900ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -1359,6 +1382,40 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
     100% {
         transform: rotateY(var(--hidden-side-spin-rotation, 0deg));
+    }
+}
+
+@keyframes hidden-side-affordance {
+    0%, 100% {
+        transform: rotateY(var(--hidden-side-spin-rotation, 0deg));
+    }
+
+    30% {
+        transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) + 16deg));
+    }
+
+    58% {
+        transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) - 10deg));
+    }
+
+    80% {
+        transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) + 5deg));
+    }
+}
+
+@keyframes hidden-side-hint-gold-dust {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.72);
+    }
+
+    24% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -58%) scale(1.08);
     }
 }
 
@@ -3095,6 +3152,10 @@ html[data-bs-theme="dark"] .rsvp-submit-button.is-sending:disabled {
         animation: none;
     }
 
+    .hidden-side-spin.is-hinting .hidden-side-spin-inner {
+        animation: none;
+    }
+
     .hidden-side-spin.is-animating::before,
     .hidden-side-spin.is-animating::after {
         animation: none;
@@ -3773,6 +3834,10 @@ html[data-bs-theme="dark"] .bg-white-black {
         padding-top: clamp(2.5rem, 5dvh, 3rem);
     }
 
+    .cover-content {
+        transform: translateY(-0.75rem);
+    }
+
     .hero-scroll-indicator {
         margin-top: 2rem;
     }
@@ -3924,7 +3989,7 @@ html[data-bs-theme="dark"] .bg-white-black {
     }
 
     .wedding-day-credit-zh {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .wedding-guide-section {

@@ -351,18 +351,63 @@ export const guest = (() => {
     /** @returns {void} */
     const hiddenSideSpinInteraction = () => {
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const hintTargets = [];
+        const scheduleHint = (spin, isVisible) => {
+            const hintState = spin.hiddenSideHintState;
+            if (!hintState || hintState.played || hintState.interacted) {
+                return;
+            }
+
+            window.clearTimeout(hintState.timer);
+            hintState.timer = null;
+            if (isVisible) {
+                hintState.timer = window.setTimeout(() => {
+                    if (!hintState.interacted && !spin.classList.contains('is-animating')) {
+                        hintState.played = true;
+                        hintObserver?.unobserve(spin);
+                        spin.classList.add('is-hinting');
+                    }
+                }, 2000);
+            }
+        };
+        const hintObserver = reducedMotion || !('IntersectionObserver' in window)
+            ? null
+            : new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    scheduleHint(entry.target, entry.isIntersecting && entry.intersectionRatio >= 0.7);
+                });
+            }, { threshold: [0, 0.7] });
+
         document.querySelectorAll('.hidden-side-spin').forEach((spin) => {
             let locked = false;
             let halfTurns = 0;
             const isHeroSpin = spin.classList.contains('hero-hidden-side-spin');
             const halfTurnsPerClick = isHeroSpin ? 13 : 7;
             const animationDuration = isHeroSpin ? 2920 : 1900;
+            const hintState = { interacted: false, played: false, timer: null };
+
+            if (!isHeroSpin && !reducedMotion) {
+                spin.hiddenSideHintState = hintState;
+                hintTargets.push(spin);
+                hintObserver?.observe(spin);
+                spin.addEventListener('animationend', (event) => {
+                    if (event.animationName === 'hidden-side-affordance') {
+                        spin.classList.remove('is-hinting');
+                    }
+                });
+            }
 
             spin.addEventListener('click', () => {
                 if (locked) {
                     return;
                 }
 
+                hintState.interacted = true;
+                window.clearTimeout(hintState.timer);
+                if (!isHeroSpin && hintObserver) {
+                    hintObserver.unobserve(spin);
+                }
+                spin.classList.remove('is-hinting');
                 locked = true;
                 const startAngle = halfTurns * 180;
                 halfTurns += halfTurnsPerClick;
@@ -395,6 +440,27 @@ export const guest = (() => {
                 window.setTimeout(unlock, reducedMotion ? 0 : animationDuration);
             });
         });
+
+        if (!reducedMotion && !hintObserver && hintTargets.length > 0) {
+            let hintFrame = null;
+            const checkHintVisibility = () => {
+                hintFrame = null;
+                hintTargets.forEach((spin) => {
+                    const rect = spin.getBoundingClientRect();
+                    const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+                    scheduleHint(spin, visibleHeight / rect.height >= 0.7);
+                });
+            };
+            const requestHintCheck = () => {
+                if (hintFrame === null) {
+                    hintFrame = window.requestAnimationFrame(checkHintVisibility);
+                }
+            };
+
+            window.addEventListener('scroll', requestHintCheck, { passive: true });
+            window.addEventListener('resize', requestHintCheck, { passive: true });
+            requestHintCheck();
+        }
     };
 
     /** @returns {void} */

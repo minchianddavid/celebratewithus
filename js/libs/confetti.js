@@ -178,21 +178,45 @@ export const journeyGoldAnimation = (element, sourceSide = 'right') => {
 
     const rect = element.getBoundingClientRect();
     const fromRight = sourceSide === 'right';
+    const centerX = (rect.left + (rect.width / 2)) / window.innerWidth;
+    const titleY = (rect.top + (rect.height * 0.42)) / window.innerHeight;
     window.confetti({
-        particleCount: 20,
-        angle: fromRight ? 135 : 45,
-        spread: 54,
-        startVelocity: 21,
-        ticks: 58,
-        gravity: 0.76,
-        scalar: 0.62,
+        particleCount: 38,
+        angle: fromRight ? 155 : 25,
+        spread: 92,
+        startVelocity: 26,
+        ticks: 78,
+        gravity: 0.92,
+        scalar: 0.58,
+        shapes: ['star'],
         origin: {
-            x: Math.max(0.08, Math.min(0.92, (fromRight ? rect.right - 12 : rect.left + 12) / window.innerWidth)),
-            y: Math.max(0.12, Math.min(0.9, (rect.bottom - 10) / window.innerHeight)),
+            x: Math.max(0.05, Math.min(0.95, (fromRight ? rect.right - 6 : rect.left + 6) / window.innerWidth)),
+            y: Math.max(0.1, Math.min(0.88, titleY)),
         },
         zIndex: zIndex,
-        colors: ['#b8976a', '#d6bd91', '#eadfc9', '#9f7b4d'],
+        colors: ['#b8976a', '#d6bd91', '#eadfc9', '#f8f0dc', '#9f7b4d'],
+        disableForReducedMotion: true,
     });
+
+    window.setTimeout(() => {
+        window.confetti({
+            particleCount: 16,
+            angle: 270,
+            spread: 116,
+            startVelocity: 11,
+            ticks: 62,
+            gravity: 1.08,
+            scalar: 0.46,
+            shapes: ['star'],
+            origin: {
+                x: Math.max(0.08, Math.min(0.92, centerX)),
+                y: Math.max(0.1, Math.min(0.88, titleY)),
+            },
+            zIndex: zIndex,
+            colors: ['#d6bd91', '#eadfc9', '#fff8e8'],
+            disableForReducedMotion: true,
+        });
+    }, 140);
 };
 
 /**
