@@ -158,16 +158,23 @@ export const guest = (() => {
      * @returns {void}
      */
     const open = async (button) => {
+        button.classList.add('is-opening');
         button.disabled = true;
-        await openingChime.play();
+        const chime = openingChime.play();
+        await new Promise((resolve) => util.timeOut(resolve, 380));
         document.body.scrollIntoView({ behavior: 'instant' });
 
         const welcome = document.getElementById('welcome');
         const root = document.getElementById('root');
 
-        await util.changeOpacity(welcome, false);
-        welcome.remove();
+        welcome.classList.add('is-revealing');
+        root.classList.add('is-opening');
         root.classList.remove('opacity-0');
+        await Promise.all([
+            chime,
+            util.changeOpacity(welcome, false, 0.06),
+        ]);
+        welcome.remove();
         document.getElementById('button-wedding-day')?.classList.remove('d-none');
 
         if (theme.isAutoMode()) {

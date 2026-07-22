@@ -619,6 +619,16 @@ html[data-bs-theme="dark"] .hero-info-zh {
     background:
         radial-gradient(circle at 50% 42%, rgb(255 255 255 / 70%), transparent 48%),
         #f7f1e6;
+    transform: translateY(0);
+}
+
+.invitation-cover.is-revealing {
+    transform: translateY(-10px);
+    transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#root.is-opening {
+    animation: hero-opening 270ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .invitation-cover::before {
@@ -698,22 +708,149 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .cover-open-button {
-    padding: 0.7rem 1.6rem;
-    border: 1px solid #b8976a;
-    color: #fff;
-    background-color: #a98556;
-    box-shadow: 0 0.5rem 1.5rem rgb(78 61 40 / 15%);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-width: 13.5rem;
+    padding: 0.95rem 0.25rem;
+    border: 0;
+    border-radius: 0;
+    color: #514b45;
+    background: transparent;
+    box-shadow: none;
     font-size: var(--type-cover-action-size);
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-control);
     letter-spacing: var(--type-tracking-md);
 }
 
-.cover-open-button:hover,
-.cover-open-button:focus-visible {
-    border-color: #8d6d45;
-    color: #fff;
-    background-color: #8d6d45;
+.cover-open-button::before,
+.cover-open-button::after {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background:
+        linear-gradient(rgb(184 151 106 / 82%), rgb(184 151 106 / 82%)) left center / 0% 100% no-repeat,
+        linear-gradient(rgb(184 151 106 / 36%), rgb(184 151 106 / 36%)) left center / 100% 100% no-repeat;
+    content: '';
+    transform-origin: left center;
+}
+
+.cover-open-button::before {
+    top: 0;
+}
+
+.cover-open-button::after {
+    bottom: 0;
+}
+
+.cover-open-button.is-opening,
+.cover-open-button.is-opening:disabled {
+    border: 0;
+    color: #8f6d42;
+    background:
+        linear-gradient(
+            90deg,
+            rgb(184 151 106 / 7%) 0%,
+            rgb(184 151 106 / 8%) 66%,
+            rgb(184 151 106 / 18%) 82%,
+            rgb(159 124 77 / 36%) 96%,
+            rgb(159 124 77 / 38%) 100%
+        ) left center / 0% 100% no-repeat;
+    box-shadow: none;
+    opacity: 1;
+    animation:
+        cover-button-exit 650ms cubic-bezier(0.22, 1, 0.36, 1) both,
+        cover-button-gold-wash 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cover-open-button.is-opening::before,
+.cover-open-button.is-opening::after {
+    animation: cover-button-line-expand 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cover-button-gold-wash {
+    0%,
+    5% {
+        color: #514b45;
+        background-size: 0% 100%;
+    }
+
+    43% {
+        color: #413a33;
+        background-size: 100% 100%;
+    }
+
+    100% {
+        color: #3d372f;
+        background-size: 100% 100%;
+    }
+}
+
+@keyframes cover-button-line-expand {
+    0%,
+    8% {
+        background-size: 0% 100%, 100% 100%;
+    }
+
+    38% {
+        background-size: 100% 100%, 100% 100%;
+    }
+
+    100% {
+        background-size: 100% 100%, 100% 100%;
+    }
+}
+
+@keyframes cover-button-exit {
+    0%,
+    8% {
+        opacity: 0.85;
+        transform: translateY(2px);
+    }
+
+    31% {
+        opacity: 0.9;
+        transform: translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    58% {
+        opacity: 0.96;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes hero-opening {
+    0% {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cover-open-button:not(.is-opening):hover,
+.cover-open-button:not(.is-opening):focus-visible {
+    border: 0;
+    color: #8f6d42;
+    background: transparent;
+    box-shadow: none;
 }
 
 .story-section {
@@ -2292,6 +2429,24 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .invitation-cover.is-revealing {
+        transform: none;
+        transition: none;
+    }
+
+    #root.is-opening {
+        animation: none;
+    }
+
+    .cover-open-button.is-opening,
+    .cover-open-button.is-opening:disabled,
+    .cover-open-button.is-opening::before,
+    .cover-open-button.is-opening::after {
+        animation: none;
+        opacity: 0.62;
+        transform: scaleX(1);
+    }
+
     .calendar-shortcut.is-guide-active::before,
     .calendar-shortcut.is-guide-active::after {
         animation: none;

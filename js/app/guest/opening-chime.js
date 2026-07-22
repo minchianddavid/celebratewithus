@@ -54,7 +54,7 @@ export const openingChime = (() => {
 
             const playPromise = audio.play();
             if (playPromise) {
-                playPromise.catch(finish);
+                playPromise.catch(() => {});
             }
         });
     };
