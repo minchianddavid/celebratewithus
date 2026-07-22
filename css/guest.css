@@ -1911,25 +1911,75 @@ html[data-bs-theme="dark"] .rsvp-submit-en {
 }
 
 .rsvp-submit-button {
-    display: flex;
+    position: relative;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
     justify-self: center;
+    justify-content: center;
     width: min(220px, 68vw);
-    min-height: 48px;
-    padding: 6px 24px;
-    border: 1px solid rgb(184 151 106 / 58%);
-    background-color: rgb(255 255 255 / 24%);
-    color: var(--bs-body-color);
+    min-height: 0;
+    padding: 0.78rem 0.25rem;
+    border: 0;
+    border-radius: 0;
+    color: #514b45;
+    background: transparent;
     box-shadow: none;
-    transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+    transition: color 160ms ease;
 }
 
-.rsvp-submit-button:hover,
-.rsvp-submit-button:focus-visible {
-    border-color: rgb(184 151 106 / 82%);
-    background-color: rgb(184 151 106 / 10%);
+.rsvp-submit-button::before,
+.rsvp-submit-button::after {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background:
+        linear-gradient(rgb(184 151 106 / 82%), rgb(184 151 106 / 82%)) left center / 0% 100% no-repeat,
+        linear-gradient(rgb(184 151 106 / 36%), rgb(184 151 106 / 36%)) left center / 100% 100% no-repeat;
+    content: '';
+    transform-origin: left center;
+}
+
+.rsvp-submit-button::before {
+    top: 0;
+}
+
+.rsvp-submit-button::after {
+    bottom: 0;
+}
+
+.rsvp-submit-button:not(.is-opening):hover,
+.rsvp-submit-button:not(.is-opening):focus-visible {
+    border: 0;
     color: #8f6d42;
+    background: transparent;
+    box-shadow: none;
+}
+
+.rsvp-submit-button.is-opening,
+.rsvp-submit-button.is-opening:disabled {
+    border: 0;
+    color: #8f6d42;
+    background:
+        linear-gradient(
+            90deg,
+            rgb(184 151 106 / 7%) 0%,
+            rgb(184 151 106 / 8%) 66%,
+            rgb(184 151 106 / 18%) 82%,
+            rgb(159 124 77 / 36%) 96%,
+            rgb(159 124 77 / 38%) 100%
+        ) left center / 0% 100% no-repeat;
+    box-shadow: none;
+    opacity: 1;
+    animation:
+        cover-button-exit 650ms cubic-bezier(0.22, 1, 0.36, 1) both,
+        cover-button-gold-wash 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rsvp-submit-button.is-opening::before,
+.rsvp-submit-button.is-opening::after {
+    animation: cover-button-line-expand 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .rsvp-submit-en,
@@ -1957,8 +2007,8 @@ html[data-bs-theme="dark"] .rsvp-submit-en {
 }
 
 html[data-bs-theme="dark"] .rsvp-submit-button {
-    border-color: rgb(216 189 147 / 48%);
-    background-color: rgb(255 255 255 / 4%);
+    border: 0;
+    background: transparent;
 }
 
 .rsvp-party-options {
@@ -2695,7 +2745,11 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
     .cover-open-button.is-opening,
     .cover-open-button.is-opening:disabled,
     .cover-open-button.is-opening::before,
-    .cover-open-button.is-opening::after {
+    .cover-open-button.is-opening::after,
+    .rsvp-submit-button.is-opening,
+    .rsvp-submit-button.is-opening:disabled,
+    .rsvp-submit-button.is-opening::before,
+    .rsvp-submit-button.is-opening::after {
         animation: none;
         opacity: 0.62;
         transform: scaleX(1);
@@ -2911,6 +2965,17 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
     font-weight: var(--type-weight-medium);
     line-height: var(--type-line-body);
     letter-spacing: var(--type-tracking-3xl);
+}
+
+.rsvp-email-delivery-note {
+    max-width: 18rem;
+    margin: 1rem auto 0;
+    color: #8a5f45;
+    font-family: var(--font-sans-zh);
+    font-size: 12px;
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-relaxed);
+    letter-spacing: var(--type-tracking-sm);
 }
 
 .rsvp-modal-signature {

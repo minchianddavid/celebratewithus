@@ -150,13 +150,19 @@ export const rsvp = (() => {
             }
         }
 
-        // Disable form
-        const btn = util.disableButton(button, 'Sending... 送出中...', true);
-        [name, presence, ...attendanceOptions, guestCount, ...partyOptions, invitationType, ...invitationOptions, email, address, message].forEach((el) => {
+        // Match the Cover action: gold wash first, then transition into the sending state.
+        const formControls = [name, presence, ...attendanceOptions, guestCount, ...partyOptions, invitationType, ...invitationOptions, email, address, message];
+        button.classList.add('is-opening');
+        button.disabled = true;
+        formControls.forEach((el) => {
             if (el) {
                 el.disabled = true;
             }
         });
+        const actionDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 650;
+        await new Promise((resolve) => window.setTimeout(resolve, actionDuration));
+        button.classList.remove('is-opening');
+        const btn = util.disableButton(button, 'Sending... 送出中...', true);
 
         try {
             // Get reCAPTCHA token if available
@@ -192,6 +198,15 @@ export const rsvp = (() => {
                 information.set('presence', isAttending);
                 information.set('submitted', true);
 
+                const emailDeliveryNote = document.getElementById('rsvp-email-delivery-note');
+                const expectedConfirmation = isAttending && Boolean(email?.value.trim());
+                const confirmationFailed = expectedConfirmation && result.email_sent !== true;
+
+                emailDeliveryNote?.classList.toggle('d-none', !confirmationFailed);
+                if (confirmationFailed) {
+                    console.warn(result.email_error || 'RSVP saved, but the confirmation email was not sent.');
+                }
+
                 // Toggle modal content based on attendance
                 document.getElementById('modal-attending').classList.toggle('d-none', !isAttending);
                 document.getElementById('modal-declined').classList.toggle('d-none', isAttending);
@@ -210,7 +225,7 @@ export const rsvp = (() => {
 
         // Re-enable form
         btn.restore();
-        [name, presence, ...attendanceOptions, guestCount, ...partyOptions, invitationType, ...invitationOptions, email, address, message].forEach((el) => {
+        formControls.forEach((el) => {
             if (el) {
                 el.disabled = false;
             }
