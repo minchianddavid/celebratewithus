@@ -59,7 +59,7 @@
 
     /* Cover and hero */
     --type-cover-name-size: 2.1rem;
-    --type-cover-name-zh-size: var(--type-hero-name-zh-size);
+    --type-cover-name-zh-size: 1.125rem;
     --type-cover-copy-size: 0.94rem;
     --type-cover-action-size: 0.9rem;
     --type-desktop-title-size: 2rem;
@@ -216,8 +216,8 @@ body {
     padding: 0;
     margin: 0.7rem 0 0;
     color: var(--bs-secondary-color);
-    font-size: var(--type-section-subtitle-size);
-    font-weight: var(--type-section-subtitle-weight);
+    font-size: clamp(18px, 4.8vw, 20px);
+    font-weight: var(--type-weight-medium);
     line-height: var(--type-section-subtitle-line);
     letter-spacing: var(--type-section-subtitle-tracking);
     transform: translateX(0.5em);
@@ -509,6 +509,15 @@ html[data-bs-theme="dark"] .hero-info-zh {
     letter-spacing: var(--type-tracking-xl);
 }
 
+.wedding-day-separator {
+    margin: 0 0.25em;
+}
+
+.wedding-day-zh {
+    font-family: var(--font-sans-zh);
+    font-size: var(--type-schedule-label-zh-size);
+}
+
 .wedding-countdown {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -668,9 +677,9 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .cover-couple-name-zh {
     margin: 0.25rem 0 1.75rem;
-    color: rgb(41 38 33 / 58%);
+    color: #292621;
     font-size: var(--type-cover-name-zh-size);
-    font-weight: var(--type-weight-regular);
+    font-weight: var(--type-weight-medium);
     letter-spacing: var(--type-tracking-xl);
 }
 
@@ -3483,9 +3492,9 @@ html[data-bs-theme="dark"] .bg-white-black {
         --type-countdown-label-size: 12px;
         --type-schedule-time-size: 18px;
         --type-schedule-label-en-size: 13px;
-        --type-schedule-label-zh-size: 14px;
+        --type-schedule-label-zh-size: 16px;
         --type-venue-en-size: 15px;
-        --type-venue-zh-size: 14px;
+        --type-venue-zh-size: 16px;
         --space-title-date: 30px;
         --space-date-countdown: 26px;
         --space-countdown-schedule: 34px;
@@ -3533,6 +3542,10 @@ html[data-bs-theme="dark"] .bg-white-black {
     .wedding-venue-zh {
         margin-top: 6px;
         line-height: var(--type-line-relaxed);
+    }
+
+    .wedding-day-credit-zh {
+        font-size: 16px;
     }
 
     .wedding-guide-section {
