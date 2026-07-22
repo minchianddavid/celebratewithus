@@ -378,8 +378,8 @@ export const guest = (() => {
             let locked = false;
             let halfTurns = 0;
             const isHeroSpin = spin.classList.contains('hero-hidden-side-spin');
-            const halfTurnsPerClick = isHeroSpin ? 13 : 1;
-            const animationDuration = isHeroSpin ? 2920 : 960;
+            const halfTurnsPerClick = isHeroSpin ? 13 : 7;
+            const animationDuration = isHeroSpin ? 2920 : 1900;
 
             spin.addEventListener('click', () => {
                 if (locked) {
@@ -395,6 +395,19 @@ export const guest = (() => {
                 spin.classList.add('is-animating');
                 spin.setAttribute('aria-pressed', String(isFlipped));
                 spin.setAttribute('aria-busy', 'true');
+
+                if (isHeroSpin && !reducedMotion) {
+                    window.setTimeout(() => {
+                        if (spin.classList.contains('is-animating')) {
+                            confetti.heroSpinSparkleAnimation(spin);
+                        }
+                    }, 300);
+                    window.setTimeout(() => {
+                        if (spin.classList.contains('is-animating')) {
+                            confetti.heroSpinSparkleAnimation(spin);
+                        }
+                    }, Math.round(animationDuration * 0.3));
+                }
 
                 const unlock = () => {
                     locked = false;

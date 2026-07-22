@@ -252,3 +252,31 @@ export const loveSparkleAnimation = (element) => {
         colors: ['#b8976a', '#d6bd91', '#f1e8d5', '#9f7b4d'],
     });
 };
+
+/**
+ * A wider gold-star burst for the Hero photo spin.
+ * @param {HTMLElement} element
+ * @returns {void}
+ */
+export const heroSpinSparkleAnimation = (element) => {
+    if (!window.confetti) {
+        return;
+    }
+
+    const rect = element.getBoundingClientRect();
+    window.confetti({
+        particleCount: 28,
+        spread: 100,
+        startVelocity: 22,
+        ticks: 58,
+        gravity: 0.62,
+        scalar: 0.62,
+        shapes: ['star'],
+        origin: {
+            x: (rect.left + (rect.width / 2)) / window.innerWidth,
+            y: (rect.top + (rect.height / 2)) / window.innerHeight,
+        },
+        zIndex: zIndex,
+        colors: ['#b8976a', '#d6bd91', '#f1e8d5', '#9f7b4d'],
+    });
+};
