@@ -278,29 +278,29 @@ export const loveSparkleAnimation = (element) => {
 };
 
 /**
- * A wider gold-star burst for the Hero photo spin.
+ * A wide burst of fine champagne-gold dust for the Hero photo spin.
  * @param {HTMLElement} element
  * @returns {void}
  */
-export const heroSpinSparkleAnimation = (element) => {
+export const heroSpinGoldDustAnimation = (element) => {
     if (!window.confetti) {
         return;
     }
 
     const rect = element.getBoundingClientRect();
     window.confetti({
-        particleCount: 28,
-        spread: 100,
-        startVelocity: 22,
-        ticks: 82,
-        gravity: 0.52,
-        scalar: 0.62,
-        shapes: ['star'],
+        particleCount: 46,
+        spread: 112,
+        startVelocity: 19,
+        ticks: 92,
+        gravity: 0.4,
+        scalar: 0.34,
+        shapes: ['circle'],
         origin: {
             x: (rect.left + (rect.width / 2)) / window.innerWidth,
             y: (rect.top + (rect.height / 2)) / window.innerHeight,
         },
         zIndex: zIndex,
-        colors: ['#d7ad62', '#f0d38f', '#fff8df', '#f8edd0'],
+        colors: ['#b99052', '#d7ad62', '#f0d38f', '#fff8df', '#f8edd0'],
     });
 };

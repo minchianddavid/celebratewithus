@@ -360,6 +360,11 @@ export const guest = (() => {
     const hiddenSideSpinInteraction = () => {
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const hintTargets = [];
+        const isHintVisible = (spin) => {
+            const rect = spin.getBoundingClientRect();
+            const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+            return visibleHeight / rect.height >= 0.7;
+        };
         const scheduleHint = (spin, isVisible) => {
             const hintState = spin.hiddenSideHintState;
             if (!hintState || hintState.played || hintState.interacted) {
@@ -375,7 +380,9 @@ export const guest = (() => {
                 hintState.timer = window.setTimeout(() => {
                     if (!hintState.interacted && !spin.classList.contains('is-animating')) {
                         hintState.played = true;
-                        hintObserver?.unobserve(spin);
+                        if (!hintState.recurring) {
+                            hintObserver?.unobserve(spin);
+                        }
                         spin.classList.add('is-hinting');
                     }
                 }, hintState.delay);
@@ -395,19 +402,28 @@ export const guest = (() => {
             const isHeroSpin = spin.classList.contains('hero-hidden-side-spin');
             const halfTurnsPerClick = isHeroSpin ? 13 : 7;
             const animationDuration = isHeroSpin ? 2920 : 1900;
-            const hintState = { interacted: false, played: false, timer: null, delay: isHeroSpin ? 1000 : 2000 };
+            const hintState = {
+                interacted: false,
+                played: false,
+                recurring: isHeroSpin,
+                timer: null,
+                delay: 2000,
+            };
 
             if (!reducedMotion) {
                 spin.hiddenSideHintState = hintState;
                 hintTargets.push(spin);
+                hintObserver?.observe(spin);
                 if (isHeroSpin) {
                     document.addEventListener('undangan.open', () => scheduleHint(spin, true), { once: true });
-                } else {
-                    hintObserver?.observe(spin);
                 }
                 spin.addEventListener('animationend', (event) => {
-                    if (event.animationName === 'hidden-side-affordance') {
+                    if (event.animationName === 'hidden-side-affordance' || event.animationName === 'hero-hidden-side-affordance') {
                         spin.classList.remove('is-hinting');
+                        if (hintState.recurring && !hintState.interacted) {
+                            hintState.played = false;
+                            scheduleHint(spin, isHintVisible(spin));
+                        }
                     }
                 });
             }
@@ -436,12 +452,12 @@ export const guest = (() => {
                 if (isHeroSpin && !reducedMotion) {
                     window.setTimeout(() => {
                         if (spin.classList.contains('is-animating')) {
-                            confetti.heroSpinSparkleAnimation(spin);
+                            confetti.heroSpinGoldDustAnimation(spin);
                         }
                     }, 300);
                     window.setTimeout(() => {
                         if (spin.classList.contains('is-animating')) {
-                            confetti.heroSpinSparkleAnimation(spin);
+                            confetti.heroSpinGoldDustAnimation(spin);
                         }
                     }, Math.round(animationDuration * 0.393));
                 }
@@ -461,9 +477,7 @@ export const guest = (() => {
             const checkHintVisibility = () => {
                 hintFrame = null;
                 hintTargets.forEach((spin) => {
-                    const rect = spin.getBoundingClientRect();
-                    const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
-                    scheduleHint(spin, visibleHeight / rect.height >= 0.7);
+                    scheduleHint(spin, isHintVisible(spin));
                 });
             };
             const requestHintCheck = () => {

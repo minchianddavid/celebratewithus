@@ -1426,6 +1426,10 @@ html[data-bs-theme="dark"] .hero-info-zh {
     will-change: transform;
 }
 
+.hero-hidden-side-spin.is-hinting .hidden-side-spin-inner {
+    animation: hero-hidden-side-affordance 1350ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 .hidden-side-spin.is-hinting::after {
     z-index: 2;
     top: 50%;
@@ -1435,13 +1439,24 @@ html[data-bs-theme="dark"] .hero-info-zh {
     inset: 50% auto auto 50%;
     background: #e4c98f;
     box-shadow:
-        -5.2rem -1.8rem 0 #d5ad63,
-        -3.8rem 3.9rem 0 #f2dfb5,
-        -0.8rem -5.5rem 0 #e8ca88,
-        2.9rem -4.6rem 0 #f6e8c8,
-        4.9rem 2.6rem 0 #cfa45c,
-        1.7rem 5.1rem 0 #ecd49e;
+        -6.3rem -2.1rem 0 #d5ad63,
+        -4.9rem 5.5rem 0 #f2dfb5,
+        -0.8rem -6.5rem 0 #e8ca88,
+        4.4rem -5.3rem 0 #f6e8c8,
+        6.3rem 3.2rem 0 #cfa45c,
+        2.2rem 6.4rem 0 #ecd49e;
     animation: hidden-side-hint-gold-dust 1200ms ease-out both;
+}
+
+.hero-hidden-side-spin.is-hinting::after {
+    animation-duration: 1350ms;
+    box-shadow:
+        -7.3rem -2.4rem 0 #d5ad63,
+        -5.8rem 6.5rem 0 #f2dfb5,
+        -1rem -7.6rem 0 #e8ca88,
+        5.4rem -6.4rem 0 #f6e8c8,
+        7.4rem 3.8rem 0 #cfa45c,
+        2.8rem 7.4rem 0 #ecd49e;
 }
 
 .hidden-side-spin.is-animating::before {
@@ -1578,18 +1593,49 @@ html[data-bs-theme="dark"] .hero-info-zh {
     }
 }
 
+@keyframes hero-hidden-side-affordance {
+    0%, 100% {
+        transform: rotateY(var(--hidden-side-spin-rotation, 0deg));
+    }
+
+    30% {
+        transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) + 24deg));
+    }
+
+    58% {
+        transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) - 14deg));
+    }
+
+    80% {
+        transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) + 6deg));
+    }
+}
+
 @keyframes hidden-side-hint-gold-dust {
     0% {
         opacity: 0;
+        filter: brightness(1) drop-shadow(0 0 0 rgb(232 202 136 / 0%));
         transform: translate(-50%, -50%) scale(0.72);
     }
 
     24% {
-        opacity: 0.9;
+        opacity: 0.95;
+        filter: brightness(1.38) drop-shadow(0 0 5px rgb(232 202 136 / 82%));
+    }
+
+    55% {
+        opacity: 0.72;
+        filter: brightness(1.08) drop-shadow(0 0 3px rgb(232 202 136 / 44%));
+    }
+
+    76% {
+        opacity: 1;
+        filter: brightness(1.5) drop-shadow(0 0 6px rgb(244 221 170 / 86%));
     }
 
     100% {
         opacity: 0;
+        filter: brightness(1.1) drop-shadow(0 0 2px rgb(232 202 136 / 0%));
         transform: translate(-50%, -58%) scale(1.08);
     }
 }
