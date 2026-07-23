@@ -182,18 +182,26 @@ export const guest = (() => {
         button.classList.add('is-opening');
         button.disabled = true;
         const chime = openingChime.play();
-        await new Promise((resolve) => util.timeOut(resolve, 420));
+        await new Promise((resolve) => util.timeOut(resolve, 140));
         document.body.scrollIntoView({ behavior: 'instant' });
 
         const welcome = document.getElementById('welcome');
         const root = document.getElementById('root');
+        const welcomeRect = welcome.getBoundingClientRect();
+        const buttonRect = button.getBoundingClientRect();
+        const seamY = buttonRect.top + (buttonRect.height / 2) - welcomeRect.top;
+        welcome.style.setProperty('--cover-seam-y', `${seamY}px`);
 
         welcome.classList.add('is-revealing');
         root.classList.add('is-opening');
         root.classList.remove('opacity-0');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const coverTransition = reducedMotion
+            ? util.changeOpacity(welcome, false, 0.08)
+            : new Promise((resolve) => util.timeOut(resolve, 600));
         await Promise.all([
             chime,
-            util.changeOpacity(welcome, false, 0.06),
+            coverTransition,
         ]);
         welcome.remove();
         document.getElementById('button-wedding-day')?.classList.remove('d-none');
@@ -360,6 +368,9 @@ export const guest = (() => {
 
             window.clearTimeout(hintState.timer);
             hintState.timer = null;
+            if (spin.classList.contains('hero-hidden-side-spin') && document.getElementById('welcome')) {
+                return;
+            }
             if (isVisible) {
                 hintState.timer = window.setTimeout(() => {
                     if (!hintState.interacted && !spin.classList.contains('is-animating')) {
@@ -367,7 +378,7 @@ export const guest = (() => {
                         hintObserver?.unobserve(spin);
                         spin.classList.add('is-hinting');
                     }
-                }, 2000);
+                }, hintState.delay);
             }
         };
         const hintObserver = reducedMotion || !('IntersectionObserver' in window)
@@ -384,12 +395,16 @@ export const guest = (() => {
             const isHeroSpin = spin.classList.contains('hero-hidden-side-spin');
             const halfTurnsPerClick = isHeroSpin ? 13 : 7;
             const animationDuration = isHeroSpin ? 2920 : 1900;
-            const hintState = { interacted: false, played: false, timer: null };
+            const hintState = { interacted: false, played: false, timer: null, delay: isHeroSpin ? 1000 : 2000 };
 
-            if (!isHeroSpin && !reducedMotion) {
+            if (!reducedMotion) {
                 spin.hiddenSideHintState = hintState;
                 hintTargets.push(spin);
-                hintObserver?.observe(spin);
+                if (isHeroSpin) {
+                    document.addEventListener('undangan.open', () => scheduleHint(spin, true), { once: true });
+                } else {
+                    hintObserver?.observe(spin);
+                }
                 spin.addEventListener('animationend', (event) => {
                     if (event.animationName === 'hidden-side-affordance') {
                         spin.classList.remove('is-hinting');
@@ -404,7 +419,7 @@ export const guest = (() => {
 
                 hintState.interacted = true;
                 window.clearTimeout(hintState.timer);
-                if (!isHeroSpin && hintObserver) {
+                if (hintObserver) {
                     hintObserver.unobserve(spin);
                 }
                 spin.classList.remove('is-hinting');
