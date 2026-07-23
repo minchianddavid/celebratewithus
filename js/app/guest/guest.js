@@ -179,6 +179,10 @@ export const guest = (() => {
      * @returns {void}
      */
     const open = async (button) => {
+        if (button.disabled) {
+            return;
+        }
+
         button.classList.add('is-opening');
         button.disabled = true;
         const chime = openingChime.play();
@@ -216,6 +220,61 @@ export const guest = (() => {
         document.dispatchEvent(new Event('undangan.open'));
         window.requestAnimationFrame(() => {
             window.requestAnimationFrame(() => confetti.basicAnimation());
+        });
+    };
+
+    /**
+     * Let a deliberate tap anywhere on the Cover open the invitation while
+     * preserving vertical swipe gestures and the accessible CTA button.
+     * @returns {void}
+     */
+    const coverTapInteraction = () => {
+        const welcome = document.getElementById('welcome');
+        const button = welcome?.querySelector('.cover-open-button');
+        if (!welcome || !button) {
+            return;
+        }
+
+        let pointerId = null;
+        let startX = 0;
+        let startY = 0;
+        let moved = false;
+        const movementThreshold = 10;
+
+        welcome.addEventListener('pointerdown', (event) => {
+            if (!event.isPrimary || event.button !== 0 || event.target.closest('.cover-open-button')) {
+                return;
+            }
+
+            pointerId = event.pointerId;
+            startX = event.clientX;
+            startY = event.clientY;
+            moved = false;
+        });
+
+        welcome.addEventListener('pointermove', (event) => {
+            if (event.pointerId !== pointerId) {
+                return;
+            }
+
+            const distance = Math.hypot(event.clientX - startX, event.clientY - startY);
+            moved ||= distance > movementThreshold;
+        });
+
+        welcome.addEventListener('pointerup', (event) => {
+            if (event.pointerId !== pointerId) {
+                return;
+            }
+
+            pointerId = null;
+            if (!moved) {
+                open(button);
+            }
+        });
+
+        welcome.addEventListener('pointercancel', () => {
+            pointerId = null;
+            moved = false;
         });
     };
 
@@ -344,26 +403,71 @@ export const guest = (() => {
             return;
         }
 
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let interacted = false;
+        let visible = false;
+        let hintCount = 0;
+        let hintTimer = null;
+        const scheduleHint = (delay) => {
+            window.clearTimeout(hintTimer);
+            if (reducedMotion || interacted || !visible || hintCount >= 2) {
+                return;
+            }
+
+            hintTimer = window.setTimeout(() => {
+                if (interacted || !visible) {
+                    return;
+                }
+
+                hintCount += 1;
+                heart.classList.remove('is-hinting');
+                void heart.offsetWidth;
+                heart.classList.add('is-hinting');
+                confetti.loveSparkleAnimation(heart, true);
+                scheduleHint(4000);
+            }, delay);
+        };
+        const hintObserver = reducedMotion || !('IntersectionObserver' in window)
+            ? null
+            : new IntersectionObserver(([entry]) => {
+                visible = entry.isIntersecting && entry.intersectionRatio >= 0.7;
+                if (visible) {
+                    scheduleHint(1200);
+                } else {
+                    window.clearTimeout(hintTimer);
+                }
+            }, { threshold: [0, 0.7] });
+
+        hintObserver?.observe(heart);
+
         heart.addEventListener('click', () => {
+            interacted = true;
+            window.clearTimeout(hintTimer);
+            hintObserver?.disconnect();
+            heart.classList.remove('is-hinting');
             heart.classList.remove('is-beating');
             void heart.offsetWidth;
             heart.classList.add('is-beating');
 
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            if (!reducedMotion) {
                 confetti.loveSparkleAnimation(heart);
             }
         });
-        heart.addEventListener('animationend', () => heart.classList.remove('is-beating'));
+        heart.addEventListener('animationend', () => {
+            heart.classList.remove('is-beating', 'is-hinting');
+        });
     };
 
     /** @returns {void} */
     const hiddenSideSpinInteraction = () => {
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const hintTargets = [];
+        let hintObserver = null;
+        const getHintThreshold = (spin) => spin.classList.contains('hero-hidden-side-spin') ? 0.7 : 0.5;
         const isHintVisible = (spin) => {
             const rect = spin.getBoundingClientRect();
             const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
-            return visibleHeight / rect.height >= 0.7;
+            return visibleHeight / rect.height >= getHintThreshold(spin);
         };
         const scheduleHint = (spin, isVisible) => {
             const hintState = spin.hiddenSideHintState;
@@ -388,13 +492,16 @@ export const guest = (() => {
                 }, hintState.delay);
             }
         };
-        const hintObserver = reducedMotion || !('IntersectionObserver' in window)
+        hintObserver = reducedMotion || !('IntersectionObserver' in window)
             ? null
             : new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
-                    scheduleHint(entry.target, entry.isIntersecting && entry.intersectionRatio >= 0.7);
+                    scheduleHint(
+                        entry.target,
+                        entry.isIntersecting && entry.intersectionRatio >= getHintThreshold(entry.target),
+                    );
                 });
-            }, { threshold: [0, 0.7] });
+            }, { threshold: [0, 0.5, 0.7] });
 
         document.querySelectorAll('.hidden-side-spin').forEach((spin) => {
             let locked = false;
@@ -763,6 +870,7 @@ export const guest = (() => {
         journeyAccordionReveal();
         confetti.prepareBasicAnimation();
         openingChime.prepare();
+        coverTapInteraction();
 
         // Don't restore previous attendance — always start fresh at "Select"
 

@@ -252,29 +252,34 @@ export const rsvpPetalAnimation = () => {
 
 /**
  * @param {HTMLElement} element
+ * @param {boolean} subtle
  * @returns {void}
  */
-export const loveSparkleAnimation = (element) => {
+export const loveSparkleAnimation = (element, subtle = false) => {
     if (!window.confetti) {
         return;
     }
 
     const rect = element.getBoundingClientRect();
-    window.confetti({
-        particleCount: 14,
-        spread: 68,
-        startVelocity: 18,
-        ticks: 55,
-        gravity: 0.65,
-        scalar: 0.62,
+    const origin = {
+        x: (rect.left + (rect.width / 2)) / window.innerWidth,
+        y: (rect.top + (rect.height / 2)) / window.innerHeight,
+    };
+    const burst = {
+        particleCount: subtle ? 3 : 7,
+        spread: subtle ? 24 : 34,
+        startVelocity: subtle ? 10 : 17,
+        ticks: subtle ? 42 : 58,
+        gravity: subtle ? 0.48 : 0.62,
+        scalar: subtle ? 0.44 : 0.6,
         shapes: ['star'],
-        origin: {
-            x: (rect.left + (rect.width / 2)) / window.innerWidth,
-            y: (rect.top + (rect.height / 2)) / window.innerHeight,
-        },
+        origin: origin,
         zIndex: zIndex,
         colors: ['#b8976a', '#d6bd91', '#f1e8d5', '#9f7b4d'],
-    });
+    };
+
+    window.confetti({ ...burst, angle: 155 });
+    window.confetti({ ...burst, angle: 25 });
 };
 
 /**

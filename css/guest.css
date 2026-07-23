@@ -713,6 +713,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .invitation-cover {
     isolation: isolate;
+    cursor: pointer;
     color: #292621;
     background:
         radial-gradient(circle at 50% 42%, rgb(255 255 255 / 70%), transparent 48%),
@@ -1054,7 +1055,21 @@ html[data-bs-theme="dark"] .hero-info-zh {
 .cover-open-label {
     position: relative;
     z-index: 1;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.18rem;
+    align-items: center;
     animation: cover-cta-shimmer 2.6s ease-in-out infinite;
+}
+
+.cover-open-label-zh {
+    color: inherit;
+    font-family: var(--font-sans-zh);
+    font-size: 0.72rem;
+    font-weight: var(--type-weight-regular);
+    line-height: 1.25;
+    letter-spacing: 0.16em;
+    opacity: 0.76;
 }
 
 .cover-open-sparkles {
@@ -1599,15 +1614,15 @@ html[data-bs-theme="dark"] .hero-info-zh {
     }
 
     30% {
-        transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) + 24deg));
+        transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) + 16deg));
     }
 
     58% {
-        transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) - 14deg));
+        transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) - 8deg));
     }
 
     80% {
-        transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) + 6deg));
+        transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) + 3deg));
     }
 }
 
@@ -1787,6 +1802,25 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .story-heart-button.is-beating {
     animation: couple-heart-beat 560ms ease-in-out;
+}
+
+.story-heart-button.is-hinting {
+    animation: couple-heart-hint 720ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes couple-heart-hint {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    42% {
+        transform: scale(1.12);
+    }
+
+    68% {
+        transform: scale(0.98);
+    }
 }
 
 @keyframes couple-heart-beat {
@@ -3466,7 +3500,8 @@ html[data-bs-theme="dark"] .rsvp-submit-button.is-sending:disabled {
         transform: scaleX(1);
     }
 
-    .story-heart-button.is-beating {
+    .story-heart-button.is-beating,
+    .story-heart-button.is-hinting {
         animation: none;
     }
 
