@@ -1088,6 +1088,62 @@ html[data-bs-theme="dark"] .hero-info-zh {
     opacity: 0.76;
 }
 
+.cover-audio-notice {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    margin: 1.25rem 0 0;
+    color: #756d63;
+    font-family: var(--font-sans-zh);
+    font-weight: var(--type-weight-regular);
+    line-height: 1.4;
+    opacity: 0.62;
+}
+
+.cover-audio-notes {
+    display: inline-flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.22rem;
+    color: #a1845f;
+    font-family: var(--font-serif);
+    font-size: 0.78rem;
+    line-height: 1;
+}
+
+.cover-audio-notes span {
+    display: block;
+    animation: cover-audio-note-bounce 1.8s ease-in-out infinite;
+}
+
+.cover-audio-notes span:nth-child(2) {
+    animation-delay: 160ms;
+}
+
+.cover-audio-notes span:nth-child(3) {
+    animation-delay: 320ms;
+}
+
+.cover-audio-copy {
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
+}
+
+@keyframes cover-audio-note-bounce {
+    0%,
+    55%,
+    100% {
+        opacity: 0.58;
+        transform: translateY(0);
+    }
+
+    25% {
+        opacity: 1;
+        transform: translateY(-4px);
+    }
+}
+
 .cover-open-sparkles {
     position: absolute;
     inset: 0;
@@ -3452,6 +3508,7 @@ html[data-bs-theme="dark"] .rsvp-submit-button.is-sending:disabled {
     }
 
     .cover-open-label,
+    .cover-audio-notes span,
     .cover-open-sparkles > span {
         animation: none;
     }
