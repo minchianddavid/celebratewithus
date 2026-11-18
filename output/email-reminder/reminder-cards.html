@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wedding Reminder Cards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Sacramento&amp;family=Zen+Maru+Gothic:wght@400&amp;display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: "Zen Maru Gothic Local";
+            src: url("../../assets/fonts/ZenMaruGothic-SoftChinese.woff2") format("woff2");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --paper: #f7f1e6;
+            --paper-light: #fbf7ef;
+            --ink: #292621;
+            --ink-soft: #514a41;
+            --muted: #77716a;
+            --gold: #a1845f;
+            --gold-line: rgb(184 151 106 / 68%);
+            --script: "Sacramento", "Snell Roundhand", cursive;
+            --sans: "Josefin Sans", sans-serif;
+            --sans-zh: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+            --soft-zh: "Zen Maru Gothic Local", "Zen Maru Gothic", "Noto Sans TC", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+            background: #ded8ce;
+        }
+
+        body {
+            display: grid;
+            justify-content: center;
+            gap: 40px;
+            padding: 40px;
+        }
+
+        .reminder-card {
+            position: relative;
+            width: 390px;
+            height: 844px;
+            overflow: hidden;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 50% 39%, rgb(255 255 255 / 76%), transparent 49%),
+                var(--paper);
+            isolation: isolate;
+        }
+
+        .reminder-card::before {
+            position: absolute;
+            z-index: 0;
+            inset: 0;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='390' height='844' viewBox='0 0 390 844' preserveAspectRatio='none'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .18' numOctaves='3' seed='17' result='fibers'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.46 .62' numOctaves='2' seed='29' result='tooth'/%3E%3CfeBlend in='fibers' in2='tooth' mode='soft-light'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='.68'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            content: "";
+            mix-blend-mode: multiply;
+            opacity: .058;
+        }
+
+        .reminder-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 70px 36px 50px;
+            text-align: center;
+        }
+
+        .cover-name {
+            margin: 0;
+            color: var(--gold);
+            font-family: var(--script);
+            font-size: 52px;
+            font-weight: 400;
+            line-height: .95;
+            letter-spacing: .02em;
+            white-space: nowrap;
+        }
+
+        .cover-name-zh {
+            margin: 11px 0 28px;
+            font-family: var(--soft-zh);
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: .13em;
+        }
+
+        .cover-photo-frame {
+            width: 274px;
+            height: 274px;
+            padding: 5px;
+            border: 1px solid var(--gold-line);
+            border-radius: 50%;
+            background: rgb(255 255 255 / 42%);
+        }
+
+        .cover-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+            filter: saturate(.9) contrast(.98);
+        }
+
+        .fine-divider {
+            width: 38px;
+            margin: 31px 0 25px;
+            border-top: 1px solid var(--gold-line);
+            transform: scaleY(.5);
+        }
+
+        .cover-reminder-zh {
+            margin: 0;
+            color: var(--ink-soft);
+            font-family: var(--soft-zh);
+            font-size: 19px;
+            line-height: 1.75;
+            letter-spacing: .08em;
+        }
+
+        .cover-reminder-en {
+            margin: 12px 0 0;
+            color: var(--muted);
+            font-family: var(--sans);
+            font-size: 12px;
+            line-height: 1.5;
+            letter-spacing: .055em;
+            text-transform: uppercase;
+        }
+
+        .cover-date {
+            margin: 24px 0 0;
+            color: var(--ink);
+            font-family: var(--sans);
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: .17em;
+        }
+
+        .cover-venue {
+            margin: 9px 0 0;
+            color: var(--ink-soft);
+            font-family: var(--sans-zh);
+            font-size: 12px;
+            letter-spacing: .09em;
+        }
+
+        .hero-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 54px 34px 48px;
+            text-align: center;
+        }
+
+        .hero-card::after {
+            position: absolute;
+            z-index: 0;
+            inset: 0;
+            background:
+                linear-gradient(to bottom, var(--paper) 0%, transparent 14%),
+                linear-gradient(to top, var(--paper) 0%, transparent 16%);
+            content: "";
+            pointer-events: none;
+        }
+
+        .hero-card > *:not(.hero-background) {
+            z-index: 2;
+        }
+
+        .hero-background {
+            position: absolute;
+            z-index: 0;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 47% center;
+            filter: saturate(.72) sepia(.08);
+            opacity: .16;
+        }
+
+        .hero-announcement-static {
+            margin: 0;
+            color: #817b74;
+            font-family: var(--script);
+            font-size: 48px;
+            font-weight: 400;
+            line-height: 1;
+            transform: translateX(-4px);
+        }
+
+        .hero-announcement-zh-static {
+            margin: 12px 0 0;
+            color: var(--ink);
+            font-family: var(--soft-zh);
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: .08em;
+            transform: translateX(.35em);
+        }
+
+        .hero-photo-static {
+            width: 236px;
+            height: 236px;
+            margin-top: 39px;
+            padding: 4px;
+            border-radius: 50%;
+            background: rgb(248 246 242 / 90%);
+            box-shadow: 0 9px 22px rgb(78 61 40 / 18%);
+        }
+
+        .hero-photo-static img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .hero-name-static {
+            margin: 33px 0 0;
+            color: var(--ink);
+            font-family: var(--script);
+            font-size: 43px;
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: .025em;
+        }
+
+        .hero-name-zh-static {
+            margin: 9px 0 0;
+            color: var(--ink-soft);
+            font-family: var(--soft-zh);
+            font-size: 14px;
+            letter-spacing: .08em;
+        }
+
+        .hero-event-static {
+            margin-top: 32px;
+        }
+
+        .hero-date-static {
+            margin: 0;
+            color: var(--ink);
+            font-family: var(--sans);
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: .025em;
+        }
+
+        .hero-venue-static {
+            margin: 15px 0 0;
+            color: var(--ink-soft);
+            font-family: var(--sans);
+            font-size: 12px;
+            letter-spacing: .03em;
+        }
+
+        .hero-venue-zh-static {
+            margin: 7px 0 0;
+            color: var(--ink-soft);
+            font-family: var(--sans-zh);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: .1em;
+        }
+
+        .info-card {
+            padding: 58px 33px 39px;
+            text-align: center;
+        }
+
+        .info-background {
+            position: absolute;
+            z-index: 0;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 70%;
+            filter: saturate(.75) sepia(.08);
+            opacity: .105;
+        }
+
+        .info-card::after {
+            position: absolute;
+            z-index: 0;
+            inset: 0;
+            background:
+                linear-gradient(to bottom, var(--paper) 0%, transparent 19%),
+                linear-gradient(to top, var(--paper) 0%, transparent 18%);
+            content: "";
+            pointer-events: none;
+        }
+
+        .info-card > *:not(.info-background) {
+            z-index: 2;
+        }
+
+        .info-title {
+            margin: 0;
+            color: var(--gold);
+            font-family: var(--script);
+            font-size: 57px;
+            font-weight: 400;
+            line-height: .9;
+        }
+
+        .info-title-zh {
+            margin: 10px 0 30px;
+            font-family: var(--soft-zh);
+            font-size: 17px;
+            font-weight: 500;
+            letter-spacing: .12em;
+        }
+
+        .info-date {
+            margin: 0;
+            font-family: var(--sans);
+            font-size: 27px;
+            font-weight: 500;
+            letter-spacing: .11em;
+        }
+
+        .info-weekday {
+            margin: 8px 0 27px;
+            color: var(--muted);
+            font-family: var(--sans-zh);
+            font-size: 12px;
+            letter-spacing: .07em;
+        }
+
+        .schedule {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin: 0 0 29px;
+            border-top: 1px solid var(--gold-line);
+            border-bottom: 1px solid var(--gold-line);
+        }
+
+        .schedule-item {
+            padding: 18px 9px 17px;
+        }
+
+        .schedule-item + .schedule-item {
+            border-left: 1px solid var(--gold-line);
+        }
+
+        .schedule-time {
+            margin: 0 0 7px;
+            color: var(--ink);
+            font-family: var(--sans);
+            font-size: 21px;
+            font-weight: 500;
+            letter-spacing: .05em;
+        }
+
+        .schedule-label {
+            margin: 0 0 5px;
+            color: var(--muted);
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+        }
+
+        .schedule-label-zh {
+            margin: 0;
+            color: var(--ink-soft);
+            font-family: var(--sans-zh);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: .1em;
+        }
+
+        .venue-en {
+            margin: 0 0 7px;
+            color: var(--muted);
+            font-family: var(--sans);
+            font-size: 12px;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .venue-zh {
+            margin: 0;
+            color: var(--ink);
+            font-family: var(--sans-zh);
+            font-size: 19px;
+            font-weight: 500;
+            letter-spacing: .09em;
+        }
+
+        .venue-address {
+            margin: 11px 0 25px;
+            color: var(--ink-soft);
+            font-family: var(--sans-zh);
+            font-size: 12px;
+            line-height: 1.65;
+            letter-spacing: .04em;
+        }
+
+        .lift-note {
+            padding: 21px 23px 20px;
+            border: 1px solid rgb(161 132 95 / 52%);
+            background: rgb(247 241 230 / 68%);
+            text-align: left;
+        }
+
+        .lift-note-heading {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin: 0 0 12px;
+            color: var(--ink);
+        }
+
+        .lift-floor {
+            flex: 0 0 auto;
+            color: var(--gold);
+            font-family: var(--sans);
+            font-size: 27px;
+            font-weight: 500;
+            letter-spacing: .03em;
+        }
+
+        .lift-title {
+            font-family: var(--sans-zh);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: .07em;
+        }
+
+        .lift-route {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 11px;
+            align-items: start;
+            margin: 0;
+            color: var(--ink-soft);
+            font-family: var(--sans-zh);
+            font-size: 12px;
+            line-height: 1.8;
+            letter-spacing: .035em;
+        }
+
+        .lift-arrow {
+            color: var(--gold);
+            font-family: var(--sans);
+            font-size: 18px;
+            line-height: 1.15;
+        }
+
+        .info-closing {
+            margin: 29px 0 0;
+            color: var(--ink-soft);
+            font-family: var(--soft-zh);
+            font-size: 14px;
+            letter-spacing: .08em;
+        }
+
+        .info-closing-en {
+            margin: 8px 0 0;
+            color: var(--muted);
+            font-family: Georgia, serif;
+            font-size: 11px;
+            font-style: italic;
+            letter-spacing: .02em;
+        }
+
+        .email-card {
+            width: 600px;
+            height: 400px;
+        }
+
+        .email-card > * {
+            z-index: 2;
+        }
+
+        .wedding-photo-card {
+            color: #fff;
+            text-align: left;
+        }
+
+        .wedding-photo-card::after {
+            position: absolute;
+            z-index: 1;
+            inset: 0;
+            background:
+                linear-gradient(to top, rgb(25 22 18 / 72%) 0%, rgb(25 22 18 / 8%) 52%, transparent 76%),
+                linear-gradient(to right, rgb(25 22 18 / 18%), transparent 58%);
+            content: "";
+            pointer-events: none;
+        }
+
+        .wedding-photo-background {
+            position: absolute;
+            z-index: 0;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 63%;
+            filter: saturate(.82) contrast(.96) sepia(.05);
+        }
+
+        .wedding-photo-copy {
+            position: absolute;
+            right: 38px;
+            bottom: 32px;
+            left: 38px;
+        }
+
+        .wedding-photo-heading {
+            display: flex;
+            align-items: flex-end;
+            gap: 15px;
+        }
+
+        .wedding-photo-title {
+            margin: 0;
+            color: #fff;
+            font-family: var(--script);
+            font-size: 48px;
+            font-weight: 400;
+            line-height: .85;
+            text-shadow: 0 1px 10px rgb(0 0 0 / 22%);
+        }
+
+        .wedding-photo-title-zh {
+            margin: 0 0 3px;
+            color: rgb(255 255 255 / 92%);
+            font-family: var(--soft-zh);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: .1em;
+        }
+
+        .wedding-photo-date {
+            margin: 18px 0 0;
+            color: rgb(255 255 255 / 90%);
+            font-family: var(--sans);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: .16em;
+        }
+
+        .schedule-card,
+        .arrival-card {
+            padding: 34px 46px 31px;
+            text-align: center;
+        }
+
+        .schedule-card::after,
+        .arrival-card::after {
+            position: absolute;
+            z-index: 0;
+            inset: 0;
+            background:
+                linear-gradient(rgb(247 241 230 / 90%), rgb(247 241 230 / 94%)),
+                url("../../assets/images/wedding-day-bg.jpeg") center 64% / cover no-repeat;
+            content: "";
+        }
+
+        .email-card-kicker {
+            margin: 0 0 5px;
+            color: var(--gold);
+            font-family: var(--script);
+            font-size: 35px;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .email-card-kicker-zh {
+            margin: 0;
+            color: var(--ink);
+            font-family: var(--soft-zh);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: .11em;
+        }
+
+        .schedule-date {
+            margin: 17px 0 16px;
+            color: var(--muted);
+            font-family: var(--sans-zh);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: .11em;
+        }
+
+        .email-schedule {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-bottom: 20px;
+            border-top: 1px solid var(--gold-line);
+            border-bottom: 1px solid var(--gold-line);
+        }
+
+        .email-schedule-item {
+            padding: 16px 12px 14px;
+        }
+
+        .email-schedule-item + .email-schedule-item {
+            border-left: 1px solid var(--gold-line);
+        }
+
+        .email-schedule-time {
+            margin: 0 0 7px;
+            color: var(--ink);
+            font-family: var(--sans);
+            font-size: 23px;
+            font-weight: 600;
+            letter-spacing: .045em;
+        }
+
+        .email-schedule-copy {
+            margin: 0;
+            color: var(--ink-soft);
+            font-family: var(--sans-zh);
+            font-size: 11.5px;
+            font-weight: 500;
+            letter-spacing: .07em;
+        }
+
+        .email-venue {
+            margin: 0;
+        }
+
+        .email-venue-main {
+            margin: 0;
+            color: var(--ink);
+            font-family: var(--sans-zh);
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: .08em;
+        }
+
+        .email-venue-address {
+            margin: 7px 0 0;
+            color: var(--muted);
+            font-family: var(--sans-zh);
+            font-size: 10.5px;
+            letter-spacing: .035em;
+        }
+
+        .arrival-route {
+            display: grid;
+            grid-template-columns: 126px 1fr;
+            align-items: center;
+            min-height: 206px;
+            margin-top: 25px;
+            border-top: 1px solid var(--gold-line);
+            border-bottom: 1px solid var(--gold-line);
+            text-align: left;
+        }
+
+        .arrival-floor {
+            padding-right: 28px;
+            border-right: 1px solid var(--gold-line);
+            color: var(--gold);
+            font-family: var(--sans);
+            font-size: 44px;
+            font-weight: 600;
+            letter-spacing: .04em;
+            text-align: center;
+        }
+
+        .arrival-copy {
+            padding-left: 31px;
+            margin: 0;
+            color: var(--ink-soft);
+            font-family: var(--sans-zh);
+            font-size: 12px;
+            line-height: 1.85;
+            letter-spacing: .035em;
+        }
+
+        .arrival-copy strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--ink);
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: .08em;
+        }
+
+        .arrival-copy-en {
+            display: block;
+            margin-top: 8px;
+            color: var(--muted);
+            font-family: var(--sans);
+            font-size: 9.5px;
+            line-height: 1.5;
+            letter-spacing: .035em;
+        }
+    </style>
+</head>
+<body>
+    <article class="reminder-card hero-card" id="email-reminder-cover" aria-label="Minchi and David wedding website home page">
+        <img class="hero-background" src="../../assets/images/home-page-bg.jpeg" alt="">
+        <h1 class="hero-announcement-static">We're getting married</h1>
+        <p class="hero-announcement-zh-static">我們要結婚了</p>
+        <div class="hero-photo-static">
+            <img src="../../assets/images/hero-photo.jpeg" alt="Minchi and David together on a golf course">
+        </div>
+        <h2 class="hero-name-static">Minchi &amp; David</h2>
+        <p class="hero-name-zh-static">旻淇 · 大為</p>
+        <div class="hero-event-static">
+            <p class="hero-date-static">November 29, 2026</p>
+            <p class="hero-venue-static">Taipei Marriott Hotel</p>
+            <p class="hero-venue-zh-static">台北萬豪酒店</p>
+        </div>
+    </article>
+
+    <article class="reminder-card email-card wedding-photo-card" id="email-wedding-photo" aria-label="Wedding Day photo card for email">
+        <img class="wedding-photo-background" src="../../assets/images/wedding-day-bg.jpeg" alt="Minchi and David standing in front of a church">
+        <div class="wedding-photo-copy">
+            <div class="wedding-photo-heading">
+                <h1 class="wedding-photo-title">Wedding Day</h1>
+                <p class="wedding-photo-title-zh">婚禮資訊</p>
+            </div>
+            <p class="wedding-photo-date">NOVEMBER 29, 2026 · SUNDAY</p>
+        </div>
+    </article>
+
+    <article class="reminder-card email-card schedule-card" id="email-wedding-schedule" aria-label="Wedding schedule and venue card for email">
+        <h1 class="email-card-kicker">Wedding Schedule</h1>
+        <p class="email-card-kicker-zh">婚禮時間與場地</p>
+        <p class="schedule-date">2026.11.29 · SUNDAY · 星期日</p>
+        <div class="email-schedule" aria-label="Wedding schedule">
+            <section class="email-schedule-item">
+                <p class="email-schedule-time">11:30 AM</p>
+                <p class="email-schedule-copy">賓客報到 · Guest Check-in</p>
+            </section>
+            <section class="email-schedule-item">
+                <p class="email-schedule-time">12:00 PM</p>
+                <p class="email-schedule-copy">宴客開始 · Reception</p>
+            </section>
+        </div>
+
+        <div class="email-venue">
+            <p class="email-venue-main">台北萬豪酒店 · 36F 寰宇廳</p>
+            <p class="email-venue-address">台北市中山區樂群二路 199 號 · Taipei Marriott Hotel</p>
+        </div>
+    </article>
+
+    <article class="reminder-card email-card arrival-card" id="email-arrival-guide" aria-label="Directions to the elevators for the 36th floor">
+        <h1 class="email-card-kicker">Getting There</h1>
+        <p class="email-card-kicker-zh">前往寰宇廳</p>
+        <section class="arrival-route">
+            <div class="arrival-floor">36F</div>
+            <p class="arrival-copy">
+                <strong>前往寰宇廳電梯</strong>
+                由飯店正門進入後，從 Concierge 櫃檯左側通道直走到底，即可搭乘前往 36 樓的電梯。
+                <span class="arrival-copy-en">Enter through the main entrance and follow the passage to the left of the Concierge desk.</span>
+            </p>
+        </section>
+    </article>
+</body>
+</html>
