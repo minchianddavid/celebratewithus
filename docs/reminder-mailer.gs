@@ -19,6 +19,8 @@
 const REMINDER_SEND_TAB = 'Send List';
 const REMINDER_LOG_TAB = 'Send Log';
 const REMINDER_MAILER_VERSION = '2026-11-18-v1';
+const REMINDER_TIME_ZONE = 'Asia/Taipei';
+const REMINDER_WEDDING_DATE = '2026-11-29';
 
 // Safety lock. Keep false until the test email has been reviewed and approved.
 const REMINDER_BATCH_ENABLED = false;
@@ -37,7 +39,9 @@ const REMINDER_CARD_URLS = {
   home: REMINDER_WEBSITE_URL + 'output/email-reminder/01-home-page-wedding-reminder.jpg',
   weddingDay: REMINDER_WEBSITE_URL + 'output/email-reminder/02-wedding-day-photo-card.jpg',
   schedule: REMINDER_WEBSITE_URL + 'output/email-reminder/03-wedding-schedule-and-venue.jpg',
-  arrival: REMINDER_WEBSITE_URL + 'output/email-reminder/04-arrival-guide-36f.jpg',
+  monogram: REMINDER_WEBSITE_URL + 'output/email-reminder/email-monogram.png',
+  signature: REMINDER_WEBSITE_URL + 'output/email-reminder/email-signature.png',
+  signatureZh: REMINDER_WEBSITE_URL + 'output/email-reminder/email-signature-zh.png',
 };
 
 const REQUIRED_SEND_HEADERS = [
@@ -245,33 +249,46 @@ function appendSendLog_(logSheet, guest, status, errorMessage) {
 
 function sendReminderEmail_(recipient, guest, isTest) {
   const subjectPrefix = isTest ? '[TEST] ' : '';
-  const subject = subjectPrefix + '婚禮行前提醒｜Minchi & David｜2026.11.29';
+  const subject = subjectPrefix + '婚禮行前提醒｜' + formatTableLabel_(guest.table) + '｜Minchi & David';
+  const sendTime = new Date();
 
   MailApp.sendEmail({
     to: recipient,
     subject: subject,
-    body: buildReminderPlainText_(guest),
-    htmlBody: buildReminderHtml_(guest),
+    body: buildReminderPlainText_(guest, sendTime),
+    htmlBody: buildReminderHtml_(guest, sendTime),
     name: 'Minchi & David',
   });
 }
 
-function buildReminderPlainText_(guest) {
+function buildReminderPlainText_(guest, sendTime) {
   const tableLabel = formatTableLabel_(guest.table);
+  const guestCountLabel = formatGuestCountLabel_(guest.guestCount);
+  const countdownCopy = formatWeddingCountdown_(sendTime);
   return [
     'Hi ' + guest.name + ',',
     '',
-    '婚禮即將到來，期待在 11 月 29 日與你見面。',
+    countdownCopy,
+    '婚禮就在這週日，11 月 29 日。',
+    '很期待見到你，',
+    '和你一起分享這份喜悅 🤍',
     '',
     '你的桌次：' + tableLabel,
+    guestCountLabel ? '出席人數：' + guestCountLabel : '',
+    '',
+    '2026.11.29 · Sunday',
     '賓客報到：11:30 AM',
-    '宴客開始：12:00 PM',
+    '午宴開始：12:00 PM',
     '',
     '台北萬豪酒店 36F 寰宇廳',
     '台北市中山區樂群二路 199 號',
     '',
-    '由飯店正門進入後，從 Concierge 櫃檯左側通道直走到底，',
-    '即可搭乘前往 36 樓的電梯。',
+    '前往 36 樓的電梯位於飯店正門 Concierge 左側。',
+    '請放心直走到底，電梯真的在那裡。',
+    '',
+    '停車資訊：',
+    'B2–B4 設有地下停車場。',
+    '接待桌備有 QR Code，離場前掃描即可免費折抵。',
     '',
     'Wedding website: ' + REMINDER_WEBSITE_URL,
     'Google Maps: ' + REMINDER_MAPS_URL,
@@ -281,50 +298,92 @@ function buildReminderPlainText_(guest) {
   ].join('\n');
 }
 
-function buildReminderHtml_(guest) {
+function buildReminderHtml_(guest, sendTime) {
   const safeName = escapeHtml_(guest.name);
   const safeTable = escapeHtml_(formatTableLabel_(guest.table));
-  const cards = [
-    { url: REMINDER_CARD_URLS.home, alt: 'Minchi and David wedding reminder' },
-    { url: REMINDER_CARD_URLS.weddingDay, alt: 'Wedding Day' },
-    { url: REMINDER_CARD_URLS.schedule, alt: 'Wedding schedule and venue' },
-    { url: REMINDER_CARD_URLS.arrival, alt: 'Directions to the 36th floor' },
-  ].map(function (card) {
-    return '<tr><td style="padding:0 0 14px;">'
-      + '<img src="' + card.url + '" width="520" alt="' + card.alt + '" '
-      + 'style="display:block;width:100%;max-width:520px;height:auto;border:0;">'
-      + '</td></tr>';
-  }).join('');
+  const safeGuestCount = escapeHtml_(formatGuestCountLabel_(guest.guestCount));
+  const safeCountdownCopy = escapeHtml_(formatWeddingCountdown_(sendTime));
+  const guestCountHtml = safeGuestCount
+    ? '<div style="margin:7px 0 0;font-size:13px;line-height:1.6;color:#716a62;">' + safeGuestCount + '</div>'
+    : '';
 
   return [
     '<!doctype html>',
     '<html lang="zh-Hant">',
-    '<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>',
-    '<body style="margin:0;padding:0;background:#f4f1eb;">',
-    '<div style="margin:0;padding:34px 12px;background:#f4f1eb;color:#37352f;font-family:Arial,\'PingFang TC\',\'Noto Sans TC\',sans-serif;">',
+    '<head><meta charset="UTF-8"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>',
+    '<body style="margin:0;padding:0;background:#f4f4f2;">',
+    '<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">11 月 29 日婚禮桌次、時間與抵達提醒</div>',
+    '<div lang="zh-Hant" style="margin:0;padding:40px 16px;background:#f4f4f2;color:#37352f;font-family:Arial,\'PingFang TC\',\'Noto Sans TC\',sans-serif;">',
     '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">',
     '<tr><td align="center">',
-    '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:560px;border-collapse:separate;background:#ffffff;">',
-    '<tr><td style="padding:46px 32px 34px;">',
-    '<p style="margin:0 0 18px;font-size:16px;line-height:1.8;color:#56514b;">Hi ' + safeName + ',</p>',
-    '<p style="margin:0 0 30px;font-size:15px;line-height:1.9;color:#37352f;">婚禮即將到來，<br>期待在 11 月 29 日與你見面。</p>',
-    '<div style="margin:0 0 34px;padding:24px 20px;border-top:1px solid #d9c7aa;border-bottom:1px solid #d9c7aa;text-align:center;">',
-    '<div style="margin:0 0 7px;font-size:12px;letter-spacing:.14em;color:#8f7049;">YOUR TABLE · 您的桌次</div>',
-    '<div style="font-family:Georgia,\'Times New Roman\',serif;font-size:32px;line-height:1.25;color:#37352f;">' + safeTable + '</div>',
+    '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:520px;border:1px solid #e6e3dd;border-collapse:separate;background:#ffffff;">',
+    '<tr><td style="padding:54px 48px 50px;">',
+    '<div style="margin:0 0 8px;text-align:center;"><img src="' + REMINDER_CARD_URLS.monogram + '" width="110" alt="M·D" style="display:inline-block;width:110px;max-width:100%;height:auto;border:0;"></div>',
+    '<div style="margin:0 0 6px;text-align:center;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:13px;font-weight:600;line-height:1.5;letter-spacing:.14em;text-transform:uppercase;color:#8f7049;">Wedding Day Reminder</div>',
+    '<div style="margin:0 0 46px;text-align:center;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:12px;font-weight:400;line-height:1.6;letter-spacing:.08em;color:#716a62;">婚禮行前提醒</div>',
+    '<p style="margin:0 0 24px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.8;color:#56514b;">Hi ' + safeName + ',</p>',
+    '<p style="margin:0 0 42px;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:15px;font-weight:400;line-height:1.9;color:#37352f;">' + safeCountdownCopy + '<br>婚禮就在這週日，11 月 29 日。<br>很期待見到你，<br>和你一起分享這份喜悅 &#129293;</p>',
+    '<div style="margin:0 0 40px;padding:23px 16px 22px;border-top:1px solid #d8d2c8;border-bottom:1px solid #d8d2c8;text-align:center;">',
+    '<div style="margin:0 0 8px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:600;line-height:1.5;letter-spacing:.18em;color:#8f7049;">YOUR TABLE</div>',
+    '<div style="font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:29px;font-weight:500;line-height:1.35;color:#37352f;">' + safeTable + '</div>',
+    guestCountHtml,
     '</div>',
-    '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">',
-    cards,
+    '<div style="margin:0 0 38px;"><img src="' + REMINDER_CARD_URLS.weddingDay + '" width="422" alt="Minchi and David on their wedding day" style="display:block;width:100%;max-width:422px;height:auto;border:0;"></div>',
+    '<div style="margin:0 0 42px;">',
+    '<div style="margin:0 0 18px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:600;line-height:1.5;letter-spacing:.14em;color:#8f7049;">2026.11.29 · SUNDAY</div>',
+    '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;color:#37352f;">',
+    '<tr><td style="width:72px;padding:0 0 9px;font-size:14px;line-height:1.7;color:#716a62;">11:30</td><td style="padding:0 0 9px;font-size:14px;line-height:1.7;">賓客報到</td></tr>',
+    '<tr><td style="width:72px;padding:0 0 21px;font-size:14px;line-height:1.7;color:#716a62;">12:00</td><td style="padding:0 0 21px;font-size:14px;line-height:1.7;">午宴開始</td></tr>',
     '</table>',
-    '<p style="margin:18px 0 8px;text-align:center;"><a href="' + REMINDER_WEBSITE_URL + '" style="color:#8f7049;font-size:14px;text-decoration:none;">Open the Invitation &#8599;</a></p>',
-    '<p style="margin:0;text-align:center;"><a href="' + REMINDER_MAPS_URL + '" style="color:#716a62;font-size:13px;text-decoration:none;">Google Maps &#8599;</a></p>',
-    '<div style="width:72px;margin:34px auto 22px;border-top:1px solid #d8d2c8;"></div>',
-    '<p style="margin:0;text-align:center;font-family:Georgia,\'Times New Roman\',serif;font-size:20px;font-style:italic;color:#37352f;">Minchi &amp; David</p>',
-    '<p style="margin:7px 0 0;text-align:center;font-size:12px;letter-spacing:.14em;color:#716a62;">旻淇・大為</p>',
+    '<p style="margin:0 0 5px;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:15px;font-weight:500;line-height:1.7;color:#37352f;">台北萬豪酒店 · 36F 寰宇廳</p>',
+    '<p style="margin:0 0 12px;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:13px;font-weight:400;line-height:1.7;color:#716a62;">台北市中山區樂群二路 199 號</p>',
+    '<p style="margin:0;"><a href="' + REMINDER_MAPS_URL + '" target="_blank" style="color:#8f7049;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:14px;font-weight:400;line-height:1.6;text-decoration:none;">Open in Google Maps &#8599;</a></p>',
+    '</div>',
+    '<div style="margin:0 0 24px;padding-top:31px;border-top:1px solid #d8d2c8;">',
+    '<div style="margin:0 0 13px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:600;line-height:1.5;letter-spacing:.16em;color:#8f7049;">ARRIVAL NOTE</div>',
+    '<p style="margin:0;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:14px;font-weight:400;line-height:1.9;color:#56514b;">前往 36 樓的電梯位於<br>飯店正門 Concierge 左側，<br>請放心直走到底，<br>電梯真的在那裡。</p>',
+    '</div>',
+    '<div style="margin:0 0 31px;padding-top:29px;border-top:1px solid #d8d2c8;">',
+    '<div style="margin:0 0 13px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:600;line-height:1.5;letter-spacing:.16em;color:#8f7049;">PARKING</div>',
+    '<p style="margin:0;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:14px;font-weight:400;line-height:1.9;color:#56514b;">B2–B4 設有地下停車場。<br>接待桌備有 QR Code，<br>離場前掃描即可免費折抵。</p>',
+    '</div>',
+    '<p style="margin:0 0 24px;"><a href="' + REMINDER_WEBSITE_URL + '" target="_blank" style="color:#8f7049;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:14px;font-weight:400;line-height:1.6;letter-spacing:.01em;text-decoration:none;">Open the Invitation &#8599;</a></p>',
+    '<div style="width:84px;margin:0 0 16px;border-top:1px solid #d8d2c8;"></div>',
+    '<p style="margin:0 0 5px;text-align:left;"><img src="' + REMINDER_CARD_URLS.signature + '" width="205" alt="Minchi &amp; David" style="display:block;width:205px;max-width:100%;height:auto;border:0;"></p>',
+    '<p style="margin:0 0 0 8px;text-align:left;"><img src="' + REMINDER_CARD_URLS.signatureZh + '" width="89" alt="旻淇・大為" style="display:block;width:89px;max-width:100%;height:auto;border:0;"></p>',
     '</td></tr></table>',
     '</td></tr></table>',
     '</div>',
     '</body></html>',
   ].join('');
+}
+
+function formatWeddingCountdown_(sendTime) {
+  const daysUntilWedding = getDaysUntilWedding_(sendTime || new Date());
+  if (daysUntilWedding === 0) {
+    return '婚禮就是今天！';
+  }
+  return '距離婚禮只剩 ' + daysUntilWedding + ' 天了，';
+}
+
+function getDaysUntilWedding_(sendTime) {
+  const localDate = Utilities.formatDate(sendTime, REMINDER_TIME_ZONE, 'yyyy-MM-dd');
+  const localParts = localDate.split('-').map(Number);
+  const weddingParts = REMINDER_WEDDING_DATE.split('-').map(Number);
+  const localUtc = Date.UTC(localParts[0], localParts[1] - 1, localParts[2]);
+  const weddingUtc = Date.UTC(weddingParts[0], weddingParts[1] - 1, weddingParts[2]);
+  return Math.max(0, Math.round((weddingUtc - localUtc) / 86400000));
+}
+
+function formatGuestCountLabel_(value) {
+  const guestCount = String(value || '').trim();
+  if (!guestCount) {
+    return '';
+  }
+  if (/^\d+$/.test(guestCount)) {
+    return guestCount + ' 位賓客';
+  }
+  return guestCount;
 }
 
 function formatTableLabel_(value) {
