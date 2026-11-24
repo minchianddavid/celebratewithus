@@ -39,7 +39,7 @@ const REMINDER_CARD_URLS = {
   home: REMINDER_WEBSITE_URL + 'output/email-reminder/01-home-page-wedding-reminder.jpg',
   weddingDay: REMINDER_WEBSITE_URL + 'output/email-reminder/02-wedding-day-photo-card.jpg',
   schedule: REMINDER_WEBSITE_URL + 'output/email-reminder/03-wedding-schedule-and-venue.jpg',
-  monogram: REMINDER_WEBSITE_URL + 'output/email-reminder/email-monogram.png',
+  monogram: REMINDER_WEBSITE_URL + 'output/email-reminder/email-emblem.png',
   signature: REMINDER_WEBSITE_URL + 'output/email-reminder/email-signature.png',
   signatureZh: REMINDER_WEBSITE_URL + 'output/email-reminder/email-signature-zh.png',
 };
@@ -269,8 +269,7 @@ function buildReminderPlainText_(guest, sendTime) {
     'Hi ' + guest.name + ',',
     '',
     countdownCopy,
-    '婚禮就在這週日，11 月 29 日。',
-    '很期待見到你，',
+    '期待見到你，',
     '和你一起分享這份喜悅 🤍',
     '',
     '你的桌次：' + tableLabel,
@@ -318,11 +317,11 @@ function buildReminderHtml_(guest, sendTime) {
     '<tr><td align="center">',
     '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:520px;border:1px solid #e6e3dd;border-collapse:separate;background:#ffffff;">',
     '<tr><td style="padding:54px 48px 50px;">',
-    '<div style="margin:0 0 8px;text-align:center;"><img src="' + REMINDER_CARD_URLS.monogram + '" width="110" alt="M·D" style="display:inline-block;width:110px;max-width:100%;height:auto;border:0;"></div>',
+    '<div style="margin:0 0 12px;text-align:center;"><img src="' + REMINDER_CARD_URLS.monogram + '" width="150" alt="Minchi and David wedding emblem" style="display:inline-block;width:150px;max-width:100%;height:auto;border:0;"></div>',
     '<div style="margin:0 0 6px;text-align:center;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:13px;font-weight:600;line-height:1.5;letter-spacing:.14em;text-transform:uppercase;color:#8f7049;">Wedding Day Reminder</div>',
     '<div style="margin:0 0 46px;text-align:center;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:12px;font-weight:400;line-height:1.6;letter-spacing:.08em;color:#716a62;">婚禮行前提醒</div>',
     '<p style="margin:0 0 24px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.8;color:#56514b;">Hi ' + safeName + ',</p>',
-    '<p style="margin:0 0 42px;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:15px;font-weight:400;line-height:1.9;color:#37352f;">' + safeCountdownCopy + '<br>婚禮就在這週日，11 月 29 日。<br>很期待見到你，<br>和你一起分享這份喜悅 &#129293;</p>',
+    '<p style="margin:0 0 42px;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:15px;font-weight:400;line-height:1.9;color:#37352f;">' + safeCountdownCopy + '<br>期待見到你，<br>和你一起分享這份喜悅 &#129293;</p>',
     '<div style="margin:0 0 40px;padding:23px 16px 22px;border-top:1px solid #d8d2c8;border-bottom:1px solid #d8d2c8;text-align:center;">',
     '<div style="margin:0 0 8px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:600;line-height:1.5;letter-spacing:.18em;color:#8f7049;">YOUR TABLE</div>',
     '<div style="font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:29px;font-weight:500;line-height:1.35;color:#37352f;">' + safeTable + '</div>',
@@ -363,7 +362,7 @@ function formatWeddingCountdown_(sendTime) {
   if (daysUntilWedding === 0) {
     return '婚禮就是今天！';
   }
-  return '距離婚禮只剩 ' + daysUntilWedding + ' 天了，';
+  return '距離我們的婚禮只剩 ' + daysUntilWedding + ' 天了！';
 }
 
 function getDaysUntilWedding_(sendTime) {
