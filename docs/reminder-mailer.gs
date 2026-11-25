@@ -10,7 +10,7 @@
  * - It installs no triggers and sends nothing automatically.
  *
  * Required "Send List" headers:
- * Email | Name | Table | Guest Count | Attendance | Send
+ * Email | Name | Table | Guest Count | Send
  *
  * Required "Send Log" headers:
  * Timestamp | Email | Name | Table | Status | Error | Version
@@ -39,7 +39,7 @@ const REMINDER_CARD_URLS = {
   home: REMINDER_WEBSITE_URL + 'output/email-reminder/01-home-page-wedding-reminder.jpg',
   weddingDay: REMINDER_WEBSITE_URL + 'output/email-reminder/02-wedding-day-photo-card.jpg',
   schedule: REMINDER_WEBSITE_URL + 'output/email-reminder/03-wedding-schedule-and-venue.jpg',
-  monogram: REMINDER_WEBSITE_URL + 'output/email-reminder/email-emblem.png',
+  monogram: REMINDER_WEBSITE_URL + 'output/email-reminder/email-emblem.png?v=20261124-1',
   signature: REMINDER_WEBSITE_URL + 'output/email-reminder/email-signature.png',
   signatureZh: REMINDER_WEBSITE_URL + 'output/email-reminder/email-signature-zh.png',
 };
@@ -49,7 +49,6 @@ const REQUIRED_SEND_HEADERS = [
   'Name',
   'Table',
   'Guest Count',
-  'Attendance',
   'Send',
 ];
 
@@ -76,7 +75,7 @@ function sendReminderTest() {
   const context = getReminderContext_();
   const candidates = getEligibleReminderRows_(context.sendSheet, new Set());
   if (!candidates.length) {
-    throw new Error('No eligible row found. Mark one Send List row as Attendance=yes and Send=YES.');
+    throw new Error('No eligible row found. Mark one valid Send List row as Send=YES.');
   }
 
   const guest = candidates[0];
@@ -194,21 +193,24 @@ function getEligibleReminderRows_(sheet, alreadySent) {
       name: data.Name,
       table: data.Table,
       guestCount: data['Guest Count'],
-      attendance: data.Attendance.toLowerCase(),
       send: data.Send.toUpperCase(),
     });
   });
 
   return Array.from(newestByEmail.values()).filter(function (guest) {
-    return guest.attendance === 'yes'
-      && guest.send === 'YES'
+    return guest.send === 'YES'
       && guest.name
-      && isUsableTable_(guest.table)
+      && hasTableValue_(guest.table)
       && !alreadySent.has(guest.email);
   });
 }
 
-function isUsableTable_(value) {
+function hasTableValue_(value) {
+  const table = String(value || '').trim();
+  return Boolean(table);
+}
+
+function hasTableAssignment_(value) {
   const table = String(value || '').trim();
   return Boolean(table) && table.toUpperCase() !== 'NOT FOUND';
 }
@@ -249,7 +251,10 @@ function appendSendLog_(logSheet, guest, status, errorMessage) {
 
 function sendReminderEmail_(recipient, guest, isTest) {
   const subjectPrefix = isTest ? '[TEST] ' : '';
-  const subject = subjectPrefix + '婚禮行前提醒｜' + formatTableLabel_(guest.table) + '｜Minchi & David';
+  const tableSubject = hasTableAssignment_(guest.table)
+    ? '｜' + formatTableLabel_(guest.table)
+    : '';
+  const subject = subjectPrefix + '婚禮行前提醒' + tableSubject + '｜Minchi & David';
   const sendTime = new Date();
 
   MailApp.sendEmail({
@@ -265,16 +270,21 @@ function buildReminderPlainText_(guest, sendTime) {
   const tableLabel = formatTableLabel_(guest.table);
   const guestCountLabel = formatGuestCountLabel_(guest.guestCount);
   const countdownCopy = formatWeddingCountdown_(sendTime);
+  const tableLines = hasTableAssignment_(guest.table)
+    ? [
+      '你的桌次：' + tableLabel,
+      guestCountLabel ? '出席人數：' + guestCountLabel : '',
+      '',
+    ]
+    : [];
+
   return [
     'Hi ' + guest.name + ',',
     '',
-    countdownCopy,
-    '期待見到你，',
-    '和你一起分享這份喜悅 🤍',
+    '歡迎來到郭大為 & 蔡旻淇的婚禮！' + countdownCopy + '期待見到你，和你一起分享這份喜悅 🤍',
+    '— 郭大為 & 蔡旻淇',
     '',
-    '你的桌次：' + tableLabel,
-    guestCountLabel ? '出席人數：' + guestCountLabel : '',
-    '',
+  ].concat(tableLines, [
     '2026.11.29 · Sunday',
     '賓客報到：11:30 AM',
     '午宴開始：12:00 PM',
@@ -295,7 +305,7 @@ function buildReminderPlainText_(guest, sendTime) {
     '',
     'Minchi & David',
     '旻淇・大為',
-  ].join('\n');
+  ]).join('\n');
 }
 
 function buildReminderHtml_(guest, sendTime) {
@@ -305,6 +315,13 @@ function buildReminderHtml_(guest, sendTime) {
   const safeCountdownCopy = escapeHtml_(formatWeddingCountdown_(sendTime));
   const guestCountHtml = safeGuestCount
     ? '<div style="margin:7px 0 0;font-size:13px;line-height:1.6;color:#716a62;">' + safeGuestCount + '</div>'
+    : '';
+  const tableSectionHtml = hasTableAssignment_(guest.table)
+    ? '<div style="margin:0 0 40px;padding:23px 16px 22px;border-top:1px solid #d8d2c8;border-bottom:1px solid #d8d2c8;text-align:center;">'
+      + '<div style="margin:0 0 8px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:600;line-height:1.5;letter-spacing:.18em;color:#8f7049;">YOUR TABLE</div>'
+      + '<div style="font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:29px;font-weight:500;line-height:1.35;color:#37352f;">' + safeTable + '</div>'
+      + guestCountHtml
+      + '</div>'
     : '';
 
   return [
@@ -322,12 +339,8 @@ function buildReminderHtml_(guest, sendTime) {
     '<div style="margin:0 0 6px;text-align:center;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:13px;font-weight:600;line-height:1.5;letter-spacing:.14em;text-transform:uppercase;color:#8f7049;">Wedding Day Reminder</div>',
     '<div style="margin:0 0 46px;text-align:center;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:12px;font-weight:400;line-height:1.6;letter-spacing:.08em;color:#716a62;">婚禮行前提醒</div>',
     '<p style="margin:0 0 24px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.8;color:#56514b;">Hi ' + safeName + ',</p>',
-    '<p style="margin:0 0 42px;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:15px;font-weight:400;line-height:1.9;color:#37352f;">' + safeCountdownCopy + '<br>期待見到你，<br>和你一起分享這份喜悅 &#129293;</p>',
-    '<div style="margin:0 0 40px;padding:23px 16px 22px;border-top:1px solid #d8d2c8;border-bottom:1px solid #d8d2c8;text-align:center;">',
-    '<div style="margin:0 0 8px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:600;line-height:1.5;letter-spacing:.18em;color:#8f7049;">YOUR TABLE</div>',
-    '<div style="font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:29px;font-weight:500;line-height:1.35;color:#37352f;">' + safeTable + '</div>',
-    guestCountHtml,
-    '</div>',
+    '<p style="margin:0 0 42px;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:15px;font-weight:400;line-height:1.9;color:#37352f;overflow-wrap:anywhere;word-break:break-all;">歡迎來到郭大為 &amp; 蔡旻淇的婚禮！' + safeCountdownCopy + '期待見到你，和你一起分享這份喜悅 &#129293;<span style="display:block;margin-top:8px;color:#716a62;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:13px;line-height:1.6;">&mdash; 郭大為 &amp; 蔡旻淇</span></p>',
+    tableSectionHtml,
     '<div style="margin:0 0 38px;"><img src="' + REMINDER_CARD_URLS.weddingDay + '" width="422" alt="Minchi and David on their wedding day" style="display:block;width:100%;max-width:422px;height:auto;border:0;"></div>',
     '<div style="margin:0 0 42px;">',
     '<div style="margin:0 0 18px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:600;line-height:1.5;letter-spacing:.14em;color:#8f7049;">2026.11.29 · SUNDAY</div>',
@@ -363,7 +376,7 @@ function formatWeddingCountdown_(sendTime) {
   if (daysUntilWedding === 0) {
     return '婚禮就是今天！';
   }
-  return '距離我們的婚禮只剩 ' + daysUntilWedding + ' 天了！';
+  return '距離婚禮只剩 ' + daysUntilWedding + ' 天了，';
 }
 
 function getDaysUntilWedding_(sendTime) {
