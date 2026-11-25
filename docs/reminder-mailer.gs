@@ -318,17 +318,17 @@ function buildReminderPlainText_(guest, sendTime) {
 function buildReminderHtml_(guest, sendTime) {
   const safeName = escapeHtml_(guest.name);
   const safeTable = escapeHtml_(formatTableLabel_(guest.table)).replace(/\d+/, function (number) {
-    return '<span style="font-family:\'Cormorant Garamond\',Georgia,serif;font-size:30px;font-weight:600;color:#49443D;padding:0 5px;">' + number.padStart(2, '0') + '</span>';
+    return '<span style="font-family:\'Cormorant Garamond\',Georgia,serif;font-size:62px;font-weight:600;line-height:1.12;color:#37322C;padding:0 8px;">' + number.padStart(2, '0') + '</span>';
   });
   const safeGuestCount = escapeHtml_(formatGuestCountLabel_(guest.guestCount));
   const safeCountdownCopy = escapeHtml_(formatWeddingCountdown_(sendTime));
   const guestCountHtml = safeGuestCount
-    ? '<div style="margin:7px 0 0;font-size:14px;line-height:1.6;color:#746A5E;">' + safeGuestCount + '</div>'
+    ? '<div style="margin:13px 0 0;font-size:14px;line-height:1.6;color:#746A5E;">' + safeGuestCount + '</div>'
     : '';
   const tableSectionHtml = hasTableAssignment_(guest.table)
-    ? '<div style="margin:0 0 40px;padding:26px 16px 8px;border-top:1px solid #d8d2c8;text-align:center;">'
+    ? '<div style="margin:0 0 40px;padding:28px 16px 12px;border-top:1px solid #d8d2c8;text-align:center;">'
       + '<div style="margin:0 0 10px;font-family:\'Cormorant Garamond\',Georgia,serif;font-size:13px;font-weight:600;line-height:1.5;letter-spacing:.25em;color:#93754E;">YOUR TABLE</div>'
-      + '<div style="font-family:\'Noto Serif TC\',\'Source Han Serif TC\',\'Songti TC\',PMingLiU,serif;font-size:15px;font-weight:500;line-height:1.4;color:#746A5E;">' + safeTable + '</div>'
+      + '<div style="font-family:\'Noto Serif TC\',\'Source Han Serif TC\',\'Songti TC\',PMingLiU,serif;font-size:18px;font-weight:500;line-height:1.4;color:#49443D;">' + safeTable + '</div>'
       + guestCountHtml
       + '</div>'
     : '';
