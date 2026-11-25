@@ -300,17 +300,16 @@ function buildReminderPlainText_(guest, sendTime) {
     '台北市中山區樂群二路 199 號 › ' + REMINDER_MAPS_URL,
     '',
     'ARRIVAL',
-    '前往 36 樓的電梯位於飯店正門 Concierge 左側。',
-    '沿著入口直走到底，即可抵達。',
+    '36 樓電梯位於飯店正門 Concierge 左側，',
+    '請放心直走到底。',
     '',
     '——',
     '',
     'PARKING',
-    '當日因多場婚宴，車位有限。',
-    '飯店 B2–B4 設有地下停車場。',
-    '接待桌備有 QR Code，離場前掃描即可免費折抵。',
+    'B2–B4 地下停車場，當日車位有限。',
+    '離場前掃描接待桌 QR Code，即可免費折抵。',
     '',
-    '再次查看婚禮邀請函 › ' + REMINDER_WEBSITE_URL,
+    'The Wedding Invitation › ' + REMINDER_WEBSITE_URL,
   ]).join('\n');
 }
 
@@ -320,7 +319,7 @@ function buildReminderHtml_(guest, sendTime) {
     return '<span style="font-family:\'Cormorant Garamond\',Georgia,serif;font-size:62px;font-weight:600;line-height:1.12;color:#37322C;padding:0 8px;">' + number.padStart(2, '0') + '</span>';
   });
   const safeGuestCount = escapeHtml_(formatGuestCountLabel_(guest.guestCount));
-  const safeCountdownCopy = escapeHtml_(formatWeddingCountdown_(sendTime)).replace(' 🤍', '&nbsp;&#129293;');
+  const safeCountdownCopy = escapeHtml_(formatWeddingCountdown_(sendTime)).replace(' 🎉', '&nbsp;&#127881;');
   const guestCountHtml = safeGuestCount
     ? '<div style="margin:13px 0 0;font-size:14px;line-height:1.6;color:#746A5E;">' + safeGuestCount + '</div>'
     : '';
@@ -354,8 +353,8 @@ function buildReminderHtml_(guest, sendTime) {
     '<div style="margin:0 0 38px;"><img src="' + REMINDER_CARD_URLS.weddingDay + '" width="422" alt="Minchi and David on their wedding day" style="display:block;width:100%;max-width:422px;height:auto;border:0;"></div>',
     '<div style="margin:0 0 42px;">',
     '<div style="font-family:\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',\'Heiti TC\',sans-serif;color:#49443D;">',
-    '<div style="margin:0 0 2px;font-size:12px;letter-spacing:.12em;color:#93754E;">2026.11.29</div>',
-    '<div style="margin:0 0 18px;font-size:14px;line-height:1.5;color:#746A5E;">Sunday · 星期日</div>',
+    '<div style="margin:0 0 2px;font-size:12px;letter-spacing:.12em;color:#78404A;">2026.11.29</div>',
+    '<div style="margin:0 0 18px;font-size:14px;line-height:1.5;color:#78404A;">Sunday · 星期日</div>',
     '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;font-family:\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',\'Heiti TC\',sans-serif;color:#49443D;">',
     '<tr><td style="width:74px;vertical-align:top;padding:0 0 15px;font-size:19px;line-height:1.5;">11:30</td><td style="padding:0 0 15px;font-size:16px;line-height:1.5;"><strong>迎賓酒會・賓客報到</strong><div style="margin-top:4px;color:#746A5E;font-size:14px;line-height:1.8;">備有甜點與迎賓飲品，<span style="white-space:nowrap;">歡迎提早來坐坐</span></div></td></tr>',
     '<tr><td style="width:74px;vertical-align:top;font-size:19px;line-height:1.5;">12:00</td><td style="font-size:16px;line-height:1.5;"><strong>婚禮午宴</strong></td></tr>',
@@ -363,21 +362,21 @@ function buildReminderHtml_(guest, sendTime) {
     '<div style="margin:24px 0 0;padding-top:22px;border-top:1px solid #E8E2D9;">',
     '<div style="margin:0 0 12px;font-size:12px;font-weight:500;line-height:1.5;letter-spacing:.25em;color:#78404A;">THE VENUE</div>',
     '<p style="margin:0 0 4px;font-size:16px;font-weight:400;line-height:1.8;">台北萬豪酒店 · <span style="white-space:nowrap;">36F 寰宇廳</span></p>',
-    '<p style="margin:0;"><a href="' + REMINDER_MAPS_URL + '" target="_blank" style="color:#93754E;font-size:14px;line-height:1.6;text-decoration:none;">台北市中山區樂群二路 199 號 &#8250;</a></p>',
+    '<p style="margin:0;"><a href="' + REMINDER_MAPS_URL + '" target="_blank" style="color:#49443D;font-size:14px;line-height:1.6;text-decoration:none;">台北市中山區樂群二路 199 號 <span style="color:#78404A;">&#8250;</span></a></p>',
     '</div>',
     '</div>',
     '</div>',
     '<div style="font-family:\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',\'Heiti TC\',sans-serif;color:#49443D;">',
     '<div style="margin:0 0 26px;padding-top:26px;border-top:1px solid #E8E2D9;">',
     '<div style="margin:0 0 12px;font-size:12px;font-weight:500;line-height:1.5;letter-spacing:.25em;color:#78404A;">ARRIVAL</div>',
-    '<p style="margin:0 0 9px;font-size:16px;line-height:1.8;">前往 36 樓的電梯位於飯店正門 Concierge 左側。</p>',
-    '<p style="margin:0;font-size:16px;line-height:1.8;">沿著入口直走到底，即可抵達。</p>',
+    '<p style="margin:0 0 4px;font-size:16px;line-height:1.8;">36 樓電梯位於飯店正門 Concierge 左側，</p>',
+    '<p style="margin:0;font-size:16px;line-height:1.8;">請放心直走到底。</p>',
     '</div>',
     '<div style="margin:0 0 26px;padding-top:26px;border-top:1px solid #E8E2D9;">',
     '<div style="margin:0 0 12px;font-size:12px;font-weight:500;line-height:1.5;letter-spacing:.25em;color:#78404A;">PARKING</div>',
-    '<p style="margin:0;font-size:16px;line-height:1.8;">當日因多場婚宴，車位有限。<br>飯店 B2–B4 設有地下停車場。<br>接待桌備有 QR Code，離場前掃描即可免費折抵。</p>',
+    '<p style="margin:0;font-size:16px;line-height:1.8;">B2–B4 地下停車場，當日車位有限。<br>離場前掃描接待桌 QR Code，<span style="white-space:nowrap;">即可免費折抵。</span></p>',
     '</div>',
-    '<div style="padding-top:31px;border-top:1px solid #d8d2c8;text-align:center;"><a href="' + REMINDER_WEBSITE_URL + '" target="_blank" style="display:inline-block;text-decoration:none;line-height:1.6;"><em style="display:block;color:#93754E;font-size:16px;">The Wedding Invitation &#8250;</em><span style="display:block;margin-top:5px;color:#746A5E;font-size:13px;">再次查看婚禮邀請函</span></a></div>',
+    '<div style="padding-top:31px;border-top:1px solid #d8d2c8;text-align:center;"><a href="' + REMINDER_WEBSITE_URL + '" target="_blank" style="display:inline-block;text-decoration:none;line-height:1.6;"><span style="display:block;color:#78404A;font-size:16px;">The Wedding Invitation &#8250;</span></a></div>',
     '</div>',
     '</td></tr></table>',
     '</td></tr></table>',
@@ -389,7 +388,7 @@ function buildReminderHtml_(guest, sendTime) {
 function formatWeddingCountdown_(sendTime) {
   const daysUntilWedding = getDaysUntilWedding_(sendTime || new Date());
   if (daysUntilWedding === 0) {
-    return '今天就是我們期待已久的婚禮了 🤍';
+    return '今天就是我們期待已久的婚禮了 🎉';
   }
   const digits = '零一二三四五六七八九';
   const tens = Math.floor(daysUntilWedding / 10);
@@ -397,7 +396,7 @@ function formatWeddingCountdown_(sendTime) {
   const days = tens === 0 ? digits[units] : tens < 10
     ? (tens === 1 ? '' : digits[tens]) + '十' + (units ? digits[units] : '')
     : String(daysUntilWedding);
-  return '再過' + days + '天，就是我們期待已久的婚禮了 🤍';
+  return '再過' + days + '天，就是我們期待已久的婚禮了 🎉';
 }
 
 function getDaysUntilWedding_(sendTime) {
