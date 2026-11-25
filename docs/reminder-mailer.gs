@@ -40,6 +40,7 @@ const REMINDER_CARD_URLS = {
   weddingDay: REMINDER_WEBSITE_URL + 'output/email-reminder/02-wedding-day-photo-card.jpg',
   schedule: REMINDER_WEBSITE_URL + 'output/email-reminder/03-wedding-schedule-and-venue.jpg',
   monogram: REMINDER_WEBSITE_URL + 'output/email-reminder/email-emblem.png?v=20261124-1',
+  heading: REMINDER_WEBSITE_URL + 'output/email-reminder/see-you-on-sunday.png',
   signature: REMINDER_WEBSITE_URL + 'output/email-reminder/email-signature.png',
   signatureZh: REMINDER_WEBSITE_URL + 'output/email-reminder/email-signature-zh.png',
 };
@@ -279,47 +280,55 @@ function buildReminderPlainText_(guest, sendTime) {
     : [];
 
   return [
-    'Hi ' + guest.name + ',',
+    'Hi ' + guest.name + '，',
     '',
-    '歡迎來到郭大為 & 蔡旻淇的婚禮！' + countdownCopy + '期待見到你，和你一起分享這份喜悅 🤍',
-    '— 郭大為 & 蔡旻淇',
+    countdownCopy,
     '',
-  ].concat(tableLines, [
-    '2026.11.29 · Sunday',
-    '賓客報到：11:30 AM',
-    '午宴開始：12:00 PM',
-    '',
-    '台北萬豪酒店 36F 寰宇廳',
-    '台北市中山區樂群二路 199 號',
-    '',
-    '前往 36 樓的電梯位於飯店正門 Concierge 左側。',
-    '請放心直走到底，電梯真的在那裡。',
-    '',
-    '停車資訊：',
-    '當日有多場婚宴，車位有限。',
-    'B2–B4 設有地下停車場。',
-    '接待桌備有 QR Code，離場前掃描即可免費折抵。',
-    '',
-    'Wedding website: ' + REMINDER_WEBSITE_URL,
-    'Google Maps: ' + REMINDER_MAPS_URL,
+    '很開心有你一起分享這個特別的日子，',
+    '期待週日與你相見 🤍',
     '',
     'Minchi & David',
-    '旻淇・大為',
+    '蔡旻淇 & 郭大為',
+    '',
+  ].concat(tableLines, [
+    '2026.11.29 · Sunday · 星期日',
+    '11:30 AM　迎賓酒會・賓客報到',
+    '備有甜點與迎賓飲品，歡迎提早來坐坐',
+    '12:00 PM　婚禮午宴',
+    '',
+    '台北萬豪酒店 · 36F 寰宇廳',
+    '台北市中山區樂群二路 199 號 ↗ ' + REMINDER_MAPS_URL,
+    '',
+    'ARRIVAL',
+    '前往 36 樓的電梯位於飯店正門 Concierge 左側。',
+    '沿著入口直走到底，即可抵達。',
+    '',
+    '——',
+    '',
+    'PARKING',
+    '當日因多場婚宴，車位有限。',
+    '飯店 B2–B4 設有地下停車場。',
+    '接待桌備有 QR Code，',
+    '離場前掃描即可免費折抵。',
+    '',
+    '再次查看婚禮邀請函 ↗ ' + REMINDER_WEBSITE_URL,
   ]).join('\n');
 }
 
 function buildReminderHtml_(guest, sendTime) {
   const safeName = escapeHtml_(guest.name);
-  const safeTable = escapeHtml_(formatTableLabel_(guest.table));
+  const safeTable = escapeHtml_(formatTableLabel_(guest.table)).replace(/\d+/, function (number) {
+    return '<span style="font-family:\'Cormorant Garamond\',Georgia,serif;font-size:30px;font-weight:600;color:#49443D;padding:0 5px;">' + number.padStart(2, '0') + '</span>';
+  });
   const safeGuestCount = escapeHtml_(formatGuestCountLabel_(guest.guestCount));
   const safeCountdownCopy = escapeHtml_(formatWeddingCountdown_(sendTime));
   const guestCountHtml = safeGuestCount
-    ? '<div style="margin:7px 0 0;font-size:13px;line-height:1.6;color:#716a62;">' + safeGuestCount + '</div>'
+    ? '<div style="margin:7px 0 0;font-size:14px;line-height:1.6;color:#746A5E;">' + safeGuestCount + '</div>'
     : '';
   const tableSectionHtml = hasTableAssignment_(guest.table)
-    ? '<div style="margin:0 0 40px;padding:23px 16px 22px;border-top:1px solid #d8d2c8;border-bottom:1px solid #d8d2c8;text-align:center;">'
-      + '<div style="margin:0 0 8px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:600;line-height:1.5;letter-spacing:.18em;color:#8f7049;">YOUR TABLE</div>'
-      + '<div style="font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:29px;font-weight:500;line-height:1.35;color:#37352f;">' + safeTable + '</div>'
+    ? '<div style="margin:0 0 40px;padding:26px 16px 8px;border-top:1px solid #d8d2c8;text-align:center;">'
+      + '<div style="margin:0 0 10px;font-family:\'Cormorant Garamond\',Georgia,serif;font-size:13px;font-weight:600;line-height:1.5;letter-spacing:.25em;color:#93754E;">YOUR TABLE</div>'
+      + '<div style="font-family:\'Noto Serif TC\',\'Source Han Serif TC\',\'Songti TC\',PMingLiU,serif;font-size:15px;font-weight:500;line-height:1.4;color:#746A5E;">' + safeTable + '</div>'
       + guestCountHtml
       + '</div>'
     : '';
@@ -327,43 +336,51 @@ function buildReminderHtml_(guest, sendTime) {
   return [
     '<!doctype html>',
     '<html lang="zh-Hant">',
-    '<head><meta charset="UTF-8"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>',
-    '<body style="margin:0;padding:0;background:#f4f4f2;">',
+    '<head><meta charset="UTF-8"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><style>@media only screen and (max-width: 540px){.reminder-inner{padding-left:24px!important;padding-right:24px!important;}}</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&amp;family=Noto+Serif+TC:wght@400;500;700&amp;display=swap"></head>',
+    '<body style="margin:0;padding:0;background:#FDFBF7;">',
     '<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">11 月 29 日婚禮桌次、時間與抵達提醒</div>',
-    '<div lang="zh-Hant" style="margin:0;padding:40px 16px;background:#f4f4f2;color:#37352f;font-family:Arial,\'PingFang TC\',\'Noto Sans TC\',sans-serif;">',
+    '<div lang="zh-Hant" style="margin:0;padding:40px 16px;background:#FDFBF7;color:#49443D;font-family:\'Noto Serif TC\',\'Source Han Serif TC\',\'Songti TC\',PMingLiU,serif;">',
     '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">',
     '<tr><td align="center">',
-    '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:520px;border:1px solid #e6e3dd;border-collapse:separate;background:#ffffff;">',
-    '<tr><td style="padding:54px 48px 50px;">',
+    '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:520px;border:1px solid #e6e3dd;border-collapse:separate;background:#FDFBF7;">',
+    '<tr><td class="reminder-inner" style="padding:54px 48px 50px;">',
     '<div style="margin:0 0 12px;text-align:center;"><img src="' + REMINDER_CARD_URLS.monogram + '" width="150" alt="Minchi and David wedding emblem" style="display:inline-block;width:150px;max-width:100%;height:auto;border:0;"></div>',
-    '<div style="margin:0 0 6px;text-align:center;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:13px;font-weight:600;line-height:1.5;letter-spacing:.14em;text-transform:uppercase;color:#8f7049;">Wedding Day Reminder</div>',
-    '<div style="margin:0 0 46px;text-align:center;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:12px;font-weight:400;line-height:1.6;letter-spacing:.08em;color:#716a62;">婚禮行前提醒</div>',
-    '<p style="margin:0 0 24px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.8;color:#56514b;">Hi ' + safeName + ',</p>',
-    '<p style="margin:0 0 42px;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:15px;font-weight:400;line-height:1.9;color:#37352f;overflow-wrap:anywhere;word-break:break-all;">歡迎來到郭大為 &amp; 蔡旻淇的婚禮！' + safeCountdownCopy + '期待見到你，和你一起分享這份喜悅 &#129293;<span style="display:block;margin-top:8px;color:#716a62;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:13px;line-height:1.6;">&mdash; 郭大為 &amp; 蔡旻淇</span></p>',
+    '<div style="margin:0 0 10px;text-align:center;font-family:\'Cormorant Garamond\',Georgia,serif;font-size:38px;font-weight:500;font-style:italic;line-height:1.12;color:#49443D;"><img src="' + REMINDER_CARD_URLS.heading + '" width="284" alt="See You on Sunday" style="display:inline-block;width:284px;max-width:100%;height:auto;vertical-align:middle;border:0;"></div>',
+    '<div style="margin:0 0 46px;text-align:center;font-family:\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',\'Heiti TC\',sans-serif;font-size:12px;font-weight:500;line-height:1.5;letter-spacing:.24em;color:#93754E;">婚禮行前提醒</div>',
+    '<p style="margin:0 0 24px;font-family:\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',\'Heiti TC\',sans-serif;font-size:16px;font-weight:400;line-height:1.8;color:#49443D;">Hi ' + safeName + '，</p>',
+    '<p style="margin:0;font-family:\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',\'Heiti TC\',sans-serif;font-size:16px;line-height:1.8;">' + safeCountdownCopy + '</p>',
+    '<p style="margin:0 0 20px;font-family:\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',\'Heiti TC\',sans-serif;font-size:16px;line-height:1.8;">很開心有你一起分享這個特別的日子，<br>期待週日與你相見&nbsp;&#129293;</p>',
+    '<p style="margin:28px 0 28px;font-size:16px;line-height:1.8;"><img src="' + REMINDER_CARD_URLS.signature + '" width="205" alt="Minchi &amp; David" style="display:block;width:205px;max-width:100%;height:auto;border:0;margin:0;"><span style="display:block;margin-top:9px;font-family:\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',\'Heiti TC\',sans-serif;color:#746A5E;font-size:14px;line-height:1.6;">蔡旻淇 &amp; 郭大為</span></p>',
     tableSectionHtml,
     '<div style="margin:0 0 38px;"><img src="' + REMINDER_CARD_URLS.weddingDay + '" width="422" alt="Minchi and David on their wedding day" style="display:block;width:100%;max-width:422px;height:auto;border:0;"></div>',
     '<div style="margin:0 0 42px;">',
-    '<div style="margin:0 0 18px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:600;line-height:1.5;letter-spacing:.14em;color:#8f7049;">2026.11.29 · SUNDAY</div>',
-    '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;color:#37352f;">',
-    '<tr><td style="width:72px;padding:0 0 9px;font-size:14px;line-height:1.7;color:#716a62;">11:30</td><td style="padding:0 0 9px;font-size:14px;line-height:1.7;">賓客報到</td></tr>',
-    '<tr><td style="width:72px;padding:0 0 21px;font-size:14px;line-height:1.7;color:#716a62;">12:00</td><td style="padding:0 0 21px;font-size:14px;line-height:1.7;">午宴開始</td></tr>',
+    '<div style="font-family:\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',\'Heiti TC\',sans-serif;color:#49443D;">',
+    '<div style="margin:0 0 2px;font-size:12px;letter-spacing:.12em;color:#93754E;">2026.11.29</div>',
+    '<div style="margin:0 0 18px;font-size:14px;line-height:1.5;color:#746A5E;">Sunday · 星期日</div>',
+    '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;font-family:\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',\'Heiti TC\',sans-serif;color:#49443D;">',
+    '<tr><td style="width:74px;vertical-align:top;padding:0 0 15px;font-size:19px;line-height:1.5;">11:30</td><td style="padding:0 0 15px;font-size:16px;line-height:1.5;"><strong>迎賓酒會・賓客報到</strong><div style="margin-top:4px;color:#746A5E;font-size:14px;line-height:1.8;">備有甜點與迎賓飲品，<span style="white-space:nowrap;">歡迎提早來坐坐</span></div></td></tr>',
+    '<tr><td style="width:74px;vertical-align:top;font-size:19px;line-height:1.5;">12:00</td><td style="font-size:16px;line-height:1.5;"><strong>婚禮午宴</strong></td></tr>',
     '</table>',
-    '<p style="margin:0 0 5px;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:15px;font-weight:500;line-height:1.7;color:#37352f;">台北萬豪酒店 · 36F 寰宇廳</p>',
-    '<p style="margin:0 0 12px;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:13px;font-weight:400;line-height:1.7;color:#716a62;">台北市中山區樂群二路 199 號</p>',
-    '<p style="margin:0;"><a href="' + REMINDER_MAPS_URL + '" target="_blank" style="color:#8f7049;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:14px;font-weight:400;line-height:1.6;text-decoration:none;">Open in Google Maps &#8599;</a></p>',
+    '<div style="margin:24px 0 0;padding-top:22px;border-top:1px solid #d8d2c8;">',
+    '<div style="margin:0 0 12px;font-size:12px;font-weight:500;line-height:1.5;letter-spacing:.25em;color:#93754E;">THE VENUE</div>',
+    '<p style="margin:0 0 4px;font-size:16px;font-weight:400;line-height:1.8;">台北萬豪酒店 · <span style="white-space:nowrap;">36F 寰宇廳</span></p>',
+    '<p style="margin:0;"><a href="' + REMINDER_MAPS_URL + '" target="_blank" style="color:#93754E;font-size:14px;line-height:1.6;text-decoration:none;">台北市中山區樂群二路 199 號 &#8599;</a></p>',
     '</div>',
-    '<div style="margin:0 0 24px;padding-top:31px;border-top:1px solid #d8d2c8;">',
-    '<div style="margin:0 0 13px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:600;line-height:1.5;letter-spacing:.16em;color:#8f7049;">ARRIVAL NOTE</div>',
-    '<p style="margin:0;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:14px;font-weight:400;line-height:1.9;color:#56514b;">前往 36 樓的電梯位於<br>飯店正門 Concierge 左側，<br>請放心直走到底，<br>電梯真的在那裡。</p>',
     '</div>',
-    '<div style="margin:0 0 31px;padding-top:29px;border-top:1px solid #d8d2c8;">',
-    '<div style="margin:0 0 13px;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:600;line-height:1.5;letter-spacing:.16em;color:#8f7049;">PARKING</div>',
-    '<p style="margin:0;font-family:\'PingFang TC\',\'Noto Sans TC\',sans-serif;font-size:14px;font-weight:400;line-height:1.9;color:#56514b;">當日有多場婚宴，車位有限。<br>B2–B4 設有地下停車場。<br>接待桌備有 QR Code，<br>離場前掃描即可免費折抵。</p>',
     '</div>',
-    '<p style="margin:0 0 24px;"><a href="' + REMINDER_WEBSITE_URL + '" target="_blank" style="color:#8f7049;font-family:\'Avenir Next\',Avenir,\'Helvetica Neue\',Arial,sans-serif;font-size:14px;font-weight:400;line-height:1.6;letter-spacing:.01em;text-decoration:none;">Open the Invitation &#8599;</a></p>',
-    '<div style="width:84px;margin:0 0 16px;border-top:1px solid #d8d2c8;"></div>',
-    '<p style="margin:0 0 5px;text-align:left;"><img src="' + REMINDER_CARD_URLS.signature + '" width="205" alt="Minchi &amp; David" style="display:block;width:205px;max-width:100%;height:auto;border:0;"></p>',
-    '<p style="margin:0 0 0 8px;text-align:left;"><img src="' + REMINDER_CARD_URLS.signatureZh + '" width="89" alt="旻淇・大為" style="display:block;width:89px;max-width:100%;height:auto;border:0;"></p>',
+    '<div style="font-family:\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',\'Heiti TC\',sans-serif;color:#49443D;">',
+    '<div style="margin:0 0 26px;padding-top:26px;border-top:1px solid #d8d2c8;">',
+    '<div style="margin:0 0 12px;font-size:12px;font-weight:500;line-height:1.5;letter-spacing:.25em;color:#93754E;">ARRIVAL</div>',
+    '<p style="margin:0 0 9px;font-size:16px;line-height:1.8;">前往 36 樓的電梯位於飯店正門 Concierge 左側。</p>',
+    '<p style="margin:0;font-size:16px;line-height:1.8;">沿著入口直走到底，即可抵達。</p>',
+    '</div>',
+    '<div style="margin:0 0 26px;padding-top:26px;border-top:1px solid #d8d2c8;">',
+    '<div style="margin:0 0 12px;font-size:12px;font-weight:500;line-height:1.5;letter-spacing:.25em;color:#93754E;">PARKING</div>',
+    '<p style="margin:0 0 9px;font-size:16px;line-height:1.8;">當日因多場婚宴，車位有限。飯店 B2–B4 設有地下停車場。</p>',
+    '<p style="margin:0;font-size:16px;line-height:1.8;">接待桌備有 QR Code，離場前掃描即可免費折抵。</p>',
+    '</div>',
+    '<div style="padding-top:31px;border-top:1px solid #d8d2c8;text-align:center;"><a href="' + REMINDER_WEBSITE_URL + '" target="_blank" style="display:inline-block;text-decoration:none;line-height:1.6;"><em style="display:block;color:#93754E;font-size:16px;">The Wedding Invitation &#8599;</em><span style="display:block;margin-top:5px;color:#746A5E;font-size:13px;">再次查看婚禮邀請函</span></a></div>',
+    '</div>',
     '</td></tr></table>',
     '</td></tr></table>',
     '</div>',
@@ -376,7 +393,13 @@ function formatWeddingCountdown_(sendTime) {
   if (daysUntilWedding === 0) {
     return '婚禮就是今天！';
   }
-  return '距離婚禮只剩 ' + daysUntilWedding + ' 天了，';
+  const digits = '零一二三四五六七八九';
+  const tens = Math.floor(daysUntilWedding / 10);
+  const units = daysUntilWedding % 10;
+  const days = tens === 0 ? digits[units] : tens < 10
+    ? (tens === 1 ? '' : digits[tens]) + '十' + (units ? digits[units] : '')
+    : String(daysUntilWedding);
+  return '再過' + days + '天，我們就要結婚了！';
 }
 
 function getDaysUntilWedding_(sendTime) {
